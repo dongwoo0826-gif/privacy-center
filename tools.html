@@ -1,0 +1,864 @@
+<div class="page" id="pg-tools">
+<div class="pg-wrap">
+  <div style="margin-bottom:1.25rem">
+    <div style="font-size:11px;color:var(--accent);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">TOOLS · 업무 도구</div>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보보호 업무 도구</div>
+  </div>
+
+  <!-- 탭 네비게이션 -->
+  <div class="tmpl-tabs" style="flex-wrap:wrap;gap:2px 0">
+    <button class="tmpl-tab active" onclick="switchToolsTab(0)">위험도 계산기</button>
+    <button class="tmpl-tab" onclick="switchToolsTab(1)">위탁/제공 판단</button>
+    <button class="tmpl-tab" onclick="switchToolsTab(2)">탐지 검증기</button>
+    <button class="tmpl-tab" onclick="switchToolsTab(3)">참조표 모음</button>
+    <button class="tmpl-tab" onclick="switchToolsTab(4)">침해사고 대응</button>
+    <button class="tmpl-tab" onclick="switchToolsTab(5)">개인정보 판단 헬퍼</button>
+  </div>
+
+  <!-- Tab 0: 위험도 판단 계산기 -->
+  <div class="tmpl-panel active" id="tools-tab-0">
+    <div class="tool-panel">
+      <div class="tool-panel-title">위험도 판단 계산기</div>
+      <div class="tool-panel-desc">법적 제재 조문 해당 여부 및 정보주체 영향을 기반으로 위험도를 판단합니다.</div>
+      <div class="rq-label">Q1. 해당 사항이 법적 제재(과태료·과징금·형사처벌) 조문에 직접 해당합니까?</div>
+      <div class="radio-row">
+        <button class="r-opt" id="r1y" onclick="setR(1,'y')">해당</button>
+        <button class="r-opt" id="r1n" onclick="setR(1,'n')">미해당</button>
+        <button class="r-opt" id="r1u" onclick="setR(1,'u')">불확실</button>
+      </div>
+      <div class="rq-label">Q2. 정보주체에게 직접적이고 즉각적인 피해(유출·차별·금전 손실)가 발생할 수 있습니까?</div>
+      <div class="radio-row">
+        <button class="r-opt" id="r2y" onclick="setR(2,'y')">가능성 높음</button>
+        <button class="r-opt" id="r2n" onclick="setR(2,'n')">간접·지연적</button>
+        <button class="r-opt" id="r2u" onclick="setR(2,'u')">불확실</button>
+      </div>
+      <div class="risk-out empty" id="riskOut">항목을 모두 선택하면 결과가 표시됩니다.</div>
+    </div>
+  </div>
+
+  <!-- Tab 1: 처리위탁 vs 제3자 제공 판단 도우미 -->
+  <div class="tmpl-panel" id="tools-tab-1">
+    <div class="tool-panel">
+      <div class="tool-panel-title">처리위탁 vs 제3자 제공 판단 도우미</div>
+      <div class="tool-panel-desc">실무에서 가장 빈번하게 혼동되는 처리위탁과 제3자 제공을 구분합니다.</div>
+      <div id="dt-wrap">
+        <div class="dt-step" id="dt-q1">
+          <div class="rq-label">Q1. 개인정보를 전달받는 자가 <strong>자신의 영업 목적</strong>으로 해당 정보를 사용합니까?</div>
+          <div class="radio-row">
+            <button class="r-opt" onclick="dtNext(1,'y')">예</button>
+            <button class="r-opt" onclick="dtNext(1,'n')">아니오</button>
+          </div>
+        </div>
+        <div class="dt-step" id="dt-q2" style="display:none">
+          <div class="rq-label">Q2. 전달받는 자가 <strong>위탁자(우리)의 업무를 대행·처리</strong>하는 것입니까?</div>
+          <div class="radio-row">
+            <button class="r-opt" onclick="dtNext(2,'y')">예</button>
+            <button class="r-opt" onclick="dtNext(2,'n')">아니오</button>
+          </div>
+        </div>
+        <div class="dt-step" id="dt-q3" style="display:none">
+          <div class="rq-label">Q3. 서비스 제공을 위해 개인정보 처리가 수반되지만, 별도 서비스(클라우드·결제대행·배송 등)를 우리에게 제공하는 관계입니까?</div>
+          <div class="radio-row">
+            <button class="r-opt" onclick="dtNext(3,'y')">예</button>
+            <button class="r-opt" onclick="dtNext(3,'n')">아니오</button>
+          </div>
+        </div>
+        <div id="dt-result" style="display:none"></div>
+        <div id="dt-checklist" style="display:none;margin-top:.85rem"></div>
+        <button class="r-opt" id="dt-reset" onclick="dtReset()" style="display:none;margin-top:.75rem;background:var(--bg2)">↺ 다시 판단</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 2: 탐지·가명처리 검증기 -->
+  <div class="tmpl-panel" id="tools-tab-2">
+    <div class="tool-panel">
+      <div class="tool-panel-title">비정형 데이터 개인정보 탐지·가명처리 검증기</div>
+      <div class="tool-panel-desc">비정형 텍스트에서 개인정보 패턴을 탐지하거나, 가명처리된 데이터의 잔류 개인정보를 검증합니다.</div>
+
+      <!-- 탐지 기준 안내 (토글) -->
+      <details style="margin-bottom:.85rem;border:1px solid var(--border);border-radius:6px;overflow:hidden">
+        <summary style="padding:.6rem .85rem;font-size:13px;font-weight:600;color:var(--text2);cursor:pointer;background:var(--bg2);list-style:none;display:flex;align-items:center;gap:.4rem">
+          탐지 기준 안내 <span style="font-size:11px;color:var(--text3)">(클릭하면 펼쳐집니다)</span>
+        </summary>
+        <div style="padding:.75rem .85rem;font-size:12px;color:var(--text2);line-height:1.75">
+          <div style="overflow-x:auto"><table class="ref-table" style="margin-bottom:.5rem">
+            <thead><tr><th>유형</th><th>탐지 패턴</th><th>예시</th></tr></thead>
+            <tbody>
+              <tr><td>주민등록번호</td><td>6자리-7자리 (뒷자리 1~4로 시작)</td><td style="font-family:var(--mono)">901215-1234567</td></tr>
+              <tr><td>휴대전화번호</td><td>010/011/016/017/018/019 + 3~4자리 + 4자리</td><td style="font-family:var(--mono)">010-1234-5678</td></tr>
+              <tr><td>일반전화번호</td><td>지역번호(02~06x) + 3~4자리 + 4자리</td><td style="font-family:var(--mono)">02-123-4567</td></tr>
+              <tr><td>이메일 주소</td><td>계정@도메인 형식</td><td style="font-family:var(--mono)">user@example.com</td></tr>
+              <tr><td>여권번호</td><td>영문 1~2자 + 숫자 7~8자리</td><td style="font-family:var(--mono)">M12345678</td></tr>
+              <tr><td>운전면허번호</td><td>2자리-2자리-6자리-2자리</td><td style="font-family:var(--mono)">11-22-333333-44</td></tr>
+              <tr><td>신용카드번호</td><td>4자리씩 4그룹 (16자리)</td><td style="font-family:var(--mono)">1234-5678-9012-3456</td></tr>
+              <tr><td>IP 주소</td><td>IPv4 (0~255 × 4)</td><td style="font-family:var(--mono)">192.168.0.1</td></tr>
+            </tbody>
+          </table></div>
+          <div style="padding:.5rem .75rem;background:var(--bg);border-radius:4px;border-left:3px solid var(--amber);color:var(--text3)">
+            이름·주소 등 문맥 의존적 정보와 간접식별정보 조합을 통한 재식별 가능성은 이 도구로 탐지할 수 없습니다. 별도의 전문가 검토가 필요합니다.
+          </div>
+        </div>
+      </details>
+
+      <div style="margin-bottom:.6rem">
+        <label style="display:flex;align-items:center;gap:.5rem;font-size:13px;color:var(--text2);cursor:pointer">
+          <input type="checkbox" id="pi-anon-mode" style="width:14px;height:14px;cursor:pointer">
+          이 데이터는 가명처리 완료된 상태입니다 (잔류 개인정보 검증 모드)
+        </label>
+      </div>
+      <textarea id="pi-input" placeholder="검사할 텍스트를 붙여넣으세요..." style="width:100%;height:140px;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--text);font-size:13px;font-family:var(--mono);resize:vertical;box-sizing:border-box;line-height:1.6"></textarea>
+      <div style="display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap;align-items:center">
+        <button class="r-opt sel" onclick="piRun()" style="padding:.45rem 1.1rem">검증 실행</button>
+        <button class="r-opt" onclick="piClear()" style="padding:.45rem 1.1rem">지우기</button>
+      </div>
+      <div id="pi-result" style="margin-top:1rem;display:none">
+        <div id="pi-summary" style="margin-bottom:.6rem;font-size:13px;font-weight:600"></div>
+        <div id="pi-highlight" style="font-size:13px;line-height:1.8;padding:.75rem;border:1px solid var(--border);border-radius:6px;background:var(--bg);white-space:pre-wrap;word-break:break-all;font-family:var(--mono)"></div>
+        <div id="pi-breakdown" style="margin-top:.5rem;font-size:12px;color:var(--text3)"></div>
+      </div>
+      <div style="margin-top:1rem;padding:.7rem .9rem;background:var(--bg2);border-radius:6px;font-size:12px;color:var(--text3);line-height:1.7;border-left:3px solid var(--amber)">
+        이 도구는 정규표현식 기반의 패턴 매칭만 수행합니다. 이름·주소 등 문맥 의존적 정보, 간접식별정보의 조합을 통한 재식별 가능성은 별도 검토가 필요합니다. 법적 판단은 개인정보보호 책임자 또는 전문가의 검토를 받으시기 바랍니다.<br>
+        입력된 데이터는 서버로 전송되지 않으며, 브라우저 내에서만 처리됩니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 3: 참조표 모음 -->
+  <div class="tmpl-panel" id="tools-tab-3">
+    <!-- 과태료 기준표 -->
+    <div class="tool-panel" style="margin-bottom:1.25rem">
+      <div class="tool-panel-title">과태료·과징금·형사처벌 기준표</div>
+      <div class="tool-panel-desc" style="margin-bottom:.75rem">개인정보보호법 위반 유형별 제재 기준 (2025.4.1 개정 기준)</div>
+      <div style="overflow-x:auto"><table class="ref-table">
+        <thead><tr><th>위반 유형</th><th>제재 수준</th><th>관련 조문</th></tr></thead>
+        <tbody id="penaltyTbody"></tbody>
+      </table></div>
+      <div style="margin-top:.75rem;padding:.65rem .85rem;background:var(--bg2);border-radius:6px;font-size:12px;color:var(--text3);line-height:1.75;border-left:3px solid var(--border)">
+        ※ 과징금을 부과한 행위에 대해서는 과태료를 중복 부과할 수 없습니다 (제76조).<br>
+        ※ [과징금 병과 가능] 항목은 과징금 미부과 시 과태료로 대체 부과될 수 있습니다.
+      </div>
+    </div>
+
+    <div class="tools-grid">
+      <!-- 법정 보유기간 참조표 -->
+      <div class="tool-panel">
+        <div class="tool-panel-title">법정 보유기간 참조표</div>
+        <div class="tool-panel-desc" style="margin-bottom:.75rem">주요 법령별 의무 보존 기간</div>
+        <table class="ref-table">
+          <thead><tr><th>대상 정보</th><th>보존기간</th><th>근거 법령</th></tr></thead>
+          <tbody id="retentionTbody"></tbody>
+        </table>
+      </div>
+      <!-- 암호화 기준 안내 -->
+      <div class="tool-panel" style="align-self:start">
+        <div class="tool-panel-title">암호화 기준 안내</div>
+        <div class="tool-panel-desc" style="margin-bottom:.75rem">개인정보의 암호화 조치 기준</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.9">
+          암호화 기준은 KISA <em>'개인정보의 암호화 조치 안내서'</em>를 참고하세요.
+        </div>
+        <a href="https://www.kisa.or.kr/2060305/form?postSeq=10&lang_type=KO" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:.4rem;margin-top:.9rem;padding:.5rem .95rem;background:var(--accent);color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none">
+          KISA 안내서 바로가기 ↗
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab 4: 침해사고 대응 -->
+  <div class="tmpl-panel" id="tools-tab-4">
+
+    <!-- ① 사고 유형별 대응 플로우 -->
+    <div class="tool-panel" style="margin-bottom:1.25rem">
+      <div class="tool-panel-title">사고 유형별 대응 플로우</div>
+      <div class="tool-panel-desc" style="margin-bottom:.7rem">유출 유형별 핵심 조치사항을 단계별로 확인하세요. (개인정보 유출 등 사고 대응 매뉴얼 2024.3. 기준)</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:.85rem">
+        <button class="r-opt sel" id="incft-0" onclick="incFlowType(0)" style="padding:.3rem .8rem;font-size:12px">해킹</button>
+        <button class="r-opt" id="incft-1" onclick="incFlowType(1)" style="padding:.3rem .8rem;font-size:12px">내부자 유출</button>
+        <button class="r-opt" id="incft-2" onclick="incFlowType(2)" style="padding:.3rem .8rem;font-size:12px">이메일 오발송</button>
+        <button class="r-opt" id="incft-3" onclick="incFlowType(3)" style="padding:.3rem .8rem;font-size:12px">개인정보 노출</button>
+      </div>
+
+      <!-- 해킹 플로우 -->
+      <div id="incflow-0">
+        <div style="display:flex;gap:6px;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px">
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">1. 긴급 조치</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">유출 시스템 분리·차단<br>로그 등 증거자료 확보<br>유출 원인 분석</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">2. 피해 최소화</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">이용자·취급자 비밀번호 변경<br>취약점 점검 및 보완<br>기술지원 의뢰 및 복구</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fed7aa;border-radius:7px;overflow:hidden">
+            <div style="background:#d97706;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">3. 신고·통지</div>
+            <div style="padding:8px 10px;background:#fffbeb;font-size:11px;color:var(--text2);line-height:1.8">72시간 이내 정보주체 통지<br>개보위·KISA 신고(해당 시)<br>침해사고 신고(KISA·경찰청)</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #bbf7d0;border-radius:7px;overflow:hidden">
+            <div style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">4. 재발 방지</div>
+            <div style="padding:8px 10px;background:#f0fdf4;font-size:11px;color:var(--text2);line-height:1.8">원인 제거·취약점 개선<br>안전조치 강화<br>사례 전파 교육</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 내부자 유출 플로우 -->
+      <div id="incflow-1" style="display:none">
+        <div style="display:flex;gap:6px;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px">
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">1. 사실 확인</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">접속 이력·열람·다운로드 확인<br>비정상 접속 경로 확인·차단<br>단말기·매체(USB·이메일·출력물) 회수</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">2. 추가 유출 차단</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">접속 권한·계정 즉시 말소<br>추가 유출 여부 확인<br>수사기관 협조 요청(필요 시)</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fed7aa;border-radius:7px;overflow:hidden">
+            <div style="background:#d97706;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">3. 신고·통지</div>
+            <div style="padding:8px 10px;background:#fffbeb;font-size:11px;color:var(--text2);line-height:1.8">72시간 이내 정보주체 통지<br>개보위·KISA 신고(해당 시)</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #bbf7d0;border-radius:7px;overflow:hidden">
+            <div style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">4. 재발 방지</div>
+            <div style="padding:8px 10px;background:#f0fdf4;font-size:11px;color:var(--text2);line-height:1.8">접근권한 관리 강화<br>개인정보보호 교육 실시<br>내부 관리계획 개정</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 이메일 오발송 플로우 -->
+      <div id="incflow-2" style="display:none">
+        <div style="display:flex;gap:6px;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px">
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">1. 이메일 회수</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">즉시 이메일 회수 조치<br>회수 불가 시 수신자에게 삭제 요청<br>첨부파일서버 운영 시 파일 삭제 요청</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fed7aa;border-radius:7px;overflow:hidden">
+            <div style="background:#d97706;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">2. 신고·통지</div>
+            <div style="padding:8px 10px;background:#fffbeb;font-size:11px;color:var(--text2);line-height:1.8">72시간 이내 정보주체 통지<br>개보위·KISA 신고(해당 시)</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #bbf7d0;border-radius:7px;overflow:hidden">
+            <div style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">3. 재발 방지</div>
+            <div style="padding:8px 10px;background:#f0fdf4;font-size:11px;color:var(--text2);line-height:1.8">개별 발송 기능 활용 습관화<br>발송 전 수신자 확인 절차 적용<br>파일 전송 시 암호화 설정</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 개인정보 노출 플로우 -->
+      <div id="incflow-3" style="display:none">
+        <div style="display:flex;gap:6px;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px">
+          <div style="flex:1;min-width:118px;border:1px solid #fecaca;border-radius:7px;overflow:hidden">
+            <div style="background:#dc2626;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">1. 노출 차단</div>
+            <div style="padding:8px 10px;background:#fef2f2;font-size:11px;color:var(--text2);line-height:1.8">검색엔진 노출 시: 웹페이지 삭제·검색 노출 개인정보 삭제 요청<br>시스템 오류 시: 소스코드·서버 설정 오류 수정<br>취급자 부주의 시: 게시글·첨부파일 마스킹 처리</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fed7aa;border-radius:7px;overflow:hidden">
+            <div style="background:#d97706;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">2. 추가 노출 방지</div>
+            <div style="padding:8px 10px;background:#fffbeb;font-size:11px;color:var(--text2);line-height:1.8">인증 절차 추가<br>로봇배제 규칙 적용<br>외부 접근 차단</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #fed7aa;border-radius:7px;overflow:hidden">
+            <div style="background:#d97706;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">3. 신고·통지</div>
+            <div style="padding:8px 10px;background:#fffbeb;font-size:11px;color:var(--text2);line-height:1.8">72시간 이내 정보주체 통지<br>개보위·KISA 신고(해당 시)</div>
+          </div>
+          <div style="display:flex;align-items:center;color:var(--text3);font-size:13px;flex-shrink:0">→</div>
+          <div style="flex:1;min-width:118px;border:1px solid #bbf7d0;border-radius:7px;overflow:hidden">
+            <div style="background:#16a34a;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.05em">4. 재발 방지</div>
+            <div style="padding:8px 10px;background:#f0fdf4;font-size:11px;color:var(--text2);line-height:1.8">웹 취약점 연 1회 이상 점검<br>홈페이지 첨부파일 개인정보 확인<br>접근통제 강화</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 단계별 실무 체크리스트 -->
+    <div class="tool-panel" style="margin-bottom:1.25rem">
+      <div class="tool-panel-title">단계별 실무 체크리스트</div>
+      <div class="tool-panel-desc" style="margin-bottom:.75rem">각 단계별 이행 여부를 체크하여 진행 상황을 관리하세요. 체크 시 완료 처리됩니다.</div>
+
+      <!-- 전체 진행률 -->
+      <div style="margin-bottom:.85rem;padding:.6rem .85rem;background:var(--bg2);border-radius:6px">
+        <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px">
+          <span style="color:var(--text2);font-weight:600">전체 진행률</span>
+          <span id="inc-progress-text" style="color:var(--accent);font-weight:600">0/35 (0%)</span>
+        </div>
+        <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+          <div id="inc-progress-bar" style="height:100%;background:var(--accent);border-radius:3px;width:0%;transition:width .25s"></div>
+        </div>
+      </div>
+
+      <div id="inc-cl-panel">
+        <!-- 1단계 -->
+        <details id="inc-stage-0" style="margin-bottom:.5rem;border:1px solid #fecaca;border-radius:6px;overflow:hidden" open>
+          <summary style="padding:.55rem .85rem;font-size:12px;font-weight:600;cursor:pointer;background:#fee2e2;color:#b91c1c;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            <span>1단계 — 사고 인지 · 신고 접수</span>
+            <span id="inc-stage-0-cnt" style="font-size:11px;font-weight:400">0/4</span>
+          </summary>
+          <div style="padding:.6rem .85rem;display:flex;flex-direction:column;gap:5px">
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출 사실 인지 즉시 개인정보 보호담당자에게 신고</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 보호담당자가 유출 사실·규모·경로를 보호책임자에게 보고</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 대표자(CEO)에게 사고 내용 및 피해 규모 최종 보고</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보 유출 신속대응팀(T/F) 구성·운영 개시</label>
+          </div>
+        </details>
+
+        <!-- 2단계 -->
+        <details id="inc-stage-1" style="margin-bottom:.5rem;border:1px solid #fed7aa;border-radius:6px;overflow:hidden" open>
+          <summary style="padding:.55rem .85rem;font-size:12px;font-weight:600;cursor:pointer;background:#ffedd5;color:#c2410c;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            <span>2단계 — 초기 대응 · 피해 최소화</span>
+            <span id="inc-stage-1-cnt" style="font-size:11px;font-weight:400">0/6</span>
+          </summary>
+          <div style="padding:.6rem .85rem;display:flex;flex-direction:column;gap:5px">
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출된 개인정보 비공개 또는 삭제 조치 이행</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출 접속 경로 차단, 취약점 점검 및 보완 긴급 조치</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 관련 로그 등 증거자료 확보 및 보전</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출 경로·규모 파악 및 추가 유출 방지 조치</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 신속대응팀 — 접근통제·모니터링 강화, 유출 개인정보 회수</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 내부 전문성 부족 시 KISA에 기술지원 요청</label>
+          </div>
+        </details>
+
+        <!-- 3단계 -->
+        <details id="inc-stage-2" style="margin-bottom:.5rem;border:1px solid #fde68a;border-radius:6px;overflow:hidden" open>
+          <summary style="padding:.55rem .85rem;font-size:12px;font-weight:600;cursor:pointer;background:#fef9c3;color:#92400e;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            <span>3단계 — 신고 · 통지 <span style="font-weight:400;font-size:11px;color:#b45309">72시간 이내</span></span>
+            <span id="inc-stage-2-cnt" style="font-size:11px;font-weight:400">0/6</span>
+          </summary>
+          <div style="padding:.6rem .85rem;display:flex;flex-direction:column;gap:5px">
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 정보주체에게 72시간 이내 서면 등으로 개별 통지 (1명 이상 해당)</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 연락처 불명 시 홈페이지 30일 이상 게시 조치</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보보호위원회 또는 KISA에 72시간 이내 신고 (1천명 이상·민감·고유식별·외부 불법접근)</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 통지 내용 포함: 유출 항목·시점·경위, 피해최소화 방법, 대응조치, 피해구제절차, 담당부서 연락처</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 구체적 내용 미확인 시 확인된 내용 우선 통지·신고 후 추가 확인 시 즉시 보완</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 해킹 침해사고 인지 시 KISA(118) 또는 경찰청 사이버수사대에 별도 신고</label>
+          </div>
+        </details>
+
+        <!-- 4단계 (PDF V.1 정보주체의 피해 구제 기준) -->
+        <details id="inc-stage-3" style="margin-bottom:.5rem;border:1px solid #bfdbfe;border-radius:6px;overflow:hidden" open>
+          <summary style="padding:.55rem .85rem;font-size:12px;font-weight:600;cursor:pointer;background:#dbeafe;color:#1e40af;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            <span>4단계 — 수습 · 민원 대응</span>
+            <span id="inc-stage-3-cnt" style="font-size:11px;font-weight:400">0/9</span>
+          </summary>
+          <div style="padding:.6rem .85rem;display:flex;flex-direction:column;gap:5px">
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 정보주체가 유출 여부를 확인할 수 있도록 별도의 홈페이지 등을 제공 (본인확인 수단: 휴대전화·이메일 인증 활용, 주민등록번호 활용 금지)</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출 여부 확인 홈페이지에 대해 웹 취약점 제거, 전송구간 암호화 등 안전조치 이행</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보 유출로 인한 정보주체의 피해 신고·접수, 상담·문의 등 민원대응 방안 마련</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 원활한 민원 대응을 위해 민원 대응 전담부서 운영, 통신회선 증설 등 필요</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 상담 스크립트를 운영하고 전화·이메일·홈페이지·SNS 등 다양한 채널을 통해 유출 사실·경위를 확인할 수 있는 창구 마련</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 현장에서 물리적 시스템 장애·파괴 등으로 인해 개인정보가 분실·도난·훼손되지 않도록 현장 혼잡 최소화</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 보이스피싱·파밍 등 2차 피해 방지를 위한 유의사항을 사전 안내하고 유출·피해 및 대응 현황 등을 실시간으로 정확하고 투명하게 공개</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 피해자 피해 구제 계획을 마련하고 개인정보 분쟁조정위원회, 손해배상제도 등도 함께 안내</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출사고 결과보고서 작성 및 보고</label>
+          </div>
+        </details>
+
+        <!-- 5단계 (PDF V.2 재발 방지 대책 마련 기준) -->
+        <details id="inc-stage-4" style="border:1px solid #bbf7d0;border-radius:6px;overflow:hidden" open>
+          <summary style="padding:.55rem .85rem;font-size:12px;font-weight:600;cursor:pointer;background:#dcfce7;color:#166534;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            <span>5단계 — 재발 방지</span>
+            <span id="inc-stage-4-cnt" style="font-size:11px;font-weight:400">0/10</span>
+          </summary>
+          <div style="padding:.6rem .85rem;display:flex;flex-direction:column;gap:5px">
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보 유출 원인·취약점에 적절한 대책 마련</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보취급자 대상 개인정보보호 교육 정기 실시</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 개인정보 유출 대응 시나리오 작성 및 모의훈련 등을 실시하여 유출 대응체계 점검·지속 보완</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 홈페이지 취약점 연 1회 이상 정기 점검</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 인증 절차 추가 및 로봇배제 규칙을 적용하여 개인정보의 인터넷 노출 방지 및 홈페이지 접근 제한</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 홈페이지에 첨부파일을 포함한 게시글 작성 시 개인정보 포함 여부 확인</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 홈페이지 게시판 등에 정보주체가 글 작성 시 개인정보가 노출되지 않도록 주의사항 안내</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 관리자 페이지 접근 IP 제한 또는 아이디·비밀번호 외 추가 인증수단 사용하여 접속</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 중소기업: KISA 보호나라 웹 취약점 점검 서비스 활용 (KISA 보호나라 → 정보보호서비스 → 보안취약점 점검)</label>
+            <label style="display:flex;align-items:flex-start;gap:.5rem;font-size:12px;color:var(--text2);cursor:pointer"><input type="checkbox" onchange="incCbTgl(this)" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> 유출사고 사례 전파 교육 및 개선 대책 시행</label>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- ③ 신고·통지 기준 + ④ 주요 서식 (2열) -->
+    <div class="tools-grid">
+      <!-- 신고·통지 기준 및 절차 -->
+      <div class="tool-panel">
+        <div class="tool-panel-title">신고·통지 기준 및 절차</div>
+        <div style="overflow-x:auto;margin-bottom:.75rem"><table class="ref-table">
+          <thead><tr><th>구분</th><th>통지</th><th>신고</th></tr></thead>
+          <tbody>
+            <tr><td style="color:var(--text2)">근거</td><td style="color:var(--text2)">개보법 §34</td><td style="color:var(--text2)">개보법 §34·§40</td></tr>
+            <tr><td style="color:var(--text2)">대상 규모</td><td style="color:var(--text2)">1명 이상</td><td style="color:var(--text2)">① 1천명 이상<br>② 민감·고유식별정보 유출<br>③ 외부 불법 접근에 의한 유출</td></tr>
+            <tr><td style="color:var(--text2)">시점</td><td style="color:var(--accent);font-weight:600">72시간 이내</td><td style="color:var(--accent);font-weight:600">72시간 이내</td></tr>
+            <tr><td style="color:var(--text2)">방법</td><td style="color:var(--text2)">서면 등 개별 통지<br>(연락처 불명 시 홈페이지 30일 게시)</td><td style="color:var(--text2)">privacy.go.kr 온라인 신고</td></tr>
+            <tr><td style="color:var(--text2)">벌칙</td><td colspan="2" style="color:var(--red)">미이행 시 3천만원 이하 과태료</td></tr>
+          </tbody>
+        </table></div>
+        <div style="font-size:11px;color:var(--text3);background:var(--bg2);padding:6px 9px;border-radius:5px;margin-bottom:.75rem;line-height:1.65;border-left:3px solid var(--amber)">
+          ※ 구체적 내용 미확인 시 확인된 내용 우선 통지·신고 후 추가 확인 시 즉시 보완<br>
+          ※ 천재지변 등 부득이한 사유로 72시간 초과 시 사유 해소 후 즉시 이행
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;font-size:12px">
+          <div style="padding:6px 9px;background:var(--bg2);border-radius:5px;border-left:2px solid var(--accent)">
+            <div style="font-weight:600;color:var(--text);margin-bottom:1px">개인정보보호위원회 · KISA 신고</div>
+            <div style="color:var(--text2)">privacy.go.kr → 기업·공공서비스 → 유출신고</div>
+          </div>
+          <div style="padding:6px 9px;background:var(--bg2);border-radius:5px;border-left:2px solid #0891b2">
+            <div style="font-weight:600;color:var(--text);margin-bottom:1px">KISA 개인정보침해신고센터</div>
+            <div style="color:var(--text2)">국번없이 118 (24시간 운영)</div>
+          </div>
+          <div style="padding:6px 9px;background:var(--bg2);border-radius:5px;border-left:2px solid #d97706">
+            <div style="font-weight:600;color:var(--text);margin-bottom:1px">개인정보보호위원회 조사총괄과</div>
+            <div style="color:var(--text2)">02-2100-3164</div>
+          </div>
+          <div style="padding:6px 9px;background:var(--bg2);border-radius:5px;border-left:2px solid #7c3aed">
+            <div style="font-weight:600;color:var(--text);margin-bottom:1px">개인정보 분쟁조정위원회</div>
+            <div style="color:var(--text2)">kopico.go.kr · 1833-6972</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 주요 서식·문서 안내 -->
+      <div class="tool-panel" style="align-self:start">
+        <div class="tool-panel-title">주요 서식·문서 안내</div>
+        <div class="tool-panel-desc" style="margin-bottom:.75rem">개인정보 유출 등 사고 대응 매뉴얼(2024.3.) 수록 부록 전체</div>
+        <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+          <!-- 부록 1 -->
+          <div style="padding:7px 10px;background:var(--bg2);border-radius:5px;border-left:3px solid #64748b">
+            <div style="font-weight:600;color:var(--text);margin-bottom:3px">[부록 1] 관련 법률</div>
+            <div style="color:var(--text2);margin-bottom:3px">개인정보 유출사고 대응에 관한 법적 의무 조문 수록. 개인정보보호법 §29·§34·§40, 시행령 §39·§40, 표준지침 §26~§28, 신용정보법 §39조의4, 신용정보업 감독규정 §43조의6.</div>
+            <div style="color:var(--text3)">활용 시점: 법적 의무 범위 확인 시 · 제출처: —</div>
+          </div>
+          <!-- 부록 2 -->
+          <div style="padding:7px 10px;background:var(--bg2);border-radius:5px;border-left:3px solid #dc2626">
+            <div style="font-weight:600;color:var(--text);margin-bottom:3px">[부록 2] 유출 등 신고서 양식</div>
+            <div style="color:var(--text2);margin-bottom:3px">개보위 표준 지침 별지 제1호서식. 기관명, 유출 항목·규모, 유출 시점·경위, 피해최소화 방법, 대응조치·피해구제절차, 담당부서 연락처 기재.</div>
+            <div style="color:var(--text3)">활용 시점: 유출 인지 후 72시간 이내 신고 시 · 제출처: privacy.go.kr 또는 개인정보보호위원회·KISA</div>
+          </div>
+          <!-- 부록 3 -->
+          <div style="padding:7px 10px;background:var(--bg2);border-radius:5px;border-left:3px solid #d97706">
+            <div style="font-weight:600;color:var(--text);margin-bottom:3px">[부록 3] 해킹에 의한 유출 시 조치사항</div>
+            <div style="color:var(--text2);margin-bottom:3px">악성코드 확인·삭제(KISA 휘슬 활용), 침해 시스템 계정·로그파일·웹쉘·백도어·루트킷 점검, 로그분석 결과에 따른 접속경로 차단, 백신 업데이트 및 수사기관 협조 등 기술적 조치사항.</div>
+            <div style="color:var(--text3)">활용 시점: 해킹에 의한 유출 확인 즉시 · 관련 기관: KISA(기술지원), 경찰청 사이버수사대</div>
+          </div>
+          <!-- 부록 4 -->
+          <div style="padding:7px 10px;background:var(--bg2);border-radius:5px;border-left:3px solid #2563eb">
+            <div style="font-weight:600;color:var(--text);margin-bottom:3px">[부록 4] 경찰 수사 및 침해사고 신고</div>
+            <div style="color:var(--text2);margin-bottom:3px">해킹 등 침해사고 발생 시 경찰청 사이버안전국에 범인 검거·유출 개인정보 회수 수사 요청 방법(사이버범죄 신고시스템 ECRM), KISA 침해사고 신고 절차(공공: 국가정보원, 민간: 과기정통부·KISA) 안내.</div>
+            <div style="color:var(--text3)">활용 시점: 해킹 침해사고 인지 즉시 · 제출처: 경찰청 ECRM, KISA 보호나라(국번없이 118)</div>
+          </div>
+          <!-- 부록 5 -->
+          <div style="padding:7px 10px;background:var(--bg2);border-radius:5px;border-left:3px solid #16a34a">
+            <div style="font-weight:600;color:var(--text);margin-bottom:3px">[부록 5] 2차 피해 유형 및 대응방안</div>
+            <div style="color:var(--text2);margin-bottom:3px">유출 개인정보 이용 절차별 2차 피해 유형(온라인 사기쇼핑, 명의도용 통신서비스 가입, 보이스피싱, 스미싱, 스팸발송, 악성코드 메일 발송 등)과 피해방지 방법, 정보주체 대응방안 수록.</div>
+            <div style="color:var(--text3)">활용 시점: 정보주체 통지 시 2차 피해 유의사항 안내, 민원 대응 시 · 관련 기관: 카드사·경찰청·금융감독원, KISA 118, 불법스팸대응센터</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- [UI개선] 개인정보 판단 헬퍼 전용 스타일 -->
+  <style>
+    #tools-tab-5 .ph-q-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:.75rem;
+      margin-top:.55rem;
+    }
+    #tools-tab-5 .ph-q-card{
+      border:1px solid var(--border);
+      border-radius:6px;
+      padding:.7rem .8rem;
+      background:var(--bg);
+      min-height:168px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      box-sizing:border-box;
+    }
+    #tools-tab-5 .ph-q-card .rq-label{margin-bottom:.45rem}
+    #tools-tab-5 .ph-q-desc{
+      font-size:12px;
+      color:var(--text3);
+      line-height:1.7;
+      margin-bottom:.55rem;
+    }
+    #tools-tab-5 .ph-criteria-box{
+      margin-top:.9rem;
+      padding:.75rem .9rem;
+      background:#eef4ff;
+      border:1px solid #dbe7ff;
+      border-radius:6px;
+      font-size:12px;
+      color:var(--text3);
+      line-height:1.75;
+    }
+    @media (max-width: 900px){
+      #tools-tab-5 .ph-q-grid{grid-template-columns:1fr}
+      #tools-tab-5 .ph-q-card{min-height:auto}
+    }
+  </style>
+
+  <!-- Tab 5: 개인정보 판단 헬퍼 -->
+  <div class="tmpl-panel" id="tools-tab-5">
+    <div class="tool-panel">
+      <div class="tool-panel-title">개인정보 판단 헬퍼</div>
+      <div class="tool-panel-desc">Yes/No 질문 기반으로 개인정보 해당 가능성을 1차 판단합니다.</div>
+
+      <!-- [UI개선] 질문 카드 2열 레이아웃 -->
+      <div class="ph-q-grid">
+        <div class="ph-q-card">
+          <div>
+            <div class="rq-label">Q1. 특정 개인을 식별할 수 있는 정보인가?</div>
+            <div class="ph-q-desc">이름, 전화번호, 이메일, 주민등록번호 등 단독으로 특정인이 식별되는 정보를 의미합니다.</div>
+          </div>
+          <div class="radio-row">
+            <button class="r-opt" id="ph1y" onclick="setPh(1,'y')">Yes</button>
+            <button class="r-opt" id="ph1n" onclick="setPh(1,'n')">No</button>
+          </div>
+        </div>
+
+        <div class="ph-q-card">
+          <div>
+            <div class="rq-label">Q2. 다른 정보와 결합하여 개인 식별 가능성이 있는가?</div>
+            <div class="ph-q-desc">단독으로는 식별이 어려워도 다른 데이터와 결합하면 개인 식별이 가능한 경우를 포함합니다.</div>
+          </div>
+          <div class="radio-row">
+            <button class="r-opt" id="ph2y" onclick="setPh(2,'y')">Yes</button>
+            <button class="r-opt" id="ph2n" onclick="setPh(2,'n')">No</button>
+          </div>
+        </div>
+
+        <div class="ph-q-card">
+          <div>
+            <div class="rq-label">Q3. 개인의 행동, 위치, 이용기록 등과 관련된 정보인가?</div>
+            <div class="ph-q-desc">접속 이력, 위치 이력, 구매 이력, 서비스 이용 로그 등 개인 활동과 연관된 정보입니다.</div>
+          </div>
+          <div class="radio-row">
+            <button class="r-opt" id="ph3y" onclick="setPh(3,'y')">Yes</button>
+            <button class="r-opt" id="ph3n" onclick="setPh(3,'n')">No</button>
+          </div>
+        </div>
+
+        <div class="ph-q-card">
+          <div>
+            <div class="rq-label">Q4. 생성자, 변경자, 계정, 식별자 정보가 포함되어 있는가?</div>
+            <div class="ph-q-desc">사번, 계정 ID, UUID, 내부 사용자 식별키 등 개인과 연결 가능한 식별자를 포함합니다.</div>
+          </div>
+          <div class="radio-row">
+            <button class="r-opt" id="ph4y" onclick="setPh(4,'y')">Yes</button>
+            <button class="r-opt" id="ph4n" onclick="setPh(4,'n')">No</button>
+          </div>
+        </div>
+
+        <div class="ph-q-card">
+          <div>
+            <div class="rq-label">Q5. 영상, 음성, 로그 등 개인 활동 데이터인가?</div>
+            <div class="ph-q-desc">CCTV 영상, 통화 음성, 활동 로그 등 개인의 행동/상태를 추적할 수 있는 데이터를 의미합니다.</div>
+          </div>
+          <div class="radio-row">
+            <button class="r-opt" id="ph5y" onclick="setPh(5,'y')">Yes</button>
+            <button class="r-opt" id="ph5n" onclick="setPh(5,'n')">No</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="risk-out empty" id="phOut" style="display:none;margin-top:.85rem"></div>
+
+      <!-- [UI개선] 판단 기준 강조 박스 -->
+      <div class="ph-criteria-box">
+        <strong style="color:var(--text2)">판단 기준</strong><br>
+        - Q1 또는 Q2가 Yes인 경우: 개인정보 해당<br>
+        - 그 외 항목에서 Yes가 1개 이상인 경우: 개인정보 가능성 있음 (검토 필요)<br>
+        - 모든 항목이 No인 경우: 개인정보 아님
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<script>
+// ══ TOOLS JS ══
+
+// ── 탭 전환 ──
+function switchToolsTab(i){
+  document.querySelectorAll('#pg-tools .tmpl-tab').forEach((t,ti)=>t.classList.toggle('active',ti===i));
+  document.querySelectorAll('#pg-tools .tmpl-panel').forEach((p,pi)=>p.classList.toggle('active',pi===i));
+  history.replaceState(null,'','#tools-tab-'+i);
+}
+
+// ── 위험도 판단 계산기 ──
+const RS={r1:null,r2:null};
+function setR(n,v){
+  RS['r'+n]=v;
+  ['y','n','u'].forEach(o=>{const el=document.getElementById('r'+n+o);if(el)el.classList.toggle('sel',o===v)});
+  const out=document.getElementById('riskOut');
+  if(!out)return;
+  const r1=RS.r1,r2=RS.r2;
+  if(!r1||!r2){out.className='risk-out empty';out.textContent='항목을 모두 선택하면 결과가 표시됩니다.';return}
+  if(r1==='y'&&r2==='y'){out.className='risk-out high';out.textContent='높음 — 법적 제재 + 즉각적 정보주체 영향. 즉시 보완 조치 필요'}
+  else if(r1==='y'&&r2==='n'){out.className='risk-out mid';out.textContent='중간 — 법적 제재 대상이나 영향이 간접·지연적. 단계적 개선 계획 수립'}
+  else if(r1==='n'){out.className='risk-out low';out.textContent='낮음 — 법적 제재 조문 미해당. 자율적 보호조치 권고 수준'}
+  else{out.className='risk-out mid';out.textContent='중간(불확실) — 추가 법령 검토 후 판단 필요'}
+}
+
+// ── 처리위탁 vs 제3자 제공 판단 도우미 ──
+const DT_TRUST_ITEMS=[
+  '위탁 업무의 목적 및 범위',
+  '재위탁 제한에 관한 사항',
+  '개인정보 안전성 확보 조치에 관한 사항',
+  '위탁 업무와 관련한 보유 개인정보의 관리현황 점검 등 감독에 관한 사항',
+  '수탁자가 의무를 위반한 경우의 손해배상 등 책임에 관한 사항',
+];
+const DT_THIRD_ITEMS=[
+  '제공받는 자',
+  '제공받는 자의 이용 목적',
+  '제공하는 개인정보 항목',
+  '제공받는 자의 보유 및 이용 기간',
+  '동의를 거부할 권리가 있다는 사실 및 동의 거부에 따른 불이익 내용',
+];
+function dtCheckList(items,label){
+  return `<div style="font-size:12px;font-weight:600;color:var(--text2);margin-bottom:.4rem">${label}</div>`
+    +items.map(it=>`<label style="display:flex;align-items:flex-start;gap:.5rem;font-size:13px;color:var(--text2);margin:.28rem 0;cursor:pointer"><input type="checkbox" style="width:13px;height:13px;margin-top:2px;flex-shrink:0"> ${it}</label>`).join('');
+}
+function dtShowResult(html,clHtml){
+  const resEl=document.getElementById('dt-result');
+  const clEl=document.getElementById('dt-checklist');
+  const resetBtn=document.getElementById('dt-reset');
+  ['dt-q1','dt-q2','dt-q3'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});
+  resEl.style.display='block'; resEl.innerHTML=html;
+  if(clHtml){clEl.style.display='block'; clEl.innerHTML=clHtml;}else{clEl.style.display='none';}
+  resetBtn.style.display='inline-block';
+}
+function dtNext(q,ans){
+  if(q===1&&ans==='y'){
+    dtShowResult(
+      `<div style="padding:.75rem 1rem;background:#fff7ed;border-left:4px solid var(--amber);border-radius:4px;font-size:13px;line-height:1.75"><strong style="color:var(--amber)">제3자 제공 (제17조)</strong><br>전달받는 자가 자신의 영업 목적으로 이용하는 경우입니다. 정보주체의 동의 또는 법령 근거 확보가 필요합니다.</div>`,
+      dtCheckList(DT_THIRD_ITEMS,'동의서 필수 고지항목 (제17조 제2항)')
+    );
+  }else if(q===1&&ans==='n'){
+    document.getElementById('dt-q2').style.display='block';
+  }else if(q===2&&ans==='y'){
+    dtShowResult(
+      `<div style="padding:.75rem 1rem;background:#f0fdf4;border-left:4px solid #22c55e;border-radius:4px;font-size:13px;line-height:1.75"><strong style="color:#16a34a">처리위탁 (제26조)</strong><br>위탁자의 업무를 대행하는 경우입니다. 위탁 계약서 체결 및 처리방침 공개가 필요합니다.</div>`,
+      dtCheckList(DT_TRUST_ITEMS,'위탁 계약서 필수 기재사항 (제26조 제1항)')
+    );
+  }else if(q===2&&ans==='n'){
+    document.getElementById('dt-q3').style.display='block';
+  }else if(q===3&&ans==='y'){
+    dtShowResult(
+      `<div style="padding:.75rem 1rem;background:#f0fdf4;border-left:4px solid #22c55e;border-radius:4px;font-size:13px;line-height:1.75"><strong style="color:#16a34a">처리위탁 가능성 높음 (제26조)</strong><br>클라우드·결제대행·배송 등 서비스 제공 과정에서 개인정보 처리가 수반되는 관계입니다. 처리위탁에 해당할 가능성이 높으므로 위탁 계약서 체결을 권고합니다.</div>`,
+      dtCheckList(DT_TRUST_ITEMS,'위탁 계약서 필수 기재사항 (제26조 제1항)')
+    );
+  }else if(q===3&&ans==='n'){
+    dtShowResult(
+      `<div style="padding:.75rem 1rem;background:#fef9c3;border-left:4px solid var(--amber);border-radius:4px;font-size:13px;line-height:1.75"><strong style="color:var(--amber)">재검토 필요</strong><br>위의 기준 어디에도 명확히 해당하지 않습니다. 개인정보보호 책임자 또는 법무 담당자와 추가 검토를 진행하세요.</div>`,
+      null
+    );
+  }
+}
+function dtReset(){
+  ['dt-q2','dt-q3','dt-result','dt-checklist'].forEach(id=>{const e=document.getElementById(id);if(e)e.style.display='none'});
+  const r=document.getElementById('dt-reset');if(r)r.style.display='none';
+  const q1=document.getElementById('dt-q1');if(q1)q1.style.display='block';
+}
+
+// ── 비정형 데이터 탐지 검증기 ──
+const PI_PATTERNS=[
+  {name:'주민등록번호', re:/\d{6}[-\s]?[1-4]\d{6}/g, color:'#fecaca'},
+  {name:'휴대전화번호', re:/01[016789][-\s.]?\d{3,4}[-\s.]?\d{4}/g, color:'#fed7aa'},
+  {name:'일반전화번호', re:/0\d{1,2}[-\s.]?\d{3,4}[-\s.]?\d{4}/g, color:'#fef08a'},
+  {name:'이메일 주소', re:/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g, color:'#bbf7d0'},
+  {name:'여권번호', re:/[A-Z]{1,2}\d{7,8}/g, color:'#bfdbfe'},
+  {name:'운전면허번호', re:/\d{2}[-\s]?\d{2}[-\s]?\d{6}[-\s]?\d{2}/g, color:'#ddd6fe'},
+  {name:'신용카드번호', re:/\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}/g, color:'#fbcfe8'},
+  {name:'IP 주소', re:/\b(?:(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b/g, color:'#e9d5ff'},
+];
+function piEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function piRun(){
+  const txt=document.getElementById('pi-input').value;
+  const anonMode=document.getElementById('pi-anon-mode').checked;
+  const resEl=document.getElementById('pi-result');
+  if(!txt.trim()){resEl.style.display='none';return;}
+  const allMatches=[];
+  PI_PATTERNS.forEach(p=>{
+    const re=new RegExp(p.re.source,'g');
+    let m;
+    while((m=re.exec(txt))!==null){
+      allMatches.push({start:m.index,end:m.index+m[0].length,text:m[0],name:p.name,color:p.color});
+    }
+  });
+  allMatches.sort((a,b)=>a.start-b.start);
+  const merged=[];let last=-1;
+  allMatches.forEach(m=>{if(m.start>=last){merged.push(m);last=m.end;}});
+  const counts={};let total=0;
+  merged.forEach(m=>{counts[m.name]=(counts[m.name]||0)+1;total++;});
+  let html='';let pos=0;
+  merged.forEach(m=>{
+    html+=piEsc(txt.slice(pos,m.start));
+    html+=`<mark style="background:${m.color};border-radius:3px;padding:0 2px" title="${m.name}">${piEsc(m.text)}</mark>`;
+    pos=m.end;
+  });
+  html+=piEsc(txt.slice(pos));
+  resEl.style.display='block';
+  const sumEl=document.getElementById('pi-summary');
+  const hlEl=document.getElementById('pi-highlight');
+  const bkEl=document.getElementById('pi-breakdown');
+  if(anonMode){
+    if(total>0){sumEl.innerHTML=`<span style="color:var(--red)">가명처리가 불완전할 수 있습니다. ${total}건의 개인정보 패턴이 남아 있습니다.</span>`;}
+    else{sumEl.innerHTML=`<span style="color:#16a34a">정규표현식 기반 검사에서 개인정보 패턴이 발견되지 않았습니다. 단, 문맥 기반 식별정보(이름·주소 등)는 별도 확인이 필요합니다.</span>`;}
+  }else{
+    if(total>0){sumEl.innerHTML=`<span style="color:var(--red)">총 ${total}건의 잠재적 개인정보 패턴 발견</span>`;}
+    else{sumEl.innerHTML=`<span style="color:var(--text2)">개인정보 패턴이 탐지되지 않았습니다.</span>`;}
+  }
+  hlEl.innerHTML=html||`<span style="color:var(--text3)">입력된 텍스트가 없습니다.</span>`;
+  bkEl.textContent=total>0?'유형별: '+Object.entries(counts).map(([k,v])=>`${k} ${v}건`).join(' · '):'';
+}
+function piClear(){
+  const inp=document.getElementById('pi-input');if(inp)inp.value='';
+  const res=document.getElementById('pi-result');if(res)res.style.display='none';
+}
+
+// ── 개인정보 판단 헬퍼 ──
+const PH={q1:null,q2:null,q3:null,q4:null,q5:null};
+function setPh(n,v){
+  // 선택 상태 저장 및 버튼 active 스타일(sel) 적용
+  PH['q'+n]=v;
+  ['y','n'].forEach(o=>{
+    const el=document.getElementById('ph'+n+o);
+    if(el)el.classList.toggle('sel',o===v);
+  });
+  const out=document.getElementById('phOut');
+  if(!out)return;
+  const vals=[PH.q1,PH.q2,PH.q3,PH.q4,PH.q5];
+
+  // 모든 문항 선택 전에는 결과를 표시하지 않음
+  if(vals.some(vv=>!vv)){
+    out.style.display='none';
+    out.className='risk-out empty';
+    out.textContent='';
+    return;
+  }
+  out.style.display='block';
+
+  // 결과 로직: Q1/Q2 YES 우선, 그 외 YES 존재 여부 판단
+  if(PH.q1==='y'||PH.q2==='y'){
+    out.className='risk-out high';
+    out.textContent='개인정보 해당';
+  }else if(vals.includes('y')){
+    out.className='risk-out mid';
+    out.textContent='개인정보 가능성 있음';
+  }else{
+    out.className='risk-out low';
+    out.textContent='개인정보 아님';
+  }
+}
+
+// ── 과태료·과징금 기준표 ──
+// badge kind: 'fine'=과태료 / 'surcharge'=과징금 / 'criminal'=형사처벌 / 'surcharge-possible'=과징금 병과 가능
+const PENALTIES=[
+  {type:'처리방침 미수립·미공개',        badges:[{k:'fine',t:'과태료 1천만원 이하'}],                                     law:'제30조·§75④'},
+  {type:'동의 없이 개인정보 수집·이용',  badges:[{k:'surcharge',t:'과징금 매출 3%'},{k:'criminal',t:'형사처벌 5년↓'}],   law:'제15조·§71'},
+  {type:'민감정보·고유식별정보 무단 처리',badges:[{k:'surcharge',t:'과징금'},{k:'criminal',t:'형사처벌 5년↓'}],           law:'제23·24조'},
+  {type:'목적 외 이용·제3자 무단 제공',  badges:[{k:'surcharge',t:'과징금'},{k:'criminal',t:'형사처벌 5년↓'}],           law:'제18조·§71'},
+  {type:'처리위탁 계약서 미체결·미공개', badges:[{k:'fine',t:'과태료 1천만원 이하'}],                                     law:'제26조·§75④'},
+  {type:'안전조치 의무 위반',            badges:[{k:'fine',t:'과태료 3천만원 이하'},{k:'sp',t:'과징금 병과 가능'}],       law:'제29조·§75②'},
+  {type:'영향평가 미수행·결과 미제출',   badges:[{k:'fine',t:'과태료 3천만원 이하'}],                                     law:'제33조·§75②'},
+  {type:'유출 신고 미이행 (72시간 초과)',badges:[{k:'fine',t:'과태료 3천만원 이하'}],                                     law:'제34조·§75②'},
+  {type:'파기 의무 미이행',              badges:[{k:'fine',t:'과태료 3천만원 이하'}],                                     law:'제21조·§75②'},
+  {type:'접속기록 미보관 (1년 미만)',    badges:[{k:'fine',t:'과태료 3천만원 이하'}],                                     law:'안전조치 §8'},
+  {type:'암호화 의무 미적용',            badges:[{k:'fine',t:'과태료 3천만원 이하'},{k:'sp',t:'과징금 병과 가능'}],       law:'제24조의2·§29'},
+  {type:'내부관리계획 미수립',           badges:[{k:'fine',t:'과태료 1천만원 이하'}],                                     law:'안전조치 §4'},
+  {type:'개인정보 보호책임자 미지정',     badges:[{k:'fine',t:'과태료 1천만원 이하'}],                                     law:'제31조·§75④'},
+  {type:'영상정보처리기기 설치 위반',     badges:[{k:'fine',t:'과태료 5천만원 이하'}],                                     law:'제25조·§75①'},
+];
+
+// ── 법정 보유기간 참조표 ──
+const RETENTIONS=[
+  {cat:'일반 회원정보',period:'탈퇴 시까지',law:'개인정보보호법 제21조'},
+  {cat:'전자상거래 표시·광고 기록',period:'6개월',law:'전자상거래법 시행령 제6조'},
+  {cat:'계약 또는 청약철회 기록',period:'5년',law:'전자상거래법 시행령 제6조'},
+  {cat:'대금결제·재화 공급 기록',period:'5년',law:'전자상거래법 시행령 제6조'},
+  {cat:'전자상거래 소비자 불만',period:'3년',law:'전자상거래법 시행령 제6조'},
+  {cat:'전자금융 거래기록',period:'5년',law:'전자금융거래법 제22조'},
+  {cat:'통신 로그기록',period:'3개월',law:'통신비밀보호법 제15조의2'},
+  {cat:'신용정보',period:'5년',law:'신용정보법 제20조의2'},
+  {cat:'채용 서류 (불합격자)',period:'채용 종료 후 즉시',law:'채용절차법 제11조'},
+  {cat:'세금계산서 관련',period:'5년',law:'부가가치세법 제32조'},
+  {cat:'접속기록 (일반)',period:'1년',law:'안전성 확보조치 기준 제8조'},
+  {cat:'접속기록 (5만 명+ 또는 고유식별정보)',period:'2년',law:'안전성 확보조치 기준 제8조'},
+  {cat:'AI 학습 데이터',period:'목적 달성 시까지',law:'개인정보보호법 제21조'},
+];
+
+(()=>{
+  const BADGE_CSS={
+    fine:   'display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;background:#e5e7eb;color:#374151',
+    surcharge:'display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;background:#fed7aa;color:#9a3412',
+    criminal: 'display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;background:#fecaca;color:#991b1b',
+    sp:       'display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:600;background:transparent;color:#c2410c;border:1px solid #fed7aa',
+  };
+  const ptb=document.getElementById('penaltyTbody');
+  if(ptb)PENALTIES.forEach(p=>{
+    const tr=document.createElement('tr');
+    const badgeHtml=p.badges.map(b=>`<span style="${BADGE_CSS[b.k]}">${b.t}</span>`).join(' ');
+    tr.innerHTML=`<td style="color:var(--text2)">${p.type}</td><td style="white-space:nowrap">${badgeHtml}</td><td style="color:var(--text3);white-space:nowrap;font-family:var(--mono)">${p.law}</td>`;
+    ptb.appendChild(tr);
+  });
+  const rtb=document.getElementById('retentionTbody');
+  if(rtb)RETENTIONS.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td style="color:var(--text2)">${r.cat}</td><td style="color:var(--accent);font-weight:600">${r.period}</td><td style="color:var(--text3);font-family:var(--mono)">${r.law}</td>`;
+    rtb.appendChild(tr);
+  });
+  // ── 침해사고 대응 탭 ──
+  function incFlowType(i){
+    [0,1,2,3].forEach(n=>{
+      const btn=document.getElementById('incft-'+n);
+      const flow=document.getElementById('incflow-'+n);
+      if(btn)btn.classList.toggle('sel',n===i);
+      if(flow)flow.style.display=n===i?'block':'none';
+    });
+  }
+  function incUpdateProgress(){
+    const panel=document.getElementById('inc-cl-panel');
+    if(!panel)return;
+    const allCbs=panel.querySelectorAll('input[type="checkbox"]');
+    const done=[...allCbs].filter(c=>c.checked).length;
+    const total=allCbs.length;
+    const pct=total>0?Math.round(done/total*100):0;
+    const pt=document.getElementById('inc-progress-text');
+    const pb=document.getElementById('inc-progress-bar');
+    if(pt)pt.textContent=done+'/'+total+' ('+pct+'%)';
+    if(pb)pb.style.width=pct+'%';
+    [0,1,2,3,4].forEach(si=>{
+      const sd=document.getElementById('inc-stage-'+si);
+      const sc=document.getElementById('inc-stage-'+si+'-cnt');
+      if(!sd||!sc)return;
+      const scbs=sd.querySelectorAll('input[type="checkbox"]');
+      const sdone=[...scbs].filter(c=>c.checked).length;
+      sc.textContent=sdone+'/'+scbs.length;
+    });
+  }
+  function incCbTgl(el){
+    const lbl=el.closest('label');
+    if(lbl){
+      lbl.style.textDecoration=el.checked?'line-through':'none';
+      lbl.style.color=el.checked?'var(--text3)':'var(--text2)';
+    }
+    incUpdateProgress();
+  }
+  window.incFlowType=incFlowType;
+  window.incCbTgl=incCbTgl;
+
+  // 해시 기반 탭 초기화
+  const hash=location.hash;
+  if(hash&&hash.startsWith('#tools-tab-')){
+    const idx=parseInt(hash.replace('#tools-tab-',''),10);
+    if(!isNaN(idx)&&idx>=0&&idx<=5)switchToolsTab(idx);
+  }
+})();
+</script>

@@ -1,0 +1,210 @@
+<div class="page" id="pg-guide">
+<div class="guide-overview">
+  <div>
+    <div class="guide-overview-title">개인정보 영향평가 수행 가이드</div>
+    <div class="guide-overview-sub">개인정보 영향평가 수행안내서 2025.10 · 5개 평가영역 · 121개 점검항목</div>
+  </div>
+  <div class="guide-overview-tags">
+    <span class="badge badge-blue">관리체계</span>
+    <span class="badge badge-teal">수집·생성</span>
+    <span class="badge badge-purple">보유·이용</span>
+    <span class="badge badge-amber">제공·위탁·파기</span>
+    <span class="badge badge-red">기술적 보호조치</span>
+  </div>
+</div>
+<div class="guide-layout">
+  <div class="g-sidebar">
+    <div class="g-search-wrap">
+      <input class="g-search" id="piaSearch" placeholder="항목 검색..." oninput="filterPIA()">
+    </div>
+    <div id="pia-overview-item" class="g-item active" onclick="showPIAOverview()">
+      <span class="g-item-code">0</span>
+      <span class="g-item-name">개인정보 영향평가 개요</span>
+    </div>
+    <div id="piaList"></div>
+  </div>
+  <div class="g-content" id="piaContent"></div>
+</div>
+</div>
+
+<template id="pia-overview-tpl">
+<div class="gc-cat">overview</div>
+<div class="gc-title">개인정보 영향평가 개요</div>
+
+<!-- [1] 개념 + 목적 2열 배치 -->
+<div class="gc-section" style="margin-bottom:10px">
+  <div class="gc-section-title">개념 및 목적</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+    <div class="gc-law-box" style="margin-bottom:0">
+      <div class="gc-law-label">개념</div>
+      <div class="gc-law-val" style="font-family:var(--sans);font-size:13px;color:var(--text2);line-height:1.7">
+        개인정보파일을 운용하는 정보시스템을 <strong>신규 도입</strong>하거나 <strong>기존 시스템을 중대하게 변경</strong>하는 경우, 그 구축·운영·변경이 개인정보에 미치는 영향을 사전에 조사·예측·검토하여 개선방안을 도출하고 이행을 점검하는 체계적 절차입니다.
+      </div>
+    </div>
+    <div class="gc-law-box" style="margin-bottom:0">
+      <div class="gc-law-label">목적</div>
+      <div class="gc-law-val" style="font-family:var(--sans);font-size:13px;color:var(--text2);line-height:1.7">
+        개인정보 처리가 수반되는 사업에서 사전에 영향을 분석하고 개선방안을 수립함으로써 개인정보 침해사고를 예방합니다.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- [2] 평가 대상 기준 + 공공기관/민간 안내 -->
+<div class="gc-section" style="margin-bottom:10px">
+  <div class="gc-section-title">평가 대상 기준 <span style="font-size:10px;font-weight:400;color:var(--text3)">(개인정보 보호법 §33, 시행령 §35)</span></div>
+  <div style="font-size:11px;color:var(--text3);background:var(--bg2);padding:5px 10px;border-radius:5px;margin-bottom:7px;line-height:1.6">
+    ※ 아래 기준은 <strong style="color:var(--text2)">공공기관 의무 대상</strong> 기준이며, 민간기업은 자율적으로 수행할 수 있습니다.
+  </div>
+  <div class="gc-checks">
+    <div class="gc-check">
+      <span class="gc-check-num" style="background:#2563eb">①</span>
+      <span><strong>민감정보·고유식별정보</strong> 처리 정보주체 <strong>5만명 이상</strong></span>
+    </div>
+    <div class="gc-check">
+      <span class="gc-check-num" style="background:#0891b2">②</span>
+      <span>다른 개인정보파일과 <strong>연계</strong>하여 정보주체 <strong>50만명 이상</strong></span>
+    </div>
+    <div class="gc-check">
+      <span class="gc-check-num" style="background:#7c3aed">③</span>
+      <span>정보주체 <strong>100만명 이상</strong> 개인정보파일 구축·운용</span>
+    </div>
+    <div class="gc-check">
+      <span class="gc-check-num" style="background:#d97706">④</span>
+      <span>영향평가를 실시한 기관이 개인정보 검색체계 등 <strong>개인정보파일 운용체계 변경</strong> 시</span>
+    </div>
+  </div>
+</div>
+
+<!-- 수행 절차 (가로 플로우 유지) -->
+<div class="gc-section" style="margin-bottom:10px">
+  <div class="gc-section-title">수행 절차</div>
+  <div style="display:flex;gap:8px;align-items:stretch;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px">
+    <div style="flex:1;min-width:120px;border:1px solid #bae6fd;border-radius:8px;overflow:hidden">
+      <div style="background:#0369a1;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.06em">사전준비단계</div>
+      <div style="padding:10px 8px;background:#f0f9ff;display:flex;flex-direction:column;gap:5px">
+        <div style="background:#fff;border:1px solid #bae6fd;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">사업계획 작성</div>
+        <div style="text-align:center;color:#7dd3fc;font-size:12px">↓</div>
+        <div style="background:#fff;border:1px solid #bae6fd;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">영향평가 기관 선정</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;color:var(--text3);font-size:14px;flex-shrink:0">→</div>
+    <div style="flex:3;min-width:200px;border:1px solid #bbf7d0;border-radius:8px;overflow:hidden">
+      <div style="background:#15803d;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.06em">수행단계</div>
+      <div style="padding:10px 8px;background:#f0fdf4;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center">
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">수행계획 수립</div>
+        <div style="color:#86efac;font-size:11px">→</div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">평가자료 수집</div>
+        <div style="color:#86efac;font-size:11px">→</div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">개인정보 흐름분석</div>
+        <div style="color:#86efac;font-size:11px">→</div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">침해요인 분석</div>
+        <div style="color:#86efac;font-size:11px">→</div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">개선계획 수립</div>
+        <div style="color:#86efac;font-size:11px">→</div>
+        <div style="background:#fff;border:1px solid #bbf7d0;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">평가서 작성</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;color:var(--text3);font-size:14px;flex-shrink:0">→</div>
+    <div style="flex:1;min-width:120px;border:1px solid #e9d5ff;border-radius:8px;overflow:hidden">
+      <div style="background:#7e22ce;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:5px 8px;letter-spacing:.06em">이행단계</div>
+      <div style="padding:10px 8px;background:#fdf4ff;display:flex;flex-direction:column;gap:5px">
+        <div style="background:#fff;border:1px solid #e9d5ff;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">개선계획 반영</div>
+        <div style="text-align:center;color:#d8b4fe;font-size:12px">↓</div>
+        <div style="background:#fff;border:1px solid #e9d5ff;border-radius:5px;padding:5px 7px;font-size:11px;color:var(--text2);text-align:center">이행 확인</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- [1] 5개 평가영역 → 2열 그리드 -->
+<div class="gc-section" style="margin-bottom:10px">
+  <div class="gc-section-title">5개 평가영역 <span style="font-size:10px;font-weight:400;color:var(--text3)">(총 121개 점검항목)</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--surface);border-radius:6px;border-left:3px solid #2563eb">
+      <span class="badge badge-blue" style="flex-shrink:0;margin-top:2px">Ⅰ</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">대상기관 개인정보 보호 관리체계</div>
+        <div style="font-size:11px;color:var(--text2)">개인정보 보호 조직·책임자 지정, 내부 관리계획, 침해대응, 정보주체 권리보장 체계</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--surface);border-radius:6px;border-left:3px solid #0891b2">
+      <span class="badge badge-teal" style="flex-shrink:0;margin-top:2px">Ⅱ</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">대상시스템의 개인정보 보호 관리체계</div>
+        <div style="font-size:11px;color:var(--text2)">시스템 취급자 관리, 개인정보파일 대장·등록, 처리방침 공개, 공공시스템 내부 관리계획</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--surface);border-radius:6px;border-left:3px solid #7c3aed">
+      <span class="badge badge-purple" style="flex-shrink:0;margin-top:2px">Ⅲ</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">개인정보 처리단계별 보호조치</div>
+        <div style="font-size:11px;color:var(--text2)">수집·보유·이용·제공·위탁·파기 각 단계별 적합성 및 안전조치 점검</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--surface);border-radius:6px;border-left:3px solid #d97706">
+      <span class="badge badge-amber" style="flex-shrink:0;margin-top:2px">Ⅳ</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">대상시스템의 기술적 보호조치</div>
+        <div style="font-size:11px;color:var(--text2)">접근권한·접근통제·암호화·접속기록·보안프로그램·출력·물리적 보호구역 조치</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--surface);border-radius:6px;border-left:3px solid #dc2626;grid-column:1/-1">
+      <span class="badge badge-red" style="flex-shrink:0;margin-top:2px">Ⅴ</span>
+      <div>
+        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px">특정 IT 기술 활용 시 개인정보 보호</div>
+        <div style="font-size:11px;color:var(--text2)">고정·이동형 영상기기, 바이오정보, IoT, 가명정보 처리, 자동화된 결정, AI 시스템</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gc-section">
+  <div class="gc-section-title">주요 추진근거</div>
+  <div class="gc-law-box">
+    <div class="gc-law-val" style="font-family:var(--sans);font-size:12px;color:var(--text2);line-height:2.2">
+      개인정보 보호법 제33조 (개인정보 영향평가)<br>
+      개인정보 보호법 시행령 제35조 (영향평가의 대상)<br>
+      개인정보 보호법 시행령 제36조 (평가기관의 지정 및 지정취소)<br>
+      개인정보 보호법 시행령 제37조 (영향평가 시 고려사항)<br>
+      개인정보 보호법 시행령 제38조 (영향평가의 평가기준 등)<br>
+      개인정보 영향평가에 관한 고시 제2024-10호 [시행 2024.10.31.]
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+(function(){
+  /* ── 개요 표시 함수 ─────────────────────────────────── */
+  window.showPIAOverview = function() {
+    window._piaOverviewActive = true;
+    // 데이터 항목 active 클래스 제거
+    document.querySelectorAll('#piaList .g-item').forEach(function(el){ el.classList.remove('active'); });
+    // 개요 항목 active 표시
+    var ov = document.getElementById('pia-overview-item');
+    if (ov) ov.classList.add('active');
+    // 개요 콘텐츠 렌더링
+    var tpl = document.getElementById('pia-overview-tpl');
+    var el  = document.getElementById('piaContent');
+    if (el && tpl) { el.innerHTML = tpl.innerHTML; el.scrollTop = 0; }
+  };
+
+  /* ── selectPIAByCode 패치: 개요 active 상태 해제 ────── */
+  var _origSel = window.selectPIAByCode;
+  if (typeof _origSel === 'function') {
+    window.selectPIAByCode = function(code) {
+      window._piaOverviewActive = false;
+      var ov = document.getElementById('pia-overview-item');
+      if (ov) ov.classList.remove('active');
+      _origSel(code);
+    };
+  }
+
+  /* ── 사이드바 초기 렌더링 ─────────────────────────── */
+  if (typeof filterPIA === 'function') filterPIA();
+
+  /* ── 기본 표시: 개요 ─────────────────────────────────── */
+  showPIAOverview();
+})();
+</script>

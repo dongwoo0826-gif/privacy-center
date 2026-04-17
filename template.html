@@ -1,0 +1,2417 @@
+<div class="page" id="pg-template">
+<div class="pg-wrap">
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:11px;color:var(--cyan);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">TEMPLATE · 약관·동의서 가이드</div>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보 수집·이용 동의서 및 개인정보 처리방침 가이드</div>
+  </div>
+  <div class="tmpl-tabs">
+    <button class="tmpl-tab active" onclick="switchTmpl(0)">동의서 체크리스트</button>
+    <button class="tmpl-tab" onclick="switchTmpl(1)">동의서 Template</button>
+    <button class="tmpl-tab" onclick="switchTmpl(2)">처리방침 체크리스트</button>
+    <button class="tmpl-tab" onclick="switchTmpl(3)">처리방침 Template</button>
+    <button class="tmpl-tab" onclick="switchTmpl(4)">잘못된 사례</button>
+  </div>
+
+  <!-- ① 동의서 체크리스트 -->
+  <div class="tmpl-panel active" id="tab-checklist-consent">
+  <div class="cl-wrap">
+
+    <!-- 진행률 카드 -->
+    <div class="cl-progress-card">
+      <div class="cl-progress-top">
+        <div class="cl-progress-title">📋 동의서 체크리스트 진행률</div>
+        <div class="cl-progress-stat">전체 <strong id="cl-done">0</strong>/27 &nbsp;·&nbsp; 필수·해당시필수 <strong id="cl-mand-done">0</strong>/21</div>
+      </div>
+      <div class="cl-bar-row">
+        <div class="cl-bar-label">전체</div>
+        <div class="cl-bar-track"><div class="cl-bar-fill" id="cl-bar-all"></div></div>
+        <div class="cl-bar-pct" id="cl-pct-all">0%</div>
+      </div>
+      <div class="cl-bar-row">
+        <div class="cl-bar-label">필수</div>
+        <div class="cl-bar-track"><div class="cl-bar-fill mand" id="cl-bar-mand"></div></div>
+        <div class="cl-bar-pct" id="cl-pct-mand">0%</div>
+      </div>
+    </div>
+
+    <!-- ① 동의가 필요한 항목 처리 적정성 -->
+    <div class="cl-section" id="cls-1">
+      <div class="cl-section-hd" onclick="clToggleSection('cls-1')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">① 동의가 필요한 항목 처리 적정성</span>
+        <span class="cl-section-cnt" id="cls-1-cnt">0 / 5</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15①</span></div>
+              <div class="cl-item-title">동의 취득 전 다른 적법근거 우선 검토</div>
+            </div>
+            <button class="cl-toggle-btn open" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail open">
+            <p>동의 외에도 계약의 이행·체결(§15①4호, 2023년 개정으로 계약 이행에 필요한 정보는 동의 불필요), 법적 의무 이행(§15①2호), 정당한 이익(§15①6호) 등 6가지 적법근거를 먼저 검토합니다.</p>
+            <p>불필요하게 동의를 수집하면 정보주체가 거부할 경우 서비스 제공에 어려움이 생기므로, 동의가 꼭 필요한 처리에만 동의를 활용하는 것이 바람직합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§22①</span></div>
+              <div class="cl-item-title">처리 목적·항목별 구분하여 각각 동의 취득</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>각각의 동의 사항을 구분하여 정보주체가 명확히 인지하고 각각 동의할 수 있어야 합니다. 예: 필수 서비스 항목과 선택 항목(마케팅·분석)을 별도 체크박스로 구분.</p>
+            <p>법 §28조의8①(1)에 따라 이동통신 단말장치 정보 처리도 별도 동의 대상이 될 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">민감정보 처리 시</span><span class="cl-b law">§23①1호</span></div>
+              <div class="cl-item-title">민감정보 처리 시 일반 개인정보와 별도 명시적 동의</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>민감정보(사상·신념, 노동조합·정당 가입·탈퇴, 정치적 견해, 건강, 성생활, 유전정보, 범죄경력, 생체인식정보, 인종·민족 등)는 일반 개인정보와 구분하여 별도로 명시적 동의를 받아야 합니다.</p>
+            <p>법 §23조는 §15·§17·§18조보다 우선 적용되므로, 다른 적법근거가 있더라도 민감정보는 반드시 별도 동의가 필요합니다(단, 법령에서 처리를 요구·허용하는 경우 제외).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">고유식별정보 처리 시</span><span class="cl-b law">§24①1호</span></div>
+              <div class="cl-item-title">고유식별정보 처리 시 별도 동의 취득</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>주민등록번호·여권번호·운전면허번호·외국인등록번호는 일반 개인정보와 구분하여 별도 동의를 받아야 합니다. 단, 법령에서 구체적으로 처리를 요구하거나 허용하는 경우는 예외입니다.</p>
+            <p>특히 주민등록번호는 §24조의2에 따라 더욱 엄격하게 제한되며, 법률·대통령령·국회규칙·대법원규칙 등에서 구체적으로 허용한 경우에만 처리 가능하고 정보주체의 동의만으로는 처리할 수 없습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">14세 미만 아동 서비스 제공 시</span><span class="cl-b law">§22조의2①</span></div>
+              <div class="cl-item-title">만 14세 미만 아동 처리 시 법정대리인 동의 취득 및 확인</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>만 14세 미만 아동의 개인정보를 처리하려면 아동의 동의 대신 법정대리인(친권자, 후견인 등)의 동의를 받고, 시행령 §17조의2 각호(SMS 인증, 카드정보 제공, 휴대전화 본인인증, 서면 발급, 이메일, 전화 등 7가지 방법 중 하나)로 법정대리인이 실제 동의했는지 확인해야 합니다.</p>
+            <p>2023년 법 개정으로 이 규정이 모든 개인정보처리자에게 확대 적용되었습니다. 아동에게 고지 시에는 이해하기 쉬운 양식과 언어를 사용해야 합니다(§22조의2③).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ② 동의 시 필수 고지사항 -->
+    <div class="cl-section" id="cls-2">
+      <div class="cl-section-hd" onclick="clToggleSection('cls-2')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">② 동의 시 필수 고지사항</span>
+        <span class="cl-section-cnt" id="cls-2-cnt">0 / 7</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15②1호</span></div>
+              <div class="cl-item-title">개인정보 수집·이용 목적 고지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의서에 개인정보를 수집·이용하는 목적을 구체적으로 명시해야 합니다. 단순히 "서비스 제공"이 아닌 구체적 업무 내용(예: "회원가입 및 본인 확인, 고객 문의 처리")을 기재합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15②2호</span></div>
+              <div class="cl-item-title">수집하는 개인정보 항목 고지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>수집하는 개인정보 항목을 빠짐없이 구체적으로 열거해야 합니다. "이름, 이메일, 휴대전화번호" 등 개별 항목 단위로 명시하며, 추후 추가 수집 예정 항목도 포함해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15②3호</span></div>
+              <div class="cl-item-title">개인정보 보유 및 이용 기간 고지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>수집한 개인정보를 보유하고 이용하는 기간을 명확히 고지해야 합니다. 예: "회원 탈퇴 시까지" 또는 "수집일로부터 1년". 기간이 아닌 사유(목적 달성 시까지)로 표현할 경우 언제 삭제되는지 예측할 수 있도록 구체적으로 기재합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15②4호</span></div>
+              <div class="cl-item-title">동의 거부권 및 거부 시 불이익 고지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체가 동의를 거부할 권리가 있음을 알리고, 거부 시 발생하는 불이익이 있다면 명확히 고지해야 합니다. 불이익이 없는 경우(선택 항목)에는 "동의 거부 시 불이익 없음"으로 기재합니다.</p>
+            <p>선택 항목에 동의하지 않을 경우 필수 서비스 이용을 제한하는 것은 §22⑤ 위반입니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">제3자 제공 시</span><span class="cl-b law">§17②1~4호</span></div>
+              <div class="cl-item-title">제3자 제공 시 필수 고지사항(4가지) 모두 포함</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보를 제3자에게 제공하는 경우 ①제공받는 자, ②제공받는 자의 개인정보 이용 목적, ③제공하는 항목, ④보유·이용 기간을 모두 고지하고 동의를 받아야 합니다(§17②1~4호).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">홍보·판매 목적 위탁 시</span><span class="cl-b law">§26③</span></div>
+              <div class="cl-item-title">홍보·판매 목적 위탁 시 수탁자 및 위탁업무 내용 고지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>재화·서비스를 홍보하거나 판매를 권유하는 업무를 위탁하는 경우, 위탁하는 업무의 내용과 수탁자를 대통령령으로 정하는 방법에 따라 정보주체에게 알려야 합니다(§26③).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">§22③</span><span class="cl-b law">통합안내서 2025.7.</span></div>
+              <div class="cl-item-title">동의 없이 처리 가능한 항목은 처리방침에 별도 공개</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>계약 이행, 법령 의무 등 동의 없이 처리할 수 있는 개인정보와 동의가 필요한 개인정보를 명확히 구분하여 처리방침에 공개하면 정보주체의 신뢰와 투명성을 높일 수 있습니다(§22③).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ③ 동의 방식 적정성 -->
+    <div class="cl-section" id="cls-3">
+      <div class="cl-section-hd" onclick="clToggleSection('cls-3')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">③ 동의 방식 적정성</span>
+        <span class="cl-section-cnt" id="cls-3-cnt">0 / 6</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">영§17①2호</span></div>
+              <div class="cl-item-title">동의 내용을 구체적·명확하게 작성</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의를 받으려는 내용을 구체적이고 명확하게 작성하여 정보주체가 무엇에 동의하는지 명확히 알 수 있어야 합니다(시행령 §17①2호). 막연하거나 포괄적인 문구(예: "서비스 개선 전반")는 부적절합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">영§17①3호</span></div>
+              <div class="cl-item-title">쉽게 읽고 이해할 수 있는 문구 사용</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>법률 전문 용어나 어려운 표현을 피하고, 누구나 쉽게 이해할 수 있는 평이한 언어로 작성합니다(시행령 §17①3호). 특히 아동·청소년 대상 서비스는 이해하기 쉬운 언어가 더욱 중요합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">영§17①1·4호</span></div>
+              <div class="cl-item-title">자유로운 의사에 따른 동의 의사표시 방법 명확히 제공</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체가 자유로운 의사에 따라 동의 여부를 결정할 수 있는 환경을 보장하고(영§17①1호), 동의 여부를 명확하게 표시할 수 있는 방법(체크박스, 서명란 등)을 제공해야 합니다(영§17①4호).</p>
+            <p>동의 거부 시 서비스 이용이 전면 차단되는 구조는 자유로운 의사에 의한 동의로 보기 어렵습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§22②</span><span class="cl-b law">영§17③</span></div>
+              <div class="cl-item-title">서면·전자문서 동의 시 중요 내용 명확 표시</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>서면 또는 전자문서로 동의를 받을 때, 민감정보 처리·고유식별정보 처리·홍보·마케팅·제3자 제공·보유기간 관련 중요 내용(영§17③)은 색깔·굵기·밑줄 등을 통해 다른 내용과 구분하여 명확히 표시해야 합니다(§22②, 영§17③).</p>
+            <p>2024년 고시 개정으로 글씨 크기(9pt) 규정은 삭제되었습니다. 크기 외 다양한 방법으로 명확히 표시하면 됩니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§16②③</span><span class="cl-b law">§22⑤</span></div>
+              <div class="cl-item-title">선택적 동의 거부를 이유로 서비스 제공 거부 금지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체가 선택적 동의(마케팅 수신, 개인화 서비스 등)를 거부하더라도 필수 서비스 제공을 거부하거나 불이익을 주어서는 안 됩니다(§16②③, §22⑤).</p>
+            <p>필수 개인정보와 선택 개인정보를 명확히 구분하고, 선택 항목 거부 시에도 서비스 핵심 기능이 이용 가능하도록 설계해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">통합안내서 2025.7. 참고2</span></div>
+              <div class="cl-item-title">동의 서식을 정보주체 관점에서 사전 검토</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의 서식 확정 전, 실제 정보주체 입장에서 동의서를 직접 읽어보고 동의 내용이 명확히 인지되는지, 동의 의사 결정에 어려움이 없는지 확인합니다(개인정보처리 통합 안내서 2025.7. 참고2 동의서 작성 전 확인 사항).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ④ 동의 철회 편의성 -->
+    <div class="cl-section" id="cls-4">
+      <div class="cl-section-hd" onclick="clToggleSection('cls-4')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">④ 동의 철회 편의성</span>
+        <span class="cl-section-cnt" id="cls-4-cnt">0 / 4</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§37①</span></div>
+              <div class="cl-item-title">동의 철회 방법·절차 안내 및 철회 채널 운영</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체는 언제든지 처리 정지(동의 철회에 준함)를 요구할 수 있으며(§37①), 개인정보처리자는 이를 위한 방법과 절차를 마련해야 합니다. 동의 철회가 가능한 채널(홈페이지, 앱 내 메뉴, 고객센터 등)을 구체적으로 안내합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§37②</span></div>
+              <div class="cl-item-title">철회 요청 후 지체 없이(10일 이내) 처리 중단</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리 정지 요구를 받은 날로부터 10일 이내에 처리를 중단하고 이를 정보주체에게 통지해야 합니다(§37②). 단, 법률에 특별 규정이 있는 경우, 제3자의 이익을 현저히 침해할 우려가 있는 경우 등 정당한 사유가 있으면 거절할 수 있으나 사유를 고지해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§37⑤</span></div>
+              <div class="cl-item-title">처리 중단 후 해당 개인정보 파기</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리가 정지된 개인정보는 다른 법령에 의한 보존 의무가 없는 한 지체 없이 파기해야 합니다(§37⑤). 파기 불가한 경우에는 해당 사유를 정보주체에게 고지하고 보관·차단 조치를 취해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">통합안내서 2025.7.</span></div>
+              <div class="cl-item-title">동의 철회 절차가 동의 취득보다 어렵지 않게 설계</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의 취득은 클릭 한 번으로 가능하지만 철회는 고객센터 전화나 복잡한 절차를 요구하는 방식은 바람직하지 않습니다. 동의받는 방법과 동일하거나 더 쉬운 방식으로 철회할 수 있도록 설계하는 것이 권고됩니다(개인정보처리 통합 안내서 2025.7.).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑤ 가독성 및 투명성 -->
+    <div class="cl-section" id="cls-5">
+      <div class="cl-section-hd" onclick="clToggleSection('cls-5')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">⑤ 가독성 및 투명성</span>
+        <span class="cl-section-cnt" id="cls-5-cnt">0 / 5</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§15②</span><span class="cl-b law">§17②</span><span class="cl-b law">§18③</span></div>
+              <div class="cl-item-title">법정 고지사항 전부 누락 없이 포함</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의서에 법정 고지사항(§15②: 수집·이용 목적, 수집 항목, 보유기간, 거부권+불이익 / §17②: 제3자 제공 시 4가지 / §18③: 목적 외 이용·제공 시 고지)이 모두 포함되어 있는지 최종 점검합니다.</p>
+            <p>개인정보처리 통합 안내서 2025.7. 참고2 "동의서 작성" 체크리스트를 기준으로 법정 고지사항 §15②, §17②, §18③을 충족하는지 확인합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">서비스 제공 과정에서 민감정보 공개 가능성 있을 때</span><span class="cl-b law">§23③</span></div>
+              <div class="cl-item-title">민감정보 공개 가능성 및 비공개 선택 방법 사전 안내</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>서비스 제공 과정에서 공개되는 정보에 민감정보가 포함됨으로써 사생활 침해 위험성이 있는 경우, 서비스 제공 전에 민감정보가 공개될 수 있다는 사실과 비공개를 선택하는 방법을 정보주체가 알아보기 쉽게 알려야 합니다(§23③).</p>
+            <p>예: SNS 서비스에서 건강 정보, 정치적 견해 등 민감정보를 타인과 공유할 수 있는 기능이 있는 경우.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">영§17③②</span><span class="cl-b law">통합안내서 2025.7.</span></div>
+              <div class="cl-item-title">동의 항목이 많을 경우 중요 내용 별도 구분 표시</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의 사항이 많아 중요 내용이 명확히 구분되기 어려운 경우, 중요 내용을 그 밖의 내용과 별도로 구분하여 표시하면 정보주체가 핵심 사항을 쉽게 확인할 수 있습니다(시행령 §17③②).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">통합안내서 2025.7. 참고2③</span></div>
+              <div class="cl-item-title">동의 증빙자료(동의서, 동의 시기 등) 관리 체계 유지</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>분쟁 대비를 위해 정보주체가 자유로운 의사에 따라 명시적 동의를 했다는 사실을 확인할 수 있는 증빙자료(동의서, 동의 시기 등)를 관리합니다.</p>
+            <p>단, 동의 증빙 목적으로 생년월일·서명 등 추가적인 개인정보를 요구하는 것은 바람직하지 않습니다(개인정보처리 통합 안내서 2025.7. 참고2 ③ 동의 후 조치사항).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="clUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b cond-txt">아동 포함 서비스 시</span><span class="cl-b law">§22조의2③</span></div>
+              <div class="cl-item-title">아동 대상 서비스 시 이해하기 쉬운 양식·언어 사용</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>만 14세 미만 아동이 이용하는 서비스에서 개인정보 처리 관련 사항을 고지할 때에는 이해하기 쉬운 양식과 명확하고 알기 쉬운 언어를 사용해야 합니다(§22조의2③). 2023년 법 개정으로 모든 개인정보처리자에게 적용됩니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /cl-wrap -->
+  </div>
+
+  <!-- ② 동의서 Template -->
+  <div class="tmpl-panel" id="tab-template-consent">
+    <div class="tmpl-layout">
+
+      <!-- ── 좌측 입력 ── -->
+      <div style="overflow-y:auto;max-height:calc(100vh - 160px);padding-right:4px">
+
+        <!-- 기관명 -->
+        <div class="form-block">
+          <div class="f-label">기관·회사명 <span class="f-req">*</span></div>
+          <input class="f-inp" id="tc-org" placeholder="예: ○○주식회사" oninput="renderDoc2()">
+        </div>
+
+        <!-- 처리 목적 -->
+        <div class="form-block">
+          <div class="f-label">처리 목적 <span class="f-req">*</span></div>
+          <input class="f-inp" id="tc-purpose" placeholder="예: 회원가입 및 서비스 제공" oninput="renderDoc2()">
+          <label class="tc-toggle-label" style="margin-top:6px">
+            <input type="checkbox" id="tc-marketing" onchange="renderDoc2()">
+            홍보·판매 권유 목적 포함 <span class="tc-badge-imp">§22② 중요내용</span>
+          </label>
+        </div>
+
+        <!-- 필수 수집항목 -->
+        <div class="form-block">
+          <div class="f-label">필수 수집 항목 <span class="f-req">*</span> <span class="f-hint">거부 시 서비스 이용 제한</span></div>
+          <div class="cb-group" id="tc-req-group">
+            <div class="cb-item"><input type="checkbox" id="tr1" value="성명" onchange="renderDoc2()"><label for="tr1">성명</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr2" value="생년월일" onchange="renderDoc2()"><label for="tr2">생년월일</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr3" value="이메일" onchange="renderDoc2()"><label for="tr3">이메일</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr4" value="휴대전화번호" onchange="renderDoc2()"><label for="tr4">휴대전화번호</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr5" value="주소" onchange="renderDoc2()"><label for="tr5">주소</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr6" value="아이디(ID)" onchange="renderDoc2()"><label for="tr6">아이디(ID)</label></div>
+            <div class="cb-item"><input type="checkbox" id="tr7" value="비밀번호" onchange="renderDoc2()"><label for="tr7">비밀번호</label></div>
+          </div>
+          <div class="custom-row">
+            <input class="f-inp" id="tc-req-ci" placeholder="직접 입력 후 Enter" onkeydown="if(event.key==='Enter')tcAddCustom('req')">
+            <button class="btn btn-ghost" onclick="tcAddCustom('req')">추가</button>
+          </div>
+          <div id="tc-req-cw"></div>
+        </div>
+
+        <!-- 선택 수집항목 -->
+        <div class="form-block">
+          <div class="f-label">선택 수집 항목 <span class="f-hint">거부해도 기본 서비스 이용 가능</span></div>
+          <div class="cb-group" id="tc-opt-group">
+            <div class="cb-item"><input type="checkbox" id="to1" value="직업" onchange="renderDoc2()"><label for="to1">직업</label></div>
+            <div class="cb-item"><input type="checkbox" id="to2" value="관심사" onchange="renderDoc2()"><label for="to2">관심사</label></div>
+            <div class="cb-item"><input type="checkbox" id="to3" value="국적" onchange="renderDoc2()"><label for="to3">국적</label></div>
+          </div>
+          <div class="custom-row">
+            <input class="f-inp" id="tc-opt-ci" placeholder="직접 입력 후 Enter" onkeydown="if(event.key==='Enter')tcAddCustom('opt')">
+            <button class="btn btn-ghost" onclick="tcAddCustom('opt')">추가</button>
+          </div>
+          <div id="tc-opt-cw"></div>
+        </div>
+
+        <!-- 보유기간 -->
+        <div class="form-block">
+          <div class="f-label">보유 및 이용 기간 <span class="f-req">*</span> <span class="tc-badge-imp">§22② 중요내용</span></div>
+          <select class="f-inp" id="tc-period" onchange="tcPeriodToggle();renderDoc2()">
+            <option value="">선택하세요</option>
+            <option value="회원 탈퇴 시까지">회원 탈퇴 시까지</option>
+            <option value="서비스 종료 시까지">서비스 종료 시까지</option>
+            <option value="계약 종료 후 1년">계약 종료 후 1년</option>
+            <option value="계약 종료 후 3년">계약 종료 후 3년</option>
+            <option value="계약 종료 후 5년">계약 종료 후 5년</option>
+            <option value="목적 달성 시 즉시 파기">목적 달성 시 즉시 파기</option>
+            <option value="custom">직접 입력</option>
+          </select>
+          <div id="tc-period-cw" style="display:none;margin-top:6px">
+            <input class="f-inp" id="tc-period-custom" placeholder="예: 수집일로부터 2년" oninput="renderDoc2()">
+          </div>
+        </div>
+
+        <!-- 동의 거부 불이익 -->
+        <div class="form-block">
+          <div class="f-label">동의 거부 시 불이익 <span class="f-req">*</span></div>
+          <label class="tc-toggle-label">
+            <input type="checkbox" id="tc-disadv-auto" checked onchange="tcDisadvToggle();renderDoc2()">
+            자동 생성 (수집항목 구분에 따라)
+          </label>
+          <div id="tc-disadv-cw" style="display:none;margin-top:6px">
+            <textarea class="f-inp" id="tc-disadv-custom" rows="2" placeholder="불이익 내용을 직접 입력하세요" oninput="renderDoc2()" style="resize:vertical"></textarea>
+          </div>
+        </div>
+
+        <!-- 민감정보 -->
+        <div class="form-block">
+          <div class="f-label">민감정보 <span class="tc-badge-law">§23 별도동의</span> <span class="tc-badge-imp">§22② 중요내용</span></div>
+          <div class="cb-group" id="tc-sens-group">
+            <div class="cb-item"><input type="checkbox" id="ts1" value="사상·신념에 관한 정보" onchange="renderDoc2()"><label for="ts1">사상·신념</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts2" value="노동조합·정당의 가입·탈퇴에 관한 정보" onchange="renderDoc2()"><label for="ts2">노동조합·정당 가입·탈퇴</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts3" value="정치적 견해에 관한 정보" onchange="renderDoc2()"><label for="ts3">정치적 견해</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts4" value="건강·성생활 등에 관한 정보" onchange="renderDoc2()"><label for="ts4">건강·성생활</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts5" value="유전자검사 등의 결과로 얻어진 유전정보" onchange="renderDoc2()"><label for="ts5">유전정보</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts6" value="범죄경력에 관한 정보" onchange="renderDoc2()"><label for="ts6">범죄경력</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts7" value="신체적 특징·생체인식 정보(지문, 홍채, 얼굴 등)" onchange="renderDoc2()"><label for="ts7">생체인식정보(지문·얼굴 등)</label></div>
+            <div class="cb-item"><input type="checkbox" id="ts8" value="인종·민족에 관한 정보" onchange="renderDoc2()"><label for="ts8">인종·민족</label></div>
+          </div>
+          <div class="custom-row">
+            <input class="f-inp" id="tc-sens-ci" placeholder="기타 민감정보 직접 입력" onkeydown="if(event.key==='Enter')tcAddCustom('sens')">
+            <button class="btn btn-ghost" onclick="tcAddCustom('sens')">추가</button>
+          </div>
+          <div id="tc-sens-cw"></div>
+        </div>
+
+        <!-- 고유식별정보 -->
+        <div class="form-block">
+          <div class="f-label">고유식별정보 <span class="tc-badge-law">§24 별도동의</span> <span class="tc-badge-imp">§22② 중요내용</span></div>
+          <div class="cb-group" id="tc-uid-group">
+            <div class="cb-item"><input type="checkbox" id="tu1" value="여권번호" onchange="renderDoc2()"><label for="tu1">여권번호</label></div>
+            <div class="cb-item"><input type="checkbox" id="tu2" value="운전면허번호" onchange="renderDoc2()"><label for="tu2">운전면허번호</label></div>
+            <div class="cb-item"><input type="checkbox" id="tu3" value="외국인등록번호" onchange="renderDoc2()"><label for="tu3">외국인등록번호</label></div>
+          </div>
+        </div>
+
+        <!-- 제3자 제공 -->
+        <div class="form-block">
+          <label class="tc-section-toggle">
+            <input type="checkbox" id="tc-third-on" onchange="tcThirdToggle()">
+            제3자 제공 <span class="tc-badge-law">§17② 별도동의</span> <span class="tc-badge-imp">§22② 중요내용</span>
+          </label>
+          <div id="tc-third-wrap" style="display:none;margin-top:8px">
+            <div id="tc-third-list"></div>
+            <button class="btn btn-ghost" style="font-size:12px;padding:4px 10px;margin-top:2px" onclick="tcAddThird()">+ 제공처 추가</button>
+          </div>
+        </div>
+
+        <!-- 아동 -->
+        <div class="form-block">
+          <label class="tc-section-toggle">
+            <input type="checkbox" id="tc-child-on" onchange="renderDoc2()">
+            14세 미만 아동 대상 포함 <span class="tc-badge-law">§22조의2</span>
+          </label>
+        </div>
+
+      </div><!-- /left col -->
+
+      <!-- ── 우측 미리보기 ── -->
+      <div>
+        <div class="preview-panel">
+          <div class="preview-label">LIVE PREVIEW · 동의서 미리보기</div>
+          <div class="doc-box" id="docPreview" style="max-height:calc(100vh - 220px);overflow-y:auto"></div>
+          <div class="preview-actions">
+            <button class="btn btn-teal" onclick="printDoc()">🖨️ 출력</button>
+            <button class="btn btn-ghost" onclick="copyDoc()">📋 텍스트 복사</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ③ 처리방침 체크리스트 -->
+  <div class="tmpl-panel" id="tab-checklist-policy">
+  <div class="cl-wrap">
+
+    <!-- 진행률 카드 -->
+    <div class="cl-progress-card">
+      <div class="cl-progress-top">
+        <div class="cl-progress-title">📋 처리방침 체크리스트 진행률</div>
+        <div class="cl-progress-stat">전체 <strong id="pc-done">0</strong>/32 &nbsp;·&nbsp; 필수·해당시필수 <strong id="pc-mand-done">0</strong>/26</div>
+      </div>
+      <div class="cl-bar-row">
+        <div class="cl-bar-label">전체</div>
+        <div class="cl-bar-track"><div class="cl-bar-fill" id="pc-bar-all"></div></div>
+        <div class="cl-bar-pct" id="pc-pct-all">0%</div>
+      </div>
+      <div class="cl-bar-row">
+        <div class="cl-bar-label">필수</div>
+        <div class="cl-bar-track"><div class="cl-bar-fill mand" id="pc-bar-mand"></div></div>
+        <div class="cl-bar-pct" id="pc-pct-mand">0%</div>
+      </div>
+    </div>
+
+    <!-- ① 기본 필수 기재사항 -->
+    <div class="cl-section" id="pcs-1">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-1')">
+        <span class="cl-section-arrow open">›</span>
+        <span class="cl-section-title">① 기본 필수 기재사항 (항상 기재)</span>
+        <span class="cl-section-cnt" id="pcs-1-cnt">0 / 9</span>
+      </div>
+      <div class="cl-section-bd open">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①</span></div>
+              <div class="cl-item-title">제목 — "개인정보 처리방침" 표준 명칭 사용</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>"개인정보 처리방침"이라는 표준화된 명칭을 상단에 기재해야 합니다. 제목에 개인정보처리자명을 함께 표시하면 정보주체가 누구의 처리방침인지 쉽게 확인할 수 있습니다.</p>
+            <p>서문에는 처리방침 수립·공개 취지를 기재하고, 본문 시작 시점에 목차를 작성하여 하이퍼링크로 연결하는 것을 권장합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①1호</span></div>
+              <div class="cl-item-title">개인정보의 처리 목적 — 구체적·사무별 기재</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리 목적을 "~등"으로 불명확하게 기재하지 않고 구체적으로 기재합니다. 목적이 여러 개인 경우 관련 목적을 유형화하고, 유형마다 구체적인 목적을 기재할 수 있습니다.</p>
+            <p>정보주체의 동의를 받아 수집하는 경우, 동의받을 때 고지한 사항과 처리방침 기재 내용이 일치해야 합니다. 민감정보·고유식별정보는 처리 목적을 별도의 하위 항목으로 구성하여 기재할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①2호</span></div>
+              <div class="cl-item-title">처리하는 개인정보의 항목 — 법적 근거·항목 전수 기재</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의 없이 처리하는 개인정보와 동의를 받아 처리하는 개인정보를 구분하여 기재하고, 각각의 법적 근거를 함께 표시합니다. "~등"으로 축약하지 말고 실제 처리 현황과 일치하도록 구체적으로 작성합니다.</p>
+            <p>자동으로 생성·수집되는 항목(접속 IP, 쿠키, 접속 로그 등)도 포함해야 합니다. 민감정보·고유식별정보는 별도 하위 항목으로 구분 기재합니다. 정보주체 이외로부터 수집한 개인정보도 기재합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①3호</span></div>
+              <div class="cl-item-title">개인정보의 처리 및 보유 기간 — 구체적 기간 명시</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>동의받은 보유·이용 기간 또는 법령에 따른 보유·이용 기간을 구체적으로 기재합니다. "목적 달성 시까지"와 같은 추상적인 기간 표현은 피해야 합니다.</p>
+            <p>법령에 보유 근거가 있는 경우 해당 법령 및 보유기간을 기재합니다(예: 전자상거래법에 따른 계약·청약철회 기록 5년, 소비자 불만·분쟁처리 기록 3년). 처리방침의 보유기간과 동의 시 고지한 보유기간이 일치해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①4호</span></div>
+              <div class="cl-item-title">개인정보의 파기 절차 및 방법</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리하는 개인정보가 불필요하게 되었을 때 지체 없이 파기한다는 내용과 파기 절차·방법을 상세히 기재합니다.</p>
+            <p>전자적 파기: 복원 불가 방법으로 삭제(완전 삭제·덮어쓰기 등). 종이 문서: 분쇄기로 분쇄하거나 소각. 법령에 따라 보존해야 하는 경우 별도 보관장소에 분리하여 보관합니다. "5. 처리 및 보유기간" 항목에서 구체적으로 기재된 경우 이 항목에서 생략 가능합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①5호</span></div>
+              <div class="cl-item-title">개인정보의 안전성 확보조치 — 관리적·기술적·물리적 조치</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>보호법 §29조, 시행령 §30조에 따라 시행 중인 안전성 확보조치를 기재합니다. 공개로 인해 개인정보 침해 위험이 증가하지 않는다고 판단되는 수준에서 조절하여 표현할 수 있습니다.</p>
+            <p>관리적 조치: 내부 관리계획 수립·시행, 직원 교육, 전담조직 운영 등. 기술적 조치: 접근권한 관리, 접근통제시스템, 접속기록 보관·점검, 암호화, 보안프로그램. 물리적 조치: 전산실·자료보관실 잠금 장치, 재해·재난 안전조치 등.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①6호</span></div>
+              <div class="cl-item-title">정보주체와 법정대리인의 권리·의무 및 행사방법</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>열람, 전송 요구, 정정·삭제, 처리정지, 동의 철회, 자동화 결정 거부·설명 요구 등의 권리와 행사 방법·절차를 구체적으로 기재합니다. 권리 행사는 서면, 전화, 전자우편, 팩스, 인터넷 등을 통해 할 수 있습니다.</p>
+            <p>처리 기한(권리 행사 접수 후 10일 이내 회신), 접수·처리 부서(명칭·주소·연락처)를 명시합니다. 14세 미만 아동의 경우 법정대리인이 권리 행사를 해야 함을 안내합니다. 정보 전송 요구권 행사방법도 해당 시 기재합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①7호</span></div>
+              <div class="cl-item-title">개인정보 보호책임자 성명·직책·연락처</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>보호법 §31조에 따라 지정한 개인정보 보호책임자의 성명 또는 개인정보 보호업무 및 관련 고충사항을 처리하는 부서의 명칭과 연락처(전화번호, 전자우편 주소 등)를 기재합니다.</p>
+            <p>공개된 연락처는 실제로 연결 가능해야 하며, 지나치게 지연되지 않도록 관리해야 합니다. 정보주체의 알권리 보장 차원에서 보호책임자 성명·연락처와 보호업무 담당부서의 명칭·연락처를 모두 기재하는 것을 권장합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①8호</span></div>
+              <div class="cl-item-title">개인정보 처리방침의 변경에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리방침 변경 시 변경 내용과 시행 일자를 공개하고, 정보주체가 쉽게 확인할 수 있도록 변경된 처리방침을 누리집(인터넷 홈페이지) 등에 지속적으로 게재해야 합니다.</p>
+            <p>처리방침 변경 시 개정 이력을 관리하고, 중요 변경 사항은 별도로 고지합니다. 이전 버전의 처리방침도 열람할 수 있도록 보관하는 것이 권장됩니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ② 조건부 기재사항 I — 제3자·위탁·국외이전 -->
+    <div class="cl-section" id="pcs-2">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-2')">
+        <span class="cl-section-arrow">›</span>
+        <span class="cl-section-title">② 조건부 기재사항 I — 제3자·위탁·국외이전</span>
+        <span class="cl-section-cnt" id="pcs-2-cnt">0 / 5</span>
+      </div>
+      <div class="cl-section-bd">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">14세 미만 아동 서비스</span><span class="cl-b law">§22의2</span></div>
+              <div class="cl-item-title">14세 미만 아동의 개인정보 처리에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>14세 미만 아동의 개인정보를 처리하는 경우, 법정대리인의 동의를 받기 위해 아동으로부터 수집하는 법정대리인 정보(이름, 휴대전화번호 등)와 법정대리인 동의 확인 방법을 별도 구분하여 기재합니다.</p>
+            <p>아동이 이해하기 쉬운 양식과 언어를 사용해야 하며, 서비스 이용 대상이 14세 미만 아동인 경우 '아동용 개인정보 처리방침'을 별도로 마련하는 것이 권장됩니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">제3자 제공 시</span><span class="cl-b law">§17②</span></div>
+              <div class="cl-item-title">개인정보의 제3자 제공 — 수신자·목적·항목·기간 기재</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체의 동의를 받아 제공하는 경우: ① 제공받는 자(제3자), ② 이용 목적, ③ 제공하는 개인정보 항목, ④ 보유·이용 기간을 기재하고, ⑤ 법적 근거 기재도 권장합니다.</p>
+            <p>동의 외 사유로 제공하는 경우: ① 법적 근거, ② 제공받는 자, ③ 이용 목적, ④ 제공 항목을 기재합니다. 제공받는 자를 "-등"으로 축약하지 않으며, 수가 많은 경우 별도 화면(팝업창)·목록 파일 내려받기 기능으로 공개할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">추가 이용·제공 발생 시</span><span class="cl-b law">§15③·§17④</span></div>
+              <div class="cl-item-title">추가적인 이용·제공이 지속 발생 시 판단 기준</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>당초 수집 목적과 합리적으로 관련된 범위에서 정보주체의 동의 없이 개인정보를 추가로 이용·제공하는 것이 지속적으로 발생하는 경우, 시행령 제14조의2에 따른 고려사항과 판단기준을 처리방침에 기재해야 합니다.</p>
+            <p>4가지 고려사항: ① 당초 수집 목적과의 관련성 여부, ② 개인정보 수집·처리 관행에 비추어 예측 가능성 여부, ③ 정보주체의 이익을 부당하게 침해하는지 여부, ④ 가명처리 또는 암호화 등 안전성 확보에 필요한 조치 여부. 사업자·단체가 자율적으로 판단하여 작성·공개합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">처리 업무 위탁 시</span><span class="cl-b law">§26</span></div>
+              <div class="cl-item-title">개인정보 처리업무의 위탁 — 수탁자·위탁 업무 전수 공개</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보 처리 업무를 위탁하는 경우 ① 위탁받는 자(수탁자) 명칭과 ② 위탁하는 업무 내용을 기재합니다. 수탁자를 "-등"으로 축약하지 않아야 합니다.</p>
+            <p>수탁자 수가 많은 경우 특성을 반영하여 유형화하고, 별도 화면(팝업창 등) 또는 목록 파일 내려받기 기능을 통해 공개할 수 있습니다. 재수탁이 이루어지는 경우 재수탁자 및 재수탁 업무 내용도 함께 공개합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">국외 이전 시</span><span class="cl-b law">§28의8</span></div>
+              <div class="cl-item-title">개인정보의 국외 수집 및 이전 — 이전 국가·근거·거부 방법</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보를 국외로 이전(제공, 처리위탁, 보관)하는 경우 ① 법적 근거, ② 이전하는 개인정보 항목, ③ 이전 국가, ④ 이전 시기 및 방법, ⑤ 이전받는 자의 성명 및 연락처, ⑥ 이용 목적 및 보유·이용 기간, ⑦ 이전 거부 방법·절차 및 거부의 효과를 기재합니다.</p>
+            <p>클라우드 서비스 이용으로 복수 국가에 이전되는 경우 해당 국가를 모두 기재합니다. 국외 제3자 제공 및 국외 처리위탁·보관은 이 항목에서 통합하여 작성할 수 있으며, 이 경우 §7(3자제공)·§9(위탁)의 기재사항을 모두 포함해야 합니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ③ 조건부 기재사항 II — 특수 처리 -->
+    <div class="cl-section" id="pcs-3">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-3')">
+        <span class="cl-section-arrow">›</span>
+        <span class="cl-section-title">③ 조건부 기재사항 II — 특수 처리</span>
+        <span class="cl-section-cnt" id="pcs-3-cnt">0 / 7</span>
+      </div>
+      <div class="cl-section-bd">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">민감정보 공개 가능 서비스</span><span class="cl-b law">§23</span></div>
+              <div class="cl-item-title">민감정보의 공개 가능성 및 비공개를 선택하는 방법</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>재화·서비스 제공 과정에서 공개되는 정보 중 민감정보가 포함될 가능성이 있는 경우, 공개될 수 있는 민감정보 항목과 비공개를 선택할 수 있는 구체적인 절차 및 방법을 기재합니다.</p>
+            <p>예: 지도앱의 성생활·건강정보, 운동앱의 체지방지수·심박수 등이 사용자가 입력한 폴더에 저장될 경우 공개 가능성이 있으며, 설정 메뉴에서 비공개 여부를 선택할 수 있는 방법을 안내합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">가명처리 이용 시</span><span class="cl-b law">§28의2</span></div>
+              <div class="cl-item-title">가명정보 처리에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>가명정보를 처리하는 경우 ① 가명처리의 목적, ② 처리 기간, ③ 제3자 제공(해당 시), ④ 처리 위탁(해당 시), ⑤ 가명처리하는 개인정보 항목, ⑥ 가명정보 안전성 확보조치를 기재합니다.</p>
+            <p>가명정보 처리의 위탁은 "9. 개인정보 처리업무의 위탁"의 지침을 따릅니다. "11. 안전성 확보조치"에서 가명정보 안전성 확보조치를 구체적으로 기재한 경우 이 항목에서 생략할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">쿠키·SDK 등 운영 시</span><span class="cl-b law">§15①</span></div>
+              <div class="cl-item-title">개인정보 자동 수집 장치의 설치·운영 및 거부에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>쿠키 또는 이와 유사한 기술을 자동으로 수집·운영하는 경우, 쿠키 등의 개념·활용 목적·수집 방법·거부 방법을 기재합니다. 행태정보를 수집하여 정보주체를 식별하는 경우 법적 근거, 수집 항목, 수집 방법, 수집 목적, 보유·이용 기간, 거부 방법도 기재합니다.</p>
+            <p>거부 방법은 웹브라우저 또는 모바일 단말기에서의 차단 방법(크롬·엣지·사파리 등 주요 브라우저별 설정 경로)을 구체적으로 안내합니다. 쿠키 저장을 차단하면 일부 서비스 이용이 제한될 수 있음도 고지합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">AI·자동화 결정 시</span><span class="cl-b law">§37의2</span></div>
+              <div class="cl-item-title">자동화된 결정에 관한 사항 (AI·알고리즘 의사결정)</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>완전히 자동화된 시스템으로 개인정보를 처리하여 이루어지는 결정(인공지능 기술 적용 포함)이 있는 경우 ① 결정이 이루어진다는 사실 및 목적·대상 범위, ② 주요 개인정보의 유형과 결정의 관계, ③ 결정 과정의 고려사항 및 처리 절차, ④ 민감정보·14세 미만 아동 처리 여부, ⑤ 거부·설명 요구 방법 및 절차를 기재합니다.</p>
+            <p>§37조의2(2024.9.15 시행)에 따라 정보주체는 자동화된 결정에 대해 거부·설명 요구를 할 수 있으며, 이를 안내해야 합니다. 인공지능 기술의 복잡성을 고려하여 정보주체가 쉽게 이해할 수 있도록 표준화된 용어, 동영상·그림·도표 등 시각적 방법을 활용하는 것을 권장합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">해외사업자·대규모 처리 시</span><span class="cl-b law">§31의2</span></div>
+              <div class="cl-item-title">국내대리인 지정에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>국내 주소·영업소가 없는 개인정보처리자로서 ① 전년도 매출액 1조원 이상, ② 전년도 기준 직전 3개월간 일평균 국내 정보주체 100만명 이상, ③ 보위원회 심의·의결로 지정 필요하다고 인정된 자는 국내대리인을 지정해야 합니다(§31조의2).</p>
+            <p>국내대리인의 성명(법인인 경우 법인명·대표자 성명), 주소(법인인 경우 영업소 소재지), 전화번호, 전자우편 주소를 기재합니다. 위반 시 1만 원 이하 과태료 부과 예정('25.10월 시행 예정).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">CCTV 운영 시</span><span class="cl-b law">§25</span></div>
+              <div class="cl-item-title">고정형 영상정보처리기기 운영·관리에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>고정형 영상정보처리기기(CCTV)를 운영하는 경우 시행령 §25조1항의 사항을 모두 기재합니다: ① 설치 근거 및 목적, ② 설치 대수·위치·촬영 범위, ③ 관리책임자·담당부서 및 접근권한자, ④ 촬영시간·보관기간·보관장소·처리방법, ⑤ 영상정보 확인 방법 및 장소, ⑥ 정보주체 열람 등 요구 대응 조치, ⑦ 안전성 확보조치.</p>
+            <p>고정형 영상정보처리기기 운영·관리 방침을 별도로 마련한 경우 처리방침에 포함하여 공개할 수 있습니다(보호법 §25조7항).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">드론·이동형 카메라 운영 시</span><span class="cl-b law">§25의2</span></div>
+              <div class="cl-item-title">이동형 영상정보처리기기 운영·관리에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>이동형 영상정보처리기기(드론 카메라, 배달 로봇, 웨어러블 카메라 등)를 운영하는 경우 시행령 §25조1항의 사항을 모두 기재합니다: ① 운영 근거·목적, ② 운영 대수, ③ 관리책임자·담당부서 및 접근권한자, ④ 촬영시간·보관기간·보관장소·처리방법, ⑤ 영상정보 확인 방법 및 장소, ⑥ 정보주체 열람 등 요구 대응 조치, ⑦ 안전성 확보조치.</p>
+            <p>이동형 영상정보처리기기 운영·관리 방침을 별도로 마련한 경우 처리방침에 포함하여 공개할 수 있습니다(보호법 §25조의2 4항).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ④ 권장 기재사항 -->
+    <div class="cl-section" id="pcs-4">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-4')">
+        <span class="cl-section-arrow">›</span>
+        <span class="cl-section-title">④ 권장 기재사항</span>
+        <span class="cl-section-cnt" id="pcs-4-cnt">0 / 3</span>
+      </div>
+      <div class="cl-section-bd">
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">§15①</span></div>
+              <div class="cl-item-title">제3자가 행태정보를 수집하도록 허용하는 경우 그 수집·이용 및 거부에 관한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>운영하는 웹·앱에서 제3자(광고사업자 등)가 개인정보 자동 수집 장치를 통해 행태정보를 수집하도록 허용하는 경우, 수집해가는 행태정보에 관한 사항을 기재할 것을 권장합니다.</p>
+            <p>기재 사항: ① 자동 수집 장치 명칭, ② 수집 장치 종류, ③ 수집하는 사업자, ④ 수집하는 행태정보 항목, ⑤ 수집 목적, ⑥ 거부 방법(웹브라우저 또는 모바일 단말기에서의 차단 방법).</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span></div>
+              <div class="cl-item-title">정보주체의 권익침해에 대한 구제방법 안내</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>정보주체가 개인정보침해에 대한 구제를 받을 수 있도록 법에 따른 전문기관(개인정보침해 신고센터, 개인정보 분쟁조정위원회), 수사기관 등을 안내할 것을 권장합니다.</p>
+            <p>주요 구제기관: ① 개인정보 분쟁조정위원회: (국번없이) 1833-6972 (www.kopico.go.kr), ② 개인정보침해 신고센터: (국번없이) 118 (privacy.kisa.or.kr), ③ 경찰청: (국번없이) 182 (ecrm.police.go.kr). 연락처 변경 시 즉시 현행화해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span></div>
+              <div class="cl-item-title">개인정보처리자가 자율적으로 포함하여 정한 사항</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보처리자가 개인정보 처리 기준 및 보호조치 등에 관하여 자율적으로 개인정보 처리방침에 포함하여 정한 사항을 기재할 것을 권장합니다.</p>
+            <p>예: 개인정보 보호 원칙, 데이터 최소화 노력, 프라이버시 by Design 적용, 개인정보 영향평가 수행 현황, 정보보호 인증(ISMS-P 등) 취득 현황, 서비스 개선을 위한 개인정보 활용 정책 등을 자율적으로 포함할 수 있습니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑤ 처리방침 변경 이력 관리 -->
+    <div class="cl-section" id="pcs-5">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-5')">
+        <span class="cl-section-arrow">›</span>
+        <span class="cl-section-title">⑤ 처리방침 변경 이력 관리</span>
+        <span class="cl-section-cnt" id="pcs-5-cnt">0 / 5</span>
+      </div>
+      <div class="cl-section-bd">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①10</span></div>
+              <div class="cl-item-title">처리방침 변경에 관한 사항 기재 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>보호법 §30조①10호에 따라 개인정보 처리방침의 변경에 관한 사항을 반드시 기재해야 합니다. 변경 내용·변경 사유·변경 일자·시행 일자를 명확히 기재합니다.</p>
+            <p>처리방침 변경 시 변경된 처리방침을 누리집(인터넷 홈페이지) 등에 지속적으로 게재해야 하며(§30②), 정보주체가 변경 전후 내용을 비교하여 확인할 수 있도록 공개하는 것을 권장합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">시행령§32②</span></div>
+              <div class="cl-item-title">변경 시 최소 7일 전 공지 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리방침을 변경하는 경우 시행일 7일 전부터 누리집(인터넷 홈페이지) 등에 공지해야 합니다(시행령 §32조②). 공지 기간이 짧을 경우 정보주체에게 충분한 확인 기회가 부여되지 않으므로 준수 여부를 반드시 점검합니다.</p>
+            <p>팝업, 배너, 이메일 발송 등 다양한 방식을 통해 정보주체가 변경 내용을 인지할 수 있도록 하는 것이 권장됩니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">시행령§32②</span></div>
+              <div class="cl-item-title">중요 변경 시 30일 전 공지 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보의 수집·이용 목적, 수집하는 개인정보 항목, 개인정보의 제3자 제공 등 정보주체에게 중요한 내용이 변경되는 경우에는 시행일 30일 전부터 공지해야 합니다(시행령 §32조②).</p>
+            <p>중요 변경 사항에 해당하는지 여부를 사전에 검토하는 내부 기준을 마련하고, 중요 변경 시에는 이메일·문자 메시지 등 개인별 통지 방법도 활용하는 것을 권장합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30②</span></div>
+              <div class="cl-item-title">이전 버전 처리방침 열람 가능 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>개인정보 보호법 §30②에 따라 변경된 처리방침과 함께 이전 처리방침을 열람할 수 있도록 보관·제공하여야 합니다. 최소 3년치 이전 버전 보관을 권장하며, '이전 처리방침 보기' 링크나 버전 이력 탭 등 접근 기능을 제공해야 합니다.</p>
+            <p>이전 처리방침이 적용되었던 기간(시행일~변경일)을 함께 표시하면 정보주체의 알권리 보장에 더욱 도움이 됩니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span></div>
+              <div class="cl-item-title">변경 이력 관리 방법 안내 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리방침 변경 이력(변경 일자, 변경 내용 요약, 시행 일자, 변경 사유 등)을 체계적으로 관리하는 방법을 안내하는 것을 권장합니다.</p>
+            <p>처리방침 하단에 개정 이력 표(버전, 개정일, 주요 변경 사항)를 작성하거나, 담당자가 관리하는 내부 이력 대장(변경 전·후 비교표 포함)을 유지하는 방식이 효과적입니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ⑥ 강조 표시 -->
+    <div class="cl-section" id="pcs-6">
+      <div class="cl-section-hd" onclick="clToggleSection('pcs-6')">
+        <span class="cl-section-arrow">›</span>
+        <span class="cl-section-title">⑥ 강조 표시 및 공개 시인성</span>
+        <span class="cl-section-cnt" id="pcs-6-cnt">0 / 3</span>
+      </div>
+      <div class="cl-section-bd">
+
+        <div class="cl-item" data-mand="1">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">표준지침§20①</span></div>
+              <div class="cl-item-title">처리방침임을 알아볼 수 있도록 다른 내용과 구분하여 표시 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>"개인정보 처리방침"이라는 표준 명칭을 사용하고, 글자 크기·색상·폰트·테두리 등을 활용하여 다른 고지사항(서비스 이용약관 등)과 명확히 구분하여 표시해야 합니다(표준지침 §20조①).</p>
+            <p>누리집(홈페이지)에서는 첫 화면 또는 하단(footer) 영역에서 쉽게 접근할 수 있어야 하고, 앱에서는 로그인 여부와 관계없이 첫 화면 또는 설정 메뉴 첫 화면에서 확인할 수 있도록 배치해야 합니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span></div>
+              <div class="cl-item-title">처리방침 내 중요 내용 강조 표시 여부 (굵은 글씨·색상·박스 등 활용)</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리방침 내 민감정보, 고유식별정보, 개인정보의 제3자 제공, 국외 이전 등 정보주체에게 중요한 내용은 굵은 글씨(bold), 색상 강조, 박스(box) 처리 등을 활용하여 시각적으로 강조하는 것을 권장합니다(작성지침 Part 05 라벨링).</p>
+            <p>특히 민감정보·고유식별정보 처리 사실, 마케팅 목적 제3자 제공 여부, 프로파일링·자동화 결정 등은 정보주체가 쉽게 인지할 수 있도록 별도 구획·색상·아이콘 등으로 표시하는 방식을 활용할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="cl-item" data-mand="0">
+          <div class="cl-item-row">
+            <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
+            <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span></div>
+              <div class="cl-item-title">정보주체가 쉽게 인지할 수 있도록 처리방침 링크·버튼 시인성 확보 여부</div>
+            </div>
+            <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
+          </div>
+          <div class="cl-item-detail">
+            <p>처리방침으로 이동하는 링크·버튼은 충분한 글자 크기, 명확한 색상 대비(배경색과 구별), 밑줄 또는 버튼 형태를 사용하여 정보주체가 쉽게 인지하고 접근할 수 있도록 시인성을 확보하는 것을 권장합니다.</p>
+            <p>회색 소글씨로 숨겨 두거나 스크롤을 많이 내려야만 접근 가능한 위치에 배치하는 것은 지양합니다. 웹 접근성(WCAG) 기준(명도 대비 4.5:1 이상)을 참고하여 설계하면 더욱 좋습니다.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <!-- ④ 처리방침 Template -->
+  <div class="tmpl-panel" id="tab-template-policy">
+    <div class="tmpl-layout">
+
+      <!-- ── 좌측 입력 폼 ── -->
+      <div style="overflow-y:auto;max-height:calc(100vh - 160px);padding-right:4px">
+
+        <!-- ▶ 기본 정보 -->
+        <div class="pp-sec-group">
+          <div class="pp-sec-group-title">📋 기본 정보</div>
+          <div class="form-block">
+            <div class="f-label">기관·회사명 <span class="f-req">*</span></div>
+            <input class="f-inp" id="pp-org" placeholder="예: ○○주식회사" oninput="ppRender()">
+          </div>
+          <div class="form-block">
+            <div class="f-label">처리방침 시행일 <span class="f-req">*</span></div>
+            <input class="f-inp" type="date" id="pp-date" onchange="ppRender()">
+          </div>
+        </div>
+
+        <!-- ▶ 필수 기재사항 -->
+        <div class="pp-sec-group">
+          <div class="pp-sec-group-title">✅ 필수 기재사항 <span class="tc-badge-law">§30①</span></div>
+
+          <!-- ② 처리 목적 · ③ 수집항목 · ⑤ 보유기간 -->
+          <div class="form-block">
+            <div class="f-label">처리 목적 · 수집항목 · 보유기간 <span class="f-req">*</span> <span class="tc-badge-law">§30①2호·3호</span></div>
+            <div id="pp-item-list"></div>
+            <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:4px" onclick="ppAddItem()">+ 처리 유형 추가</button>
+          </div>
+
+          <!-- ⑥ 파기 절차 및 방법 -->
+          <div class="form-block">
+            <div class="f-label">파기 절차 및 방법 <span class="f-req">*</span> <span class="tc-badge-law">§30①4호</span></div>
+            <div class="pp-destr-opts">
+              <label><input type="radio" name="pp-destr-media" value="electronic" onchange="ppRender()" checked> 전자 매체만</label>
+              <label><input type="radio" name="pp-destr-media" value="paper" onchange="ppRender()"> 종이만</label>
+              <label><input type="radio" name="pp-destr-media" value="both" onchange="ppRender()"> 혼합</label>
+            </div>
+            <textarea class="f-inp" id="pp-destr-extra" rows="2" placeholder="추가 파기 절차·방법 설명 (선택)" oninput="ppRender()" style="resize:vertical;margin-top:5px"></textarea>
+          </div>
+
+          <!-- ⑪ 안전성 확보조치 -->
+          <div class="form-block">
+            <div class="f-label">안전성 확보조치 <span class="f-req">*</span> <span class="tc-badge-law">§30①5호</span></div>
+            <div class="pp-safe-grid">
+              <label><input type="checkbox" id="pp-safe1" onchange="ppRender()" checked> 내부관리계획 수립·시행</label>
+              <label><input type="checkbox" id="pp-safe2" onchange="ppRender()" checked> 개인정보취급자 교육</label>
+              <label><input type="checkbox" id="pp-safe3" onchange="ppRender()" checked> 접근권한 관리·제한</label>
+              <label><input type="checkbox" id="pp-safe4" onchange="ppRender()" checked> 접근통제 시스템 운영</label>
+              <label><input type="checkbox" id="pp-safe5" onchange="ppRender()" checked> 개인정보 암호화</label>
+              <label><input type="checkbox" id="pp-safe6" onchange="ppRender()" checked> 접속기록 보관·위변조 방지</label>
+              <label><input type="checkbox" id="pp-safe7" onchange="ppRender()" checked> 보안 프로그램 설치·갱신</label>
+              <label><input type="checkbox" id="pp-safe8" onchange="ppRender()"> 전산실·자료보관실 접근통제</label>
+            </div>
+          </div>
+
+          <!-- ⑯ 정보주체 권리·행사방법 -->
+          <div class="form-block">
+            <div class="f-label">정보주체 권리·행사방법 접수처 <span class="f-req">*</span> <span class="tc-badge-law">§30①6호</span></div>
+            <input class="f-inp" id="pp-rights-dept" placeholder="부서명 (예: 개인정보보호팀)" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-rights-contact" placeholder="연락처 (전화·이메일)" oninput="ppRender()">
+          </div>
+
+          <!-- ⑱ 개인정보 보호책임자 -->
+          <div class="form-block">
+            <div class="f-label">개인정보 보호책임자 <span class="f-req">*</span> <span class="tc-badge-law">§30①7호</span></div>
+            <input class="f-inp" id="pp-cpo-name" placeholder="성명" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-cpo-dept" placeholder="직위·부서 (예: 개인정보보호팀장)" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-cpo-email" placeholder="이메일" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-cpo-tel" placeholder="전화번호" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-cpo-dept2" placeholder="담당부서명 (예: 개인정보보호팀)" oninput="ppRender()" style="margin-bottom:4px">
+            <input class="f-inp" id="pp-cpo-dept2-contact" placeholder="담당부서 연락처" oninput="ppRender()">
+          </div>
+        </div>
+
+        <!-- ▶ 해당 시 기재사항 (Y/N 토글) -->
+        <div class="pp-sec-group">
+          <div class="pp-sec-group-title">🔀 해당 시 기재사항</div>
+
+          <!-- ④ 14세 미만 아동 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">14세 미만 아동 처리 <span class="tc-badge-law">§22의2</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-child-yn">
+                <button class="pp-yn active-n" onclick="ppYN('child','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('child','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-child-body">
+              <input class="f-inp" id="pp-child-guardian" placeholder="법정대리인 동의 확인 방법 (예: 이메일 인증)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑫ 민감정보 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">민감정보 처리 <span class="tc-badge-law">§23</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-sens-yn">
+                <button class="pp-yn active-n" onclick="ppYN('sens','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('sens','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-sens-body">
+              <div class="f-label">처리하는 민감정보 항목</div>
+              <div class="pp-sens-grid">
+                <label><input type="checkbox" id="pps1" value="사상·신념에 관한 정보" onchange="ppRender()"> 사상·신념</label>
+                <label><input type="checkbox" id="pps2" value="건강·성생활 등에 관한 정보" onchange="ppRender()"> 건강·성생활</label>
+                <label><input type="checkbox" id="pps3" value="유전정보" onchange="ppRender()"> 유전정보</label>
+                <label><input type="checkbox" id="pps4" value="범죄경력 및 수사에 관한 정보" onchange="ppRender()"> 범죄경력</label>
+                <label><input type="checkbox" id="pps5" value="생체인식정보(지문·홍채·얼굴 등)" onchange="ppRender()"> 생체인식정보</label>
+                <label><input type="checkbox" id="pps6" value="인종·민족에 관한 정보" onchange="ppRender()"> 인종·민족</label>
+                <label><input type="checkbox" id="pps7" value="노동조합·정당의 가입·탈퇴 정보" onchange="ppRender()"> 노동조합·정당</label>
+                <label><input type="checkbox" id="pps8" value="성적 지향에 관한 정보" onchange="ppRender()"> 성적 지향</label>
+              </div>
+              <div class="f-label" style="margin-top:6px">공개 가능성 및 비공개 선택 방법</div>
+              <textarea class="f-inp" id="pp-sens-openness" rows="2" placeholder="예: 당사는 민감정보를 외부에 공개하지 않으며, 비공개를 원하시면 담당자에게 요청하실 수 있습니다." oninput="ppRender()" style="resize:vertical"></textarea>
+            </div>
+          </div>
+
+          <!-- 고유식별정보 (§24) -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">고유식별정보 처리 <span class="tc-badge-law">§24</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-uid-yn">
+                <button class="pp-yn active-n" onclick="ppYN('uid','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('uid','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-uid-body">
+              <div class="pp-sens-grid" style="margin-bottom:5px">
+                <label><input type="checkbox" id="ppuid1" value="주민등록번호" onchange="ppRender()"> 주민등록번호</label>
+                <label><input type="checkbox" id="ppuid2" value="여권번호" onchange="ppRender()"> 여권번호</label>
+                <label><input type="checkbox" id="ppuid3" value="운전면허번호" onchange="ppRender()"> 운전면허번호</label>
+                <label><input type="checkbox" id="ppuid4" value="외국인등록번호" onchange="ppRender()"> 외국인등록번호</label>
+              </div>
+              <input class="f-inp" id="pp-uid-purpose" placeholder="처리 목적 (예: 본인확인, 연령인증)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑦ 제3자 제공 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">제3자 제공 <span class="tc-badge-law">§17·18</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-third-yn">
+                <button class="pp-yn active-n" onclick="ppYN('third','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('third','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-third-body">
+              <div id="pp-third-list"></div>
+              <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:2px" onclick="ppAddThird()">+ 제공처 추가</button>
+            </div>
+          </div>
+
+          <!-- ⑧ 추가적 이용·제공 판단기준 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">추가적 이용·제공 판단기준 <span class="tc-badge-law">§15③·17④</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-adduse-yn">
+                <button class="pp-yn active-n" onclick="ppYN('adduse','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('adduse','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-adduse-body">
+              <div style="font-size:11px;color:var(--text3);margin-bottom:5px">당초 수집 목적과 관련성, 예측 가능성, 이익 침해 여부, 안전성 확보조치 등을 고려하여 동의 없이 추가 이용·제공 가능</div>
+              <textarea class="f-inp" id="pp-adduse-desc" rows="3" placeholder="추가적 이용·제공 판단 기준 및 절차를 기재하세요" oninput="ppRender()" style="resize:vertical"></textarea>
+            </div>
+          </div>
+
+          <!-- ⑨ 처리위탁 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">처리 위탁 <span class="tc-badge-law">§26</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-delegate-yn">
+                <button class="pp-yn active-n" onclick="ppYN('delegate','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('delegate','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-delegate-body">
+              <div id="pp-delegate-list"></div>
+              <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:2px" onclick="ppAddDelegate()">+ 수탁자 추가</button>
+            </div>
+          </div>
+
+          <!-- ⑩ 국외이전 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">국외 이전 <span class="tc-badge-law">§28의8</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-overseas-yn">
+                <button class="pp-yn active-n" onclick="ppYN('overseas','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('overseas','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-overseas-body">
+              <div id="pp-overseas-list"></div>
+              <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:2px" onclick="ppAddOverseas()">+ 이전처 추가</button>
+            </div>
+          </div>
+
+          <!-- ⑬ 가명정보 처리 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">가명정보 처리 <span class="tc-badge-law">§28의2</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-pseudo-yn">
+                <button class="pp-yn active-n" onclick="ppYN('pseudo','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('pseudo','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-pseudo-body">
+              <input class="f-inp" id="pp-pseudo-purpose" placeholder="가명처리 목적 (예: 통계 분석, 연구)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-pseudo-period" placeholder="처리 기간" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-pseudo-items" placeholder="처리 항목 (예: 구매 이력, 접속 기록 등)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑭⑮ 쿠키·행태정보 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">쿠키·행태정보 수집 <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-cookie-yn">
+                <button class="pp-yn active-n" onclick="ppYN('cookie','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('cookie','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-cookie-body">
+              <textarea class="f-inp" id="pp-cookie-purpose" rows="2" placeholder="쿠키 이용 목적 (예: 로그인 유지, 이용자 선호도 분석)" oninput="ppRender()" style="resize:vertical;margin-bottom:4px"></textarea>
+              <div class="pp-destr-opts">
+                <label><input type="checkbox" id="pp-cookie-third" onchange="ppRender()"> 제3자 행태정보 수집 허용 중</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- ⑰ 자동화된 결정 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">자동화된 결정 <span class="tc-badge-law">§37의2</span> <span class="tc-badge-imp">해당시</span> <span class="tc-badge-imp" style="background:#fef3c7;color:#92400e;border-color:#fde68a">2025 신설</span></div>
+              <div class="pp-yn-group" id="pp-auto-yn">
+                <button class="pp-yn active-n" onclick="ppYN('auto','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('auto','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-auto-body">
+              <input class="f-inp" id="pp-auto-scope" placeholder="결정의 대상 (예: 신용 등급 산정, 채용 서류 전형)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-auto-logic" placeholder="주요 처리 절차·기준 (간략히)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-auto-refuse" placeholder="거부·설명 요구 방법 (예: 고객센터 또는 개인정보보호팀에 서면 요청)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑯ 개인정보 전송요구 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">개인정보 전송요구 <span class="tc-badge-law">§35의2</span> <span class="tc-badge-imp">해당시</span> <span class="tc-badge-imp" style="background:#fef3c7;color:#92400e;border-color:#fde68a">2025 신설</span></div>
+              <div class="pp-yn-group" id="pp-transfer-yn">
+                <button class="pp-yn active-n" onclick="ppYN('transfer','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('transfer','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-transfer-body">
+              <input class="f-inp" id="pp-transfer-method" placeholder="전송 요청 방법 (예: 홈페이지 내정보 > 본인전송요구, 마이데이터 앱)" oninput="ppRender()" style="margin-bottom:4px">
+              <div style="font-size:11px;color:var(--text3)">※ 개인정보전송지원플랫폼(온마이데이터, OnMydata.go.kr)에서 확인 가능</div>
+            </div>
+          </div>
+
+          <!-- ㉑ 고정형 영상정보처리기기 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">고정형 영상정보처리기기 <span class="tc-badge-law">§25</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-cctv-yn">
+                <button class="pp-yn active-n" onclick="ppYN('cctv','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('cctv','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-cctv-body">
+              <input class="f-inp" id="pp-cctv-purpose" placeholder="설치 목적 (예: 시설 안전, 화재 예방)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-cctv-count" placeholder="대수 (예: 00대)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-cctv-location" placeholder="설치 위치·촬영 범위" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-cctv-time" placeholder="촬영 시간 (예: 24시간)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-cctv-period" placeholder="보관기간 (예: 촬영일로부터 30일)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-cctv-manager" placeholder="관리책임자 (성명·부서·연락처)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ㉒ 이동형 영상정보처리기기 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">이동형 영상정보처리기기 <span class="tc-badge-law">§25의2</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-yn-group" id="pp-mcctv-yn">
+                <button class="pp-yn active-n" onclick="ppYN('mcctv','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('mcctv','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-mcctv-body">
+              <input class="f-inp" id="pp-mcctv-purpose" placeholder="운영 목적 (예: 배달 서비스 제공)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-mcctv-count" placeholder="운영 대수" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-mcctv-time" placeholder="촬영 시간" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-mcctv-period" placeholder="보관기간" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-mcctv-manager" placeholder="관리책임자 (성명·부서·연락처)" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑲ 국내대리인 -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">국내대리인 지정 <span class="tc-badge-law">§31의2</span> <span class="tc-badge-imp">해당시·해외사업자</span></div>
+              <div class="pp-yn-group" id="pp-rep-yn">
+                <button class="pp-yn active-n" onclick="ppYN('rep','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('rep','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-rep-body">
+              <input class="f-inp" id="pp-rep-name" placeholder="성명 또는 법인명" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-rep-addr" placeholder="주소 (법인: 영업소 소재지)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-rep-tel" placeholder="전화번호 (국내번호)" oninput="ppRender()" style="margin-bottom:4px">
+              <input class="f-inp" id="pp-rep-email" placeholder="이메일" oninput="ppRender()">
+            </div>
+          </div>
+
+          <!-- ⑳ 구제방법 (권장) -->
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">권익침해 구제방법 <span class="tc-badge-imp">권장</span></div>
+              <div class="pp-yn-group" id="pp-remedy-yn">
+                <button class="pp-yn active-n" onclick="ppYN('remedy','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('remedy','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-remedy-body">
+              <div style="font-size:11px;color:var(--text3)">아래 기관 정보가 미리보기에 자동 포함됩니다.<br>① 개인정보 분쟁조정위원회 1833-6972<br>② 개인정보침해 신고센터 118<br>③ 경찰청 182</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ▶ 처리방침 변경 (필수) -->
+        <div class="pp-sec-group">
+          <div class="pp-sec-group-title">📝 처리방침 변경 <span class="tc-badge-law">§30①8호</span></div>
+          <div class="form-block">
+            <div class="pp-cond-header">
+              <div class="pp-cond-label">이전 버전 변경이력 기재 <span class="tc-badge-law">§30②</span></div>
+              <div class="pp-yn-group" id="pp-history-yn">
+                <button class="pp-yn active-n" onclick="ppYN('history','N',this)">N</button>
+                <button class="pp-yn pp-yn-y" onclick="ppYN('history','Y',this)">Y</button>
+              </div>
+            </div>
+            <div class="pp-cond-body" id="pp-history-body">
+              <div id="pp-history-list"></div>
+              <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:2px" onclick="ppAddHistory()">+ 이력 추가</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AI TBD -->
+        <div class="form-block" style="border:2px dashed var(--border);border-radius:10px;padding:14px;background:var(--surface2);margin-top:4px">
+          <div style="font-size:12px;color:var(--text2);margin-bottom:8px">🤖 AI 자동 초안 생성 <span style="font-size:11px;color:var(--text3)">(준비 중)</span></div>
+          <button class="btn btn-teal" style="width:100%;opacity:0.5;cursor:not-allowed" disabled>AI로 처리방침 초안 생성하기</button>
+          <div id="privacy-policy-output" style="margin-top:8px;font-size:12px;color:var(--text3)"></div>
+        </div>
+
+      </div><!-- /left col -->
+
+      <!-- ── 우측 미리보기 ── -->
+      <div>
+        <div class="preview-panel">
+          <div class="preview-label">LIVE PREVIEW · 처리방침 미리보기</div>
+          <div class="doc-box" id="ppPreview" style="max-height:calc(100vh - 220px);overflow-y:auto"></div>
+          <div class="preview-actions">
+            <button class="btn btn-teal" onclick="ppPrint()">🖨️ 출력</button>
+            <button class="btn btn-ghost" onclick="ppCopy()">📋 텍스트 복사</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ⑤ 잘못된 사례 -->
+  <div class="tmpl-panel" id="tab-bad-cases">
+    <div style="margin-bottom:1rem;font-size:13px;color:var(--text2)">실무에서 자주 발생하는 잘못된 동의서·처리방침 예시와 올바른 예시를 비교합니다.</div>
+    <div class="cases-grid" id="casesGrid"></div>
+  </div>
+</div>
+</div>
+<script>
+// ══ TEMPLATE JS ══
+const tcCustom={req:[],opt:[],sens:[]};
+const tcThirds=[];
+let tcThirdIdx=0;
+
+function tcAddCustom(type){
+  const inp=document.getElementById('tc-'+type+'-ci');
+  const val=inp?.value.trim();
+  if(!val)return;
+  tcCustom[type].push(val);
+  inp.value='';
+  tcRenderCustom(type);
+  renderDoc2();
+}
+function tcRemoveCustom(type,i){tcCustom[type].splice(i,1);tcRenderCustom(type);renderDoc2();}
+function tcRenderCustom(type){
+  const w=document.getElementById('tc-'+type+'-cw');
+  if(!w)return;
+  w.innerHTML=tcCustom[type].map((v,i)=>`<div class="custom-row" style="margin-bottom:4px"><div class="f-inp" style="flex:1;padding:5px 8px;font-size:12px;cursor:default">${v}</div><button class="btn btn-ghost" onclick="tcRemoveCustom('${type}',${i})">×</button></div>`).join('');
+}
+function tcAddThird(){
+  const id='tc-th-'+(tcThirdIdx++);
+  tcThirds.push({id,receiver:'',purpose:'',items:'',period:''});
+  tcRenderThirds();
+}
+function tcRemoveThird(id){
+  const i=tcThirds.findIndex(x=>x.id===id);if(i>=0)tcThirds.splice(i,1);
+  tcRenderThirds();renderDoc2();
+}
+function tcRenderThirds(){
+  const wrap=document.getElementById('tc-third-list');if(!wrap)return;
+  wrap.innerHTML=tcThirds.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>제공처 ${i+1}</span><button class="tc-sub-delete" onclick="tcRemoveThird('${t.id}')">× 삭제</button></div>
+      <div class="f-label">제공받는 자 <span class="tc-badge-imp" style="font-size:9px">중요</span></div>
+      <input class="f-inp" style="margin-bottom:5px" placeholder="예: ○○은행" value="${t.receiver.replace(/"/g,'&quot;')}" oninput="tcThirds[${i}].receiver=this.value;renderDoc2()">
+      <div class="f-label">이용 목적 <span class="tc-badge-imp" style="font-size:9px">중요</span></div>
+      <input class="f-inp" style="margin-bottom:5px" placeholder="예: 대출 심사" value="${t.purpose.replace(/"/g,'&quot;')}" oninput="tcThirds[${i}].purpose=this.value;renderDoc2()">
+      <div class="f-label">제공 항목 <span class="tc-badge-imp" style="font-size:9px">중요</span></div>
+      <input class="f-inp" style="margin-bottom:5px" placeholder="예: 성명, 이메일" value="${t.items.replace(/"/g,'&quot;')}" oninput="tcThirds[${i}].items=this.value;renderDoc2()">
+      <div class="f-label">보유 및 이용 기간 <span class="tc-badge-imp" style="font-size:9px">중요</span></div>
+      <input class="f-inp" placeholder="예: 제공일로부터 1년" value="${t.period.replace(/"/g,'&quot;')}" oninput="tcThirds[${i}].period=this.value;renderDoc2()">
+    </div>`).join('');
+}
+
+function tcPeriodToggle(){
+  const sel=document.getElementById('tc-period');
+  const cw=document.getElementById('tc-period-cw');
+  if(cw)cw.style.display=(sel?.value==='custom')?'block':'none';
+}
+function tcThirdToggle(){
+  const on=document.getElementById('tc-third-on')?.checked;
+  const w=document.getElementById('tc-third-wrap');
+  if(w)w.style.display=on?'block':'none';
+  if(on&&tcThirds.length===0)tcAddThird();
+  renderDoc2();
+}
+
+function tcDisadvToggle(){
+  const auto=document.getElementById('tc-disadv-auto')?.checked;
+  const cw=document.getElementById('tc-disadv-cw');
+  if(cw)cw.style.display=auto?'none':'block';
+}
+function tcGetChecked(gid){return[...document.querySelectorAll('#'+gid+' input:checked')].map(c=>c.value);}
+function tcGetPeriod(){
+  const sel=document.getElementById('tc-period');
+  if(!sel||!sel.value)return'';
+  if(sel.value==='custom')return(document.getElementById('tc-period-custom')?.value||'').trim();
+  return sel.value;
+}
+// §22② 중요내용 bold 처리 (서면 동의 기준)
+function bld(t){return`<strong style="font-weight:700">${t}</strong>`;}
+
+function renderDoc2(){
+  const el=document.getElementById('docPreview');if(!el)return;
+  const org=(document.getElementById('tc-org')?.value||'').trim()||'○○○';
+  const purpose=(document.getElementById('tc-purpose')?.value||'').trim()||'(처리 목적 입력)';
+  const marketing=!!document.getElementById('tc-marketing')?.checked;
+  const reqItems=[...tcGetChecked('tc-req-group'),...tcCustom.req];
+  const optItems=[...tcGetChecked('tc-opt-group'),...tcCustom.opt];
+  const sensItems=[...tcGetChecked('tc-sens-group'),...tcCustom.sens];
+  const uidItems=tcGetChecked('tc-uid-group');
+  const period=tcGetPeriod()||'(보유기간 선택)';
+  const thirdOn=!!document.getElementById('tc-third-on')?.checked;
+  const childOn=!!document.getElementById('tc-child-on')?.checked;
+  const disadvAuto=!!document.getElementById('tc-disadv-auto')?.checked;
+  const disadvCustom=(document.getElementById('tc-disadv-custom')?.value||'').trim();
+  const hasSens=sensItems.length>0;
+  const hasUid=uidItems.length>0;
+  const hasThird=thirdOn&&tcThirds.length>0;
+
+  // 동의 거부 불이익 문구 자동 생성
+  let disadvTxt;
+  if(disadvAuto){
+    const p=[];
+    if(reqItems.length)p.push('필수 항목 동의 거부 시 서비스 이용이 제한될 수 있습니다.');
+    if(optItems.length)p.push('선택 항목 동의 거부 시에도 기본 서비스 이용은 가능합니다.');
+    disadvTxt=p.length?p.join(' '):'동의를 거부하실 수 있으며, 거부 시 서비스 이용이 제한될 수 있습니다.';
+  }else{disadvTxt=disadvCustom||'(불이익 내용 입력)';}
+
+  function itemRow(label,arr){return arr.length?`<tr><td style="white-space:nowrap;width:68px">${label}</td><td>${arr.join(', ')}</td></tr>`:'';}
+  const sep=`<hr class="ds-sep">`;
+  const consentBox=`<div class="ds-consent-box"><label><input type="checkbox"> 동의합니다</label><label><input type="checkbox"> 동의하지 않습니다</label></div>`;
+  let sn=1;let html=`<h3>개인정보 수집·이용 동의서</h3>`;
+
+  // ① 기본 수집·이용 동의 (§15①1호)
+  const purposeDisplay=marketing?bld(purpose)+' <span style="font-size:10px;color:#b45309">(홍보·판매 권유 포함 §22②)</span>':purpose;
+  html+=`<div class="ds">
+  <div class="ds-title">${sn++}. 개인정보 수집·이용 동의<span class="ds-section-badge">§15①1호</span></div>
+  <p><strong>${org}</strong>은(는) 다음과 같이 개인정보를 수집·이용합니다. 내용을 읽으신 후 동의 여부를 결정해 주시기 바랍니다.</p>
+  <table><tr><th>항목</th><th>내용</th></tr>
+  <tr><td>처리 목적</td><td>${purposeDisplay}</td></tr>
+  ${itemRow('필수 항목',reqItems)}
+  ${itemRow('선택 항목',optItems)}
+  <tr><td>보유·이용 기간</td><td>${bld(period)}</td></tr>
+  </table>
+  <div class="ds-notice">※ ${disadvTxt}<br>※ 정보주체는 동의를 거부할 권리가 있으며, 동의 후에도 언제든지 철회할 수 있습니다. (§37①)</div>
+  ${consentBox}
+</div>`;
+
+  // ② 민감정보 별도 동의 (§23①1호)
+  if(hasSens){html+=sep+`<div class="ds">
+  <div class="ds-title">${sn++}. 민감정보 처리 별도 동의<span class="ds-section-badge sep">§23①1호</span></div>
+  <p>다음의 민감정보 처리에 대해 별도로 동의를 구합니다.</p>
+  <table><tr><th>항목</th><th>내용</th></tr>
+  <tr><td>처리 목적</td><td>${purpose}</td></tr>
+  <tr><td>민감정보 항목</td><td>${bld(sensItems.join(', '))}</td></tr>
+  <tr><td>보유·이용 기간</td><td>${bld(period)}</td></tr>
+  </table>
+  <div class="ds-notice">※ 민감정보 수집에 동의하지 않으셔도 기본 서비스 이용은 가능합니다. (§16②)</div>
+  ${consentBox}
+</div>`;}
+
+  // ③ 고유식별정보 별도 동의 (§24①1호)
+  if(hasUid){html+=sep+`<div class="ds">
+  <div class="ds-title">${sn++}. 고유식별정보 처리 별도 동의<span class="ds-section-badge warn">§24①1호</span></div>
+  <p>다음의 고유식별정보 처리에 대해 별도로 동의를 구합니다.</p>
+  <table><tr><th>항목</th><th>내용</th></tr>
+  <tr><td>처리 목적</td><td>${purpose}</td></tr>
+  <tr><td>고유식별정보</td><td>${bld(uidItems.join(', '))}</td></tr>
+  <tr><td>보유·이용 기간</td><td>${bld(period)}</td></tr>
+  </table>
+  <div class="ds-notice">※ 고유식별정보 수집에 동의하지 않으셔도 기본 서비스 이용은 가능합니다. (§16②)</div>
+  ${consentBox}
+</div>`;}
+
+  // ④ 제3자 제공 별도 동의 (§17①1호)
+  if(hasThird){
+    const rows=tcThirds.map(t=>`<tr><td>${bld(t.receiver||'(입력 필요)')}</td><td>${bld(t.purpose||'(입력 필요)')}</td><td>${bld(t.items||'(입력 필요)')}</td><td>${bld(t.period||'(입력 필요)')}</td></tr>`).join('');
+    html+=sep+`<div class="ds">
+  <div class="ds-title">${sn++}. 개인정보 제3자 제공 별도 동의<span class="ds-section-badge">§17①1호</span></div>
+  <p><strong>${org}</strong>은(는) 아래와 같이 개인정보를 제3자에게 제공합니다.</p>
+  <table><tr><th>제공받는 자</th><th>이용 목적</th><th>제공 항목</th><th>보유·이용 기간</th></tr>${rows}</table>
+  <div class="ds-notice">※ 제3자 제공 동의를 거부하실 수 있으나, 거부 시 관련 서비스 이용이 제한될 수 있습니다.</div>
+  ${consentBox}
+</div>`;}
+
+  // ④ 14세 미만 아동 법정대리인 동의 (§22조의2)
+  if(childOn){html+=sep+`<div class="ds">
+  <div class="ds-title">${sn++}. 14세 미만 아동 법정대리인 동의<span class="ds-section-badge sep">§22조의2</span></div>
+  <p>만 14세 미만 아동의 개인정보를 처리하기 위하여 법정대리인의 동의를 받습니다. (이해하기 쉬운 양식과 명확하고 알기 쉬운 언어 사용 의무 §22조의2③)</p>
+  <table>
+  <tr><th>아동 성명</th><td>________________</td><th>생년월일</th><td>________________</td></tr>
+  <tr><th>법정대리인 성명</th><td>________________</td><th>연락처</th><td>________________</td></tr>
+  </table>
+  <div class="ds-notice">※ 법정대리인의 성명 및 연락처는 법정대리인 동의 확인 목적으로만 이용하며, 5일 이내 파기합니다. (§22조의2②)</div>
+  ${consentBox}
+</div>`;}
+
+  // 서명란
+  html+=sep+`<div class="sign">동의일: ____년 ____월 ____일<br>성&nbsp;&nbsp;&nbsp;&nbsp;명: ________________ (서명 또는 인)<br><span style="font-size:10px;color:#94a3b8">※ 굵은 글씨 항목은 §22②에 따른 중요내용입니다.</span></div>`;
+  el.innerHTML=html;
+}
+renderDoc2();
+function printDoc(){
+  const c=document.getElementById('docPreview')?.innerHTML||'';
+  const w=window.open('','','width=720,height=950');
+  w.document.write(`<html><head><title>개인정보 수집·이용 동의서</title><style>
+body{font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:12px;padding:28px 34px;max-width:650px;margin:0 auto;color:#222}
+h3{font-size:14px;font-weight:700;text-align:center;margin-bottom:18px}
+.ds{margin-bottom:13px}.ds-title{font-weight:600;font-size:12px;border-left:2px solid #2563eb;padding-left:7px;margin-bottom:5px}
+.ds-section-badge{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:600;background:#dbeafe;color:#1e40af;border:1px solid #bfdbfe;margin-left:5px}
+.ds-section-badge.sep{background:#fce7f3;color:#9d174d;border-color:#fbcfe8}
+.ds-section-badge.warn{background:#fef3c7;color:#92400e;border-color:#fde68a}
+.ds-section-badge.info{background:#f0fdf4;color:#166534;border-color:#bbf7d0}
+table{width:100%;border-collapse:collapse;font-size:11px}th,td{border:1px solid #ccc;padding:5px 7px;text-align:left;vertical-align:top}
+th{background:#f5f5f5;font-weight:500}.ds-notice{font-size:10px;color:#555;margin-top:4px;padding:4px 7px;background:#f8f8f8;border-left:2px solid #ccc}
+.ds-sep{border:none;border-top:1px solid #ddd;margin:11px 0}.ds-consent-box{display:flex;gap:18px;margin-top:7px}
+.sign{text-align:right;margin-top:14px;font-size:11px;color:#555}
+</style></head><body>${c}</body></html>`);
+  w.document.close();w.print();
+}
+function copyDoc(){
+  const t=document.getElementById('docPreview')?.innerText||'';
+  navigator.clipboard.writeText(t).then(()=>alert('텍스트가 복사되었습니다.'));
+}
+/* ── 동의서 체크리스트 ── */
+function clUpdate(){
+  const all=[...document.querySelectorAll('#tab-checklist-consent .cl-chk')];
+  const mand=[...document.querySelectorAll('#tab-checklist-consent .cl-item[data-mand="1"] .cl-chk')];
+  const done=all.filter(c=>c.checked).length;
+  const mandDone=mand.filter(c=>c.checked).length;
+  const pctAll=all.length?Math.round(done/all.length*100):0;
+  const pctMand=mand.length?Math.round(mandDone/mand.length*100):0;
+  document.getElementById('cl-done').textContent=done;
+  document.getElementById('cl-mand-done').textContent=mandDone;
+  document.getElementById('cl-bar-all').style.width=pctAll+'%';
+  document.getElementById('cl-bar-mand').style.width=pctMand+'%';
+  document.getElementById('cl-pct-all').textContent=pctAll+'%';
+  document.getElementById('cl-pct-mand').textContent=pctMand+'%';
+  // per-section counts
+  ['cls-1','cls-2','cls-3','cls-4','cls-5'].forEach(sid=>{
+    const sec=document.getElementById(sid);
+    if(!sec)return;
+    const items=[...sec.querySelectorAll('.cl-chk')];
+    const checked=items.filter(c=>c.checked).length;
+    const cnt=sec.querySelector('.cl-section-cnt');
+    if(cnt)cnt.textContent=checked+' / '+items.length;
+  });
+  // item done state
+  all.forEach(c=>{
+    c.closest('.cl-item').classList.toggle('cl-done',c.checked);
+  });
+}
+function clToggleDetail(item){
+  const det=item.querySelector('.cl-item-detail');
+  const btn=item.querySelector('.cl-toggle-btn');
+  if(!det)return;
+  const isOpen=det.classList.contains('open');
+  det.classList.toggle('open',!isOpen);
+  if(btn)btn.classList.toggle('open',!isOpen);
+}
+function clToggleSection(sid){
+  const sec=document.getElementById(sid);
+  if(!sec)return;
+  const bd=sec.querySelector('.cl-section-bd');
+  const arrow=sec.querySelector('.cl-section-arrow');
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  if(arrow)arrow.classList.toggle('open',!isOpen);
+}
+function switchTmpl(i){
+  document.querySelectorAll('.tmpl-tab').forEach((t,ti)=>t.classList.toggle('active',ti===i));
+  document.querySelectorAll('.tmpl-panel').forEach((p,pi)=>p.classList.toggle('active',pi===i));
+}
+/* ── 처리방침 체크리스트 ── */
+function pcUpdate(){
+  const all=[...document.querySelectorAll('#tab-checklist-policy .cl-chk')];
+  const mand=[...document.querySelectorAll('#tab-checklist-policy .cl-item[data-mand="1"] .cl-chk')];
+  const done=all.filter(c=>c.checked).length;
+  const mandDone=mand.filter(c=>c.checked).length;
+  const pctAll=all.length?Math.round(done/all.length*100):0;
+  const pctMand=mand.length?Math.round(mandDone/mand.length*100):0;
+  document.getElementById('pc-done').textContent=done;
+  document.getElementById('pc-mand-done').textContent=mandDone;
+  document.getElementById('pc-bar-all').style.width=pctAll+'%';
+  document.getElementById('pc-bar-mand').style.width=pctMand+'%';
+  document.getElementById('pc-pct-all').textContent=pctAll+'%';
+  document.getElementById('pc-pct-mand').textContent=pctMand+'%';
+  ['pcs-1','pcs-2','pcs-3','pcs-4','pcs-5','pcs-6'].forEach(sid=>{
+    const sec=document.getElementById(sid);
+    if(!sec)return;
+    const items=[...sec.querySelectorAll('.cl-chk')];
+    const checked=items.filter(c=>c.checked).length;
+    const cnt=sec.querySelector('.cl-section-cnt');
+    if(cnt)cnt.textContent=checked+' / '+items.length;
+  });
+  all.forEach(c=>{
+    c.closest('.cl-item').classList.toggle('cl-done',c.checked);
+  });
+}
+const BAD_CASES=[
+  {title:'동의서: 포괄적 목적 기재',bad:'개인정보를 서비스 향상 및 기타 목적에 이용합니다.',good:'①회원가입 및 본인확인 ②상품 배송 처리 ③고객 불만 접수·처리 ④마케팅(선택 시만) — 목적별 구분 기재'},
+  {title:'동의서: 선택항목 동의 강제',bad:'아래 항목에 동의하지 않으면 서비스 이용이 불가합니다. (생년월일, 직업 등 선택항목)',good:'선택항목(생년월일·직업)은 미동의 시에도 기본 서비스 이용 가능. 추가 혜택 제공에만 활용.'},
+  {title:'처리방침: 보유기간 불명확',bad:'"이용 목적 달성 후 즉시 파기합니다."',good:'"회원정보: 탈퇴 시까지 / 거래기록: 전자상거래법에 따라 5년 / 불만접수: 3년"'},
+  {title:'처리방침: 수탁업체 미공개',bad:'개인정보 처리를 일부 외부 업체에 위탁할 수 있습니다.',good:'"수탁자: ○○클라우드(주) / 위탁업무: 서버 운영·데이터 저장 / 수탁자: △△결제(주) / 업무: 결제 처리"'},
+  {title:'처리방침: CPO 연락처 누락',bad:'"개인정보 보호를 위해 최선을 다하겠습니다."',good:'"개인정보 보호책임자: 홍길동(정보보호팀장) / Tel: 02-1234-5678 / E-mail: privacy@company.com"'},
+  {title:'동의서: 민감정보 별도 동의 누락',bad:'(건강 정보, 성적 취향 등을 일반 동의에 포함)',good:'민감정보(건강 정보·유전 정보)는 별도 동의서 사용. 일반 수집 동의와 반드시 분리.'},
+];
+(()=>{
+  const g=document.getElementById('casesGrid');
+  if(!g)return;
+  BAD_CASES.forEach(c=>{
+    const d=document.createElement('div');d.className='case-card';
+    d.innerHTML=`<div class="case-title">${c.title}</div><div class="case-split"><div class="case-bad"><div class="case-lbl">BAD ✗</div><div class="case-txt">${c.bad}</div></div><div class="case-good"><div class="case-lbl">GOOD ✓</div><div class="case-txt">${c.good}</div></div></div>`;
+    g.appendChild(d);
+  });
+})();
+
+/* ─── 처리방침 Template 상태 ─── */
+let ppItemIdx=0;
+const ppThirds=[]; let ppThirdIdx=0;
+const ppDelegates=[]; let ppDelegateIdx=0;
+const ppOverseas=[]; let ppOverseasIdx=0;
+const ppHistory=[]; let ppHistoryIdx=0;
+
+/* ─ Y/N 토글 헬퍼 ─ */
+
+function ppYN(key,val,btn){
+  const body=document.getElementById('pp-'+key+'-body');
+  const grp=document.getElementById('pp-'+key+'-yn');
+  if(!grp)return;
+  grp.querySelectorAll('.pp-yn').forEach(b=>{b.classList.remove('active-y','active-n');});
+  if(val==='Y'){btn.classList.add('active-y');if(body)body.classList.add('pp-open');}
+  else{btn.classList.add('active-n');if(body)body.classList.remove('pp-open');}
+  if(val==='Y'){
+    if(key==='third'&&ppThirds.length===0)ppAddThird();
+    if(key==='delegate'&&ppDelegates.length===0)ppAddDelegate();
+    if(key==='overseas'&&ppOverseas.length===0)ppAddOverseas();
+    if(key==='history'&&ppHistory.length===0)ppAddHistory();
+  }
+  ppRender();
+}
+function ppIsY(key){const b=document.getElementById('pp-'+key+'-body');return b?b.classList.contains('pp-open'):false;}
+
+/* ─ 항목 배열 CRUD ─ */
+function ppAddItem(){
+  const id='pp-it-'+(ppItemIdx++);
+  ppItems.push({id,pur:'',basis:'',items:'',periodSel:'',periodCustom:''});
+  ppRenderItems();ppRender();
+}
+function ppRemoveItem(id){const i=ppItems.findIndex(x=>x.id===id);if(i>=0)ppItems.splice(i,1);ppRenderItems();ppRender();}
+function ppRenderItems(){
+  const wrap=document.getElementById('pp-item-list');if(!wrap)return;
+  wrap.innerHTML=ppItems.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>처리 유형 ${i+1}</span><button class="tc-sub-delete" onclick="ppRemoveItem('${t.id}')">× 삭제</button></div>
+      <div class="f-label">처리 목적</div>
+      <input class="f-inp" style="margin-bottom:5px" placeholder="예: 회원 가입·관리 및 서비스 제공" value="${t.pur.replace(/"/g,'&quot;')}" oninput="ppItems[${i}].pur=this.value;ppRender()">
+      <div class="f-label">수집 근거</div>
+      <select class="f-inp" style="margin-bottom:5px" onchange="ppItems[${i}].basis=this.value;ppRender()">
+        <option value="">선택</option>
+        <option value="정보주체의 동의 (§15①1호)"${t.basis==='정보주체의 동의 (§15①1호)'?' selected':''}>정보주체의 동의 (§15①1호)</option>
+        <option value="계약의 체결·이행 (§15①4호)"${t.basis==='계약의 체결·이행 (§15①4호)'?' selected':''}>계약의 체결·이행 (§15①4호) 🆕2025</option>
+        <option value="법령상 의무 이행 (§15①2호)"${t.basis==='법령상 의무 이행 (§15①2호)'?' selected':''}>법령상 의무 이행 (§15①2호)</option>
+        <option value="공공기관 소관 업무 (§15①3호)"${t.basis==='공공기관 소관 업무 (§15①3호)'?' selected':''}>공공기관 소관 업무 (§15①3호)</option>
+        <option value="급박한 생명·재산 보호 (§15①5호)"${t.basis==='급박한 생명·재산 보호 (§15①5호)'?' selected':''}>급박한 생명·재산 보호 (§15①5호)</option>
+        <option value="정당한 이익 달성 (§15①6호)"${t.basis==='정당한 이익 달성 (§15①6호)'?' selected':''}>정당한 이익 달성 (§15①6호)</option>
+      </select>
+      <div class="f-label">수집 항목</div>
+      <input class="f-inp" style="margin-bottom:5px" placeholder="예: 성명, 이메일, 생년월일" value="${t.items.replace(/"/g,'&quot;')}" oninput="ppItems[${i}].items=this.value;ppRender()">
+      <div class="f-label">보유기간</div>
+      <select class="f-inp" style="margin-bottom:4px" onchange="ppItems[${i}].periodSel=this.value;ppRenderItems();ppRender()">
+        <option value="">선택</option>
+        <option value="회원 탈퇴 시 즉시 파기"${t.periodSel==='회원 탈퇴 시 즉시 파기'?' selected':''}>회원 탈퇴 시 즉시 파기</option>
+        <option value="서비스 종료 후 즉시 파기"${t.periodSel==='서비스 종료 후 즉시 파기'?' selected':''}>서비스 종료 후 즉시 파기</option>
+        <option value="목적 달성 후 즉시 파기"${t.periodSel==='목적 달성 후 즉시 파기'?' selected':''}>목적 달성 후 즉시 파기</option>
+        <option value="계약 종료 후 1년"${t.periodSel==='계약 종료 후 1년'?' selected':''}>계약 종료 후 1년</option>
+        <option value="계약 종료 후 3년"${t.periodSel==='계약 종료 후 3년'?' selected':''}>계약 종료 후 3년</option>
+        <option value="계약 종료 후 5년"${t.periodSel==='계약 종료 후 5년'?' selected':''}>계약 종료 후 5년</option>
+        <option value="custom"${t.periodSel==='custom'?' selected':''}>직접 입력</option>
+      </select>
+      ${t.periodSel==='custom'?`<input class="f-inp" placeholder="보유기간 직접 입력" value="${t.periodCustom.replace(/"/g,'&quot;')}" oninput="ppItems[${i}].periodCustom=this.value;ppRender()">`:''}`
+  ).join('');
+}
+
+function ppAddThird(){
+  const id='pp-th-'+(ppThirdIdx++);
+  ppThirds.push({id,name:'',purpose:'',items:'',period:''});
+  ppRenderThirds();ppRender();
+}
+function ppRemoveThird(id){const i=ppThirds.findIndex(x=>x.id===id);if(i>=0)ppThirds.splice(i,1);ppRenderThirds();ppRender();}
+function ppRenderThirds(){
+  const wrap=document.getElementById('pp-third-list');if(!wrap)return;
+  wrap.innerHTML=ppThirds.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>제공처 ${i+1}</span><button class="tc-sub-delete" onclick="ppRemoveThird('${t.id}')">× 삭제</button></div>
+      <input class="f-inp" style="margin-bottom:4px" placeholder="제공받는 자 (기관명)" value="${t.name.replace(/"/g,'&quot;')}" oninput="ppThirds[${i}].name=this.value;ppRender()">
+      <input class="f-inp" style="margin-bottom:4px" placeholder="제공 목적" value="${t.purpose.replace(/"/g,'&quot;')}" oninput="ppThirds[${i}].purpose=this.value;ppRender()">
+      <input class="f-inp" style="margin-bottom:4px" placeholder="제공 항목" value="${t.items.replace(/"/g,'&quot;')}" oninput="ppThirds[${i}].items=this.value;ppRender()">
+      <input class="f-inp" placeholder="보유·이용 기간" value="${t.period.replace(/"/g,'&quot;')}" oninput="ppThirds[${i}].period=this.value;ppRender()">
+    </div>`).join('');
+}
+
+function ppAddDelegate(){
+  const id='pp-dg-'+(ppDelegateIdx++);
+  ppDelegates.push({id,name:'',task:''});
+  ppRenderDelegates();ppRender();
+}
+function ppRemoveDelegate(id){const i=ppDelegates.findIndex(x=>x.id===id);if(i>=0)ppDelegates.splice(i,1);ppRenderDelegates();ppRender();}
+function ppRenderDelegates(){
+  const wrap=document.getElementById('pp-delegate-list');if(!wrap)return;
+  wrap.innerHTML=ppDelegates.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>수탁자 ${i+1}</span><button class="tc-sub-delete" onclick="ppRemoveDelegate('${t.id}')">× 삭제</button></div>
+      <input class="f-inp" style="margin-bottom:4px" placeholder="수탁자 (기관명)" value="${t.name.replace(/"/g,'&quot;')}" oninput="ppDelegates[${i}].name=this.value;ppRender()">
+      <input class="f-inp" placeholder="위탁 업무 내용" value="${t.task.replace(/"/g,'&quot;')}" oninput="ppDelegates[${i}].task=this.value;ppRender()">
+    </div>`).join('');
+}
+
+function ppAddOverseas(){
+  const id='pp-ov-'+(ppOverseasIdx++);
+  ppOverseas.push({id,recipient:'',country:'',items:'',basis:'',purpose:'',period:'',refuse:''});
+  ppRenderOverseas();ppRender();
+}
+function ppRemoveOverseas(id){const i=ppOverseas.findIndex(x=>x.id===id);if(i>=0)ppOverseas.splice(i,1);ppRenderOverseas();ppRender();}
+function ppRenderOverseas(){
+  const wrap=document.getElementById('pp-overseas-list');if(!wrap)return;
+  wrap.innerHTML=ppOverseas.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>이전처 ${i+1}</span><button class="tc-sub-delete" onclick="ppRemoveOverseas('${t.id}')">× 삭제</button></div>
+      <input class="f-inp" style="margin-bottom:4px" placeholder="이전받는 자 (기관명·연락처)" value="${t.recipient.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].recipient=this.value;ppRender()">
+      <input class="f-inp" style="margin-bottom:4px" placeholder="이전 국가" value="${t.country.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].country=this.value;ppRender()">
+      <input class="f-inp" style="margin-bottom:4px" placeholder="이전 항목" value="${t.items.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].items=this.value;ppRender()">
+      <select class="f-inp" style="margin-bottom:4px" onchange="ppOverseas[${i}].basis=this.value;ppRender()">
+        <option value="">이전 법적 근거 선택</option>
+        <option value="정보주체의 동의 (§28의8①1호)"${t.basis==='정보주체의 동의 (§28의8①1호)'?' selected':''}>정보주체의 동의</option>
+        <option value="보호위원회 인정 (§28의8①2호)"${t.basis==='보호위원회 인정 (§28의8①2호)'?' selected':''}>보호위원회 인정</option>
+        <option value="국제조약·협정 (§28의8①3호)"${t.basis==='국제조약·협정 (§28의8①3호)'?' selected':''}>국제조약·협정</option>
+        <option value="표준계약조항 (§28의8①4호)"${t.basis==='표준계약조항 (§28의8①4호)'?' selected':''}>표준계약조항</option>
+      </select>
+      <input class="f-inp" style="margin-bottom:4px" placeholder="이용 목적" value="${t.purpose.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].purpose=this.value;ppRender()">
+      <input class="f-inp" style="margin-bottom:4px" placeholder="보유기간" value="${t.period.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].period=this.value;ppRender()">
+      <input class="f-inp" placeholder="거부 방법·절차·효과" value="${t.refuse.replace(/"/g,'&quot;')}" oninput="ppOverseas[${i}].refuse=this.value;ppRender()">
+    </div>`).join('');
+}
+
+function ppAddHistory(){
+  const id='pp-hs-'+(ppHistoryIdx++);
+  ppHistory.push({id,ver:'',date:'',desc:''});
+  ppRenderHistory();ppRender();
+}
+function ppRemoveHistory(id){const i=ppHistory.findIndex(x=>x.id===id);if(i>=0)ppHistory.splice(i,1);ppRenderHistory();ppRender();}
+function ppRenderHistory(){
+  const wrap=document.getElementById('pp-history-list');if(!wrap)return;
+  wrap.innerHTML=ppHistory.map((t,i)=>`
+    <div class="tc-sub-section">
+      <div class="tc-sub-header"><span>이력 ${i+1}</span><button class="tc-sub-delete" onclick="ppRemoveHistory('${t.id}')">× 삭제</button></div>
+      <input class="f-inp" style="margin-bottom:4px" placeholder="버전 (예: v2.0)" value="${t.ver.replace(/"/g,'&quot;')}" oninput="ppHistory[${i}].ver=this.value;ppRender()">
+      <input class="f-inp" type="date" style="margin-bottom:4px" value="${t.date}" onchange="ppHistory[${i}].date=this.value;ppRender()">
+      <input class="f-inp" placeholder="주요 변경 내용" value="${t.desc.replace(/"/g,'&quot;')}" oninput="ppHistory[${i}].desc=this.value;ppRender()">
+    </div>`).join('');
+}
+
+function ppV(id){const el=document.getElementById(id);return el?(el.value||'').trim():'';}
+function ppC(id){const el=document.getElementById(id);return el?el.checked:false;}
+function ppRadio(name){const el=document.querySelector(`input[name="${name}"]:checked`);return el?el.value:'';}
+
+/* ═══ RENDER ═══ */
+function ppRender(){
+  const el=document.getElementById('ppPreview');if(!el)return;
+  const org=ppV('pp-org')||'○○기관';
+  const dateVal=ppV('pp-date');
+  const dateStr=dateVal?dateVal.replace(/-/g,'. ')+'.':'YYYY. MM. DD.';
+
+  const childOn  =ppIsY('child');
+  const sensOn   =ppIsY('sens');
+  const uidOn    =ppIsY('uid');
+  const thirdOn  =ppIsY('third')&&ppThirds.length>0;
+  const adduseOn =ppIsY('adduse');
+  const delegOn  =ppIsY('delegate')&&ppDelegates.length>0;
+  const oversOn  =ppIsY('overseas')&&ppOverseas.length>0;
+  const pseudoOn =ppIsY('pseudo');
+  const cookieOn =ppIsY('cookie');
+  const autoOn   =ppIsY('auto');
+  const transferOn=ppIsY('transfer');
+  const cctvOn   =ppIsY('cctv');
+  const mcctvOn  =ppIsY('mcctv');
+  const repOn    =ppIsY('rep');
+  const remedyOn =ppIsY('remedy');
+  const histOn   =ppIsY('history')&&ppHistory.length>0;
+
+  const sensItems=['pps1','pps2','pps3','pps4','pps5','pps6','pps7','pps8']
+    .filter(id=>ppC(id)).map(id=>document.getElementById(id).value);
+  const uidItems=['ppuid1','ppuid2','ppuid3','ppuid4']
+    .filter(id=>ppC(id)).map(id=>document.getElementById(id).value);
+
+  const safeMeasures=[
+    {id:'pp-safe1',label:'내부관리계획 수립·시행',detail:'개인정보의 안전한 처리를 위한 내부관리계획을 수립하고 시행하고 있습니다.'},
+    {id:'pp-safe2',label:'개인정보취급자 교육 실시',detail:'개인정보를 취급하는 직원을 대상으로 정기적인 개인정보 보호 교육을 실시하고 있습니다.'},
+    {id:'pp-safe3',label:'접근권한 관리·제한',detail:'개인정보를 처리하는 데이터베이스 시스템에 대한 접근권한을 업무 수행에 필요한 최소한으로 부여하고 있습니다.'},
+    {id:'pp-safe4',label:'접근통제 시스템 운영',detail:'외부로부터의 무단 접근을 차단하기 위한 침입차단시스템 및 침입탐지시스템을 운영하고 있습니다.'},
+    {id:'pp-safe5',label:'개인정보 암호화',detail:'비밀번호 및 고유식별정보 등 중요한 개인정보는 암호화하여 저장·전송하고 있습니다.'},
+    {id:'pp-safe6',label:'접속기록 보관·위변조 방지',detail:'개인정보처리시스템에 대한 접속기록을 보관하고 위변조 방지 조치를 적용하고 있습니다.'},
+    {id:'pp-safe7',label:'보안 프로그램 설치·갱신',detail:'악성 프로그램 등 침해사고 예방을 위하여 보안 프로그램을 설치하고 주기적으로 갱신·점검하고 있습니다.'},
+    {id:'pp-safe8',label:'물리적 접근통제',detail:'전산실, 자료보관실 등 개인정보를 보관하는 물리적 장소에 대한 접근통제 및 잠금장치를 운영하고 있습니다.'},
+  ].filter(m=>ppC(m.id));
+
+  const destrMedia=ppRadio('pp-destr-media');
+  let destrElectro='',destrPaper='';
+  if(destrMedia==='electronic'||destrMedia==='both')destrElectro='전자적 파일 형태로 처리된 개인정보는 기록을 재생할 수 없도록 영구 삭제합니다.';
+  if(destrMedia==='paper'||destrMedia==='both')destrPaper='종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각하여 파기합니다.';
+  const destrExtra=ppV('pp-destr-extra');
+
+  const cpoName  =ppV('pp-cpo-name')||'(성명 입력)';
+  const cpoDept  =ppV('pp-cpo-dept')||'(직위·부서 입력)';
+  const cpoEmail =ppV('pp-cpo-email')||'(이메일 입력)';
+  const cpoTel   =ppV('pp-cpo-tel')||'(전화번호 입력)';
+  const cpoDept2 =ppV('pp-cpo-dept2')||'(담당부서 입력)';
+  const cpoDept2C=ppV('pp-cpo-dept2-contact')||'(담당부서 연락처 입력)';
+  const rightsDept=ppV('pp-rights-dept')||cpoDept2;
+  const rightsCon =ppV('pp-rights-contact')||cpoDept2C;
+
+  // 목차
+  const toc=[];let sn=0;
+  toc.push({n:++sn,t:'개인정보의 처리 목적'});
+  toc.push({n:++sn,t:'처리하는 개인정보의 항목 및 보유·이용기간'});
+  toc.push({n:++sn,t:'개인정보의 파기 절차 및 방법'});
+  if(childOn) toc.push({n:++sn,t:'만 14세 미만 아동의 개인정보 처리'});
+  if(sensOn&&sensItems.length>0)toc.push({n:++sn,t:'민감정보의 처리에 관한 사항'});
+  if(uidOn&&uidItems.length>0)toc.push({n:++sn,t:'고유식별정보의 처리에 관한 사항'});
+  if(thirdOn) toc.push({n:++sn,t:'개인정보의 제3자 제공'});
+  if(adduseOn)toc.push({n:++sn,t:'추가적인 이용·제공에 관한 판단기준'});
+  if(delegOn) toc.push({n:++sn,t:'개인정보 처리업무의 위탁'});
+  if(oversOn) toc.push({n:++sn,t:'개인정보의 국외 이전'});
+  toc.push({n:++sn,t:'개인정보의 안전성 확보조치'});
+  if(pseudoOn)toc.push({n:++sn,t:'가명정보 처리에 관한 사항'});
+  if(cookieOn)toc.push({n:++sn,t:'개인정보 자동 수집 장치의 설치·운영 및 거부'});
+  toc.push({n:++sn,t:'정보주체와 법정대리인의 권리·의무 및 행사방법'});
+  if(autoOn)  toc.push({n:++sn,t:'자동화된 결정에 관한 사항'});
+  toc.push({n:++sn,t:'개인정보 보호책임자 및 담당부서'});
+  if(repOn)   toc.push({n:++sn,t:'국내대리인 지정에 관한 사항'});
+  if(remedyOn)toc.push({n:++sn,t:'정보주체의 권익침해에 대한 구제방법'});
+  if(cctvOn)  toc.push({n:++sn,t:'고정형 영상정보처리기기 운영·관리'});
+  if(mcctvOn) toc.push({n:++sn,t:'이동형 영상정보처리기기 운영·관리'});
+  toc.push({n:++sn,t:'개인정보 처리방침의 변경'});
+
+  let secN=0;
+  const SEC=(title,body)=>{secN++;return`<div style="margin-bottom:22px"><div style="font-size:14px;font-weight:700;color:#1a56a0;border-bottom:2px solid #1a56a0;padding-bottom:4px;margin-bottom:10px">제${secN}조 (${title})</div>${body}</div>`;};
+  const TBL=(heads,rows)=>`<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0"><thead><tr>${heads.map(h=>`<th style="border:1px solid #b8c8e0;padding:6px 8px;background:#dce7f5;text-align:left;white-space:nowrap;font-size:11px">${h}</th>`).join('')}</tr></thead><tbody>${rows||`<tr><td colspan="${heads.length}" style="border:1px solid #b8c8e0;padding:8px;text-align:center;color:#aaa;font-style:italic">항목을 추가하세요.</td></tr>`}</tbody></table></div>`;
+  const NOTE=(txt,col,bg,bdr)=>`<div style="border-left:3px solid ${bdr||'#1a56a0'};padding:7px 12px;background:${bg||'#eff6ff'};font-size:12px;color:${col||'#1d4ed8'};margin:8px 0;border-radius:0 5px 5px 0;line-height:1.6">${txt}</div>`;
+  const TD=(v)=>`<td style="border:1px solid #b8c8e0;padding:6px 8px;vertical-align:top">${v||'—'}</td>`;
+  const NEW25=`<span style="display:inline-block;background:#dcfce7;color:#166534;font-size:10px;padding:1px 5px;border-radius:3px;font-weight:600;margin-left:4px">2025 개정</span>`;
+
+  const purList=ppItems.length>0
+    ?ppItems.map(t=>`<li>${t.pur||'(처리 목적 입력)'}</li>`).join('')
+    :'<li style="color:#aaa">(처리 유형을 추가하세요)</li>';
+  const itemRows=ppItems.map(t=>{
+    const p=t.periodSel==='custom'?(t.periodCustom||'—'):t.periodSel||'—';
+    return`<tr>${TD(t.pur)}${TD(t.basis)}${TD(t.items)}${TD(p)}</tr>`;
+  }).join('');
+  const thirdRows=ppThirds.map(t=>`<tr>${TD(t.name)}${TD(t.purpose)}${TD(t.items)}${TD(t.period)}</tr>`).join('');
+  const delegRows=ppDelegates.map(t=>`<tr>${TD(t.name)}${TD(t.task)}</tr>`).join('');
+  const oversRows=ppOverseas.map(t=>`<tr>${TD(t.recipient)}${TD(t.country)}${TD(t.items)}${TD(t.basis)}${TD(t.purpose)}${TD(t.period)}${TD(t.refuse)}</tr>`).join('');
+  const histRows =ppHistory.map(t=>`<tr>${TD(t.ver)}${TD(t.date)}${TD(t.desc)}</tr>`).join('');
+
+  secN=0;
+  let html=`<div style="font-family:'Noto Sans KR','Apple SD Gothic Neo',sans-serif;font-size:13px;color:#1a1a2e;line-height:1.85;word-break:keep-all">
+<div style="text-align:center;margin-bottom:24px;padding-bottom:16px;border-bottom:3px solid #1a56a0">
+  <div style="font-size:20px;font-weight:800;color:#1a56a0;letter-spacing:-.02em;margin-bottom:4px">${org}</div>
+  <div style="font-size:16px;font-weight:700;letter-spacing:.05em;color:#222">개인정보 처리방침</div>
+  <div style="font-size:12px;color:#555;margin-top:6px">시행일: <strong>${dateStr}</strong></div>
+</div>
+<div style="background:#f4f8ff;border:1px solid #c5d9f1;border-radius:8px;padding:12px 18px;margin-bottom:22px">
+  <div style="font-size:11px;font-weight:800;color:#1a56a0;letter-spacing:.08em;margin-bottom:7px">◆ 목 차</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 20px;font-size:12px">
+    ${toc.map(s=>`<div><span style="color:#1a56a0;font-weight:700">제${s.n}조</span> <span style="color:#334">(${s.t})</span></div>`).join('')}
+  </div>
+</div>
+<div style="font-size:12.5px;color:#333;margin-bottom:22px;line-height:1.85;padding:12px 16px;background:#fffbf0;border-radius:8px;border:1px solid #fde68a">
+  <strong>${org}</strong>(이하 '회사'라 합니다)는 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. 이 처리방침은 시행일로부터 적용되며, 변경이 있을 경우 공지사항 등을 통해 안내드립니다.
+</div>`;
+
+  html+=SEC('개인정보의 처리 목적',
+    `<p>${org}는 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경되는 경우에는 「개인정보 보호법」 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다.</p>
+<ul style="margin:8px 0 8px 20px;line-height:2.1">${purList}</ul>`);
+
+  html+=SEC('처리하는 개인정보의 항목 및 보유·이용기간',
+    `${NOTE('「개인정보 보호법」 §15①4호(계약의 체결·이행)에 해당하는 경우 정보주체의 별도 동의 없이 수집 가능 (2025.9.15. 시행)'+NEW25)}
+${TBL(['처리 목적','수집 근거','수집 항목','보유기간'],itemRows||null)}
+<p style="font-size:12px;color:#555;margin-top:6px">※ 관계 법령에서 개인정보 보관 의무 기간을 정한 경우에는 해당 기간이 종료될 때까지 보관합니다.</p>`);
+
+  let destrBody=`<p>${org}는 개인정보 보유기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p>
+<p><strong>① 파기 절차</strong> : 이용자가 입력한 정보는 목적이 달성된 후 별도의 DB에 옮겨져 내부 방침 및 관계 법령에 따라 일정 기간 저장된 후 즉시 파기됩니다. 파기 사유가 발생한 개인정보는 개인정보 보호책임자의 승인을 받아 파기합니다.</p>
+<p><strong>② 파기 기한</strong> : 이용자의 개인정보는 개인정보의 보유기간이 경과된 날로부터 5일 이내에 파기합니다.</p>
+<p><strong>③ 파기 방법</strong></p><ul style="margin:5px 0 5px 20px;line-height:2">`;
+  if(destrElectro)destrBody+=`<li>${destrElectro}</li>`;
+  if(destrPaper)  destrBody+=`<li>${destrPaper}</li>`;
+  if(!destrElectro&&!destrPaper)destrBody+=`<li>관련 법령 및 내부 방침에 따라 복구 불가능한 방법으로 파기합니다.</li>`;
+  destrBody+='</ul>';
+  if(destrExtra)destrBody+=`<p style="font-size:12px;color:#555">${destrExtra}</p>`;
+  html+=SEC('개인정보의 파기 절차 및 방법',destrBody);
+
+  if(childOn){
+    const cg=ppV('pp-child-guardian')||'(법정대리인 동의 확인 방법 입력)';
+    html+=SEC('만 14세 미만 아동의 개인정보 처리',
+      `<p>${org}는 만 14세 미만 아동의 개인정보를 처리하는 경우 「개인정보 보호법」 제22조의2에 따라 법정대리인의 동의를 받습니다.</p>
+<p><strong>① 법정대리인 동의 확인 방법</strong> : ${cg}</p>
+<p><strong>② 14세 이상 미성년자</strong>인 정보주체는 본인이 직접 권리를 행사하거나 법정대리인을 통하여 권리를 행사할 수 있습니다.</p>
+${NOTE('14세 미만 아동의 권리는 법정대리인이 직접 행사합니다.','#166534','#f0fdf4','#16a34a')}`);
+  }
+
+  if(sensOn&&sensItems.length>0){
+    const openness=ppV('pp-sens-openness')||'해당 민감정보는 외부에 공개되지 않으며, 비공개를 원하시는 경우 개인정보 보호책임자에게 요청하실 수 있습니다.';
+    html+=SEC('민감정보의 처리에 관한 사항',
+      `<p>${org}는 「개인정보 보호법」 제23조에 따라 정보주체로부터 별도의 동의를 받아 다음의 민감정보를 처리합니다.</p>
+<ul style="margin:8px 0 8px 20px;line-height:2">${sensItems.map(s=>`<li>${s}</li>`).join('')}</ul>
+<p><strong>공개 가능성 및 비공개 선택 방법</strong> : ${openness}</p>`);
+  }
+
+  if(uidOn&&uidItems.length>0){
+    const up=ppV('pp-uid-purpose')||'(처리 목적 입력)';
+    html+=SEC('고유식별정보의 처리에 관한 사항',
+      `<p>${org}는 「개인정보 보호법」 제24조에 따라 법령에서 구체적으로 요구하거나 정보주체의 별도 동의를 받아 다음의 고유식별정보를 처리합니다.</p>
+<ul style="margin:8px 0 8px 20px;line-height:2">${uidItems.map(s=>`<li>${s}</li>`).join('')}</ul>
+<p><strong>처리 목적</strong> : ${up}</p>`);
+  }
+
+  if(thirdOn){
+    html+=SEC('개인정보의 제3자 제공',
+      `<p>${org}는 정보주체의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다.</p>
+${TBL(['제공받는 자','제공 목적','제공 항목','보유·이용기간'],thirdRows||null)}
+<p style="font-size:12px;color:#555;margin-top:5px">※ 정보주체는 개인정보의 제3자 제공에 대하여 동의를 거부할 수 있으며, 거부하실 경우 일부 서비스 이용이 제한될 수 있습니다.</p>`);
+  }
+
+  if(adduseOn){
+    const adddesc=ppV('pp-adduse-desc');
+    html+=SEC('추가적인 이용·제공에 관한 판단기준',
+      `<p>${org}는 「개인정보 보호법」 제15조제3항 및 제17조제4항에 따라 당초 수집 목적과 합리적으로 관련된 범위 내에서 정보주체의 동의 없이 개인정보를 추가적으로 이용·제공할 수 있습니다. 이를 위하여 다음의 사항을 고려합니다.</p>
+<ul style="margin:8px 0 8px 20px;line-height:2.1">
+  <li>당초 수집 목적과의 관련성</li>
+  <li>개인정보를 수집한 정황 또는 처리 관행에 비추어 정보주체가 예측 가능한지 여부</li>
+  <li>정보주체의 이익을 부당하게 침해하는지 여부</li>
+  <li>가명처리 또는 암호화 등 안전성 확보에 필요한 조치의 이행 여부</li>
+</ul>
+${adddesc?`<p>${adddesc}</p>`:''}`);
+  }
+
+  if(delegOn){
+    html+=SEC('개인정보 처리업무의 위탁',
+      `<p>${org}는 원활한 개인정보 업무처리를 위하여 다음과 같이 개인정보 처리 업무를 위탁하고 있습니다.</p>
+${TBL(['수탁자 (수탁업체)','위탁 업무 내용'],delegRows||null)}
+<p style="font-size:12px;color:#555;margin-top:5px">위탁계약 체결 시 「개인정보 보호법」 제26조에 따라 위탁업무 수행 목적 외 개인정보 처리 금지, 기술적·관리적 보호조치, 재위탁 제한, 손해배상 등에 관한 사항을 계약서 등 문서에 명시하고, 수탁자가 개인정보를 안전하게 처리하는지를 감독하고 있습니다.</p>`);
+  }
+
+  if(oversOn){
+    html+=SEC('개인정보의 국외 이전',
+      `<p>${org}는 다음과 같이 개인정보를 국외로 이전하고 있습니다. (「개인정보 보호법」 §28조의8)</p>
+${TBL(['이전받는 자·연락처','이전 국가','이전 항목','법적 근거','이용 목적','보유기간','거부 방법·효과'],oversRows||null)}`);
+  }
+
+  const safeList=safeMeasures.length>0?safeMeasures:[
+    {label:'내부관리계획 수립·시행',detail:'개인정보의 안전한 처리를 위한 내부관리계획을 수립하고 시행하고 있습니다.'},
+    {label:'접근권한 관리',detail:'개인정보처리시스템에 대한 접근권한을 최소한으로 부여하고 있습니다.'},
+    {label:'개인정보 암호화',detail:'중요한 개인정보는 암호화하여 저장·전송하고 있습니다.'}];
+  html+=SEC('개인정보의 안전성 확보조치',
+    `<p>「개인정보 보호법」 제29조에 따라 다음과 같이 안전성 확보에 필요한 기술적·관리적·물리적 조치를 취하고 있습니다.</p>
+<ol style="margin:8px 0 8px 20px;line-height:2.1">
+${safeList.map(m=>`<li><strong>${m.label}</strong> : ${m.detail}</li>`).join('')}
+</ol>`);
+
+  if(pseudoOn){
+    const ppur=ppV('pp-pseudo-purpose')||'통계 분석 및 연구';
+    const pper=ppV('pp-pseudo-period')||'처리 목적 달성 시까지';
+    const pitm=ppV('pp-pseudo-items')||'(처리 항목 입력)';
+    html+=SEC('가명정보 처리에 관한 사항',
+      `<p>${org}는 「개인정보 보호법」 제28조의2에 따라 통계작성, 과학적 연구, 공익적 기록 보존 등을 위하여 정보주체의 동의 없이 가명정보를 처리합니다.</p>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0">
+<tbody>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left;width:30%">처리 목적</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${ppur}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">처리 기간</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${pper}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">처리 항목</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${pitm}</td></tr>
+</tbody></table>
+${NOTE('가명처리한 개인정보는 재식별 목적으로 처리하지 않으며, 재식별 위험에 대한 안전성 확보조치를 적용합니다.','#166534','#f0fdf4','#16a34a')}`);
+  }
+
+  if(cookieOn){
+    const cpurp=ppV('pp-cookie-purpose')||'이용자의 서비스 접속 편의 및 맞춤형 서비스 제공';
+    const hasThird=ppC('pp-cookie-third');
+    html+=SEC('개인정보 자동 수집 장치의 설치·운영 및 거부',
+      `<p>${org}는 이용자에게 개별적인 맞춤 서비스를 제공하기 위해 이용 정보를 저장하고 수시로 불러오는 '쿠키(cookie)'를 사용합니다.</p>
+<p><strong>① 쿠키의 이용 목적</strong> : ${cpurp}</p>
+<p><strong>② 쿠키 설치·운영 및 거부</strong> : 웹브라우저 상단의 도구 &gt; 인터넷 옵션 &gt; 개인정보 메뉴의 옵션 설정을 통해 쿠키 저장을 거부할 수 있습니다.</p>
+<p><strong>③ 쿠키 저장 거부 시 효과</strong> : 쿠키 저장을 거부할 경우 로그인이 필요한 서비스 이용에 어려움이 있을 수 있습니다.</p>
+${hasThird?NOTE('제3자가 수집하는 행태정보가 운영 중입니다. 브라우저 쿠키 설정에서 제3자 쿠키를 차단하거나 개인정보처리자에게 수집 거부를 요청할 수 있습니다.','#92400e','#fffbeb','#d97706'):''}`);
+  }
+
+  html+=SEC('정보주체와 법정대리인의 권리·의무 및 행사방법',
+    `<p>정보주체는 ${org}에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.</p>
+<ol style="margin:8px 0 8px 20px;line-height:2.1">
+  <li>개인정보 열람 요구 (법 §35)</li>
+  <li>오류 등이 있을 경우 정정 요구 (법 §36)</li>
+  <li>삭제 요구 (법 §36)</li>
+  <li>처리 정지 요구 (법 §37)</li>
+  <li>동의 철회 (법 §37③)</li>
+  ${autoOn?'<li>자동화된 결정에 대한 거부 및 설명·검토 요구 (법 §37의2) '+NEW25+'</li>':""}
+  ${transferOn?'<li>개인정보 전송 요구 (법 §35의2) '+NEW25+'</li>':""}
+</ol>
+<p>권리 행사는 서면, 전자우편, 팩스(FAX), 인터넷 등을 통하여 하실 수 있으며, ${org}는 이에 대해 지체 없이 조치하겠습니다. (보호법 시행령 §41①)</p>
+<p>※ 14세 미만 아동의 권리 행사는 법정대리인이 직접 해야 하며, 14세 이상 미성년자는 본인 또는 법정대리인을 통하여 할 수 있습니다.</p>
+${transferOn?`<p><strong>개인정보 전송 요청 방법</strong> : ${ppV('pp-transfer-method')||'온마이데이터(OnMydata.go.kr) 또는 담당부서에 서면 신청'}</p>`:''}
+<p style="margin-top:8px">▶ <strong>개인정보 권리 행사 접수·처리 부서</strong><br>
+부서명 : ${rightsDept||'(담당부서 입력)'}<br>
+연락처 : ${rightsCon||'(연락처 입력)'}</p>`);
+
+  if(autoOn){
+    const aScope=ppV('pp-auto-scope')||'(결정 대상 입력)';
+    const aLogic=ppV('pp-auto-logic')||'(처리 절차 입력)';
+    const aRefuse=ppV('pp-auto-refuse')||'개인정보 보호책임자 또는 담당부서에 서면·이메일로 요청';
+    html+=SEC('자동화된 결정에 관한 사항',
+      `${NOTE('「개인정보 보호법」 §37조의2 — 완전히 자동화된 시스템으로 개인정보를 처리하여 이루어지는 결정으로서 정보주체에게 법적 효력이나 그 밖에 중대한 영향을 미치는 경우 적용 (2025.9.15. 시행)'+NEW25)}
+<p>${org}는 인공지능 기술을 적용한 완전히 자동화된 시스템으로 개인정보를 처리하여 이루어지는 결정(이하 '자동화된 결정'이라 합니다)을 하고 있습니다.</p>
+<p><strong>① 자동화된 결정이 이루어지는 사실 및 그 목적·대상</strong> : ${aScope}</p>
+<p><strong>② 주요 개인정보의 유형과 자동화된 결정의 관계·절차</strong> : ${aLogic}</p>
+<p><strong>③ 정보주체가 거부·설명 등을 요구할 수 있다는 사실과 그 방법·절차</strong></p>
+<ul style="margin:6px 0 6px 20px;line-height:2">
+  <li>자동화된 결정에 대한 거부</li>
+  <li>자동화된 결정에 대한 설명 요구</li>
+  <li>의견 제출을 통한 검토 요구</li>
+</ul>
+<p>요구 방법 : ${aRefuse}</p>
+<p style="font-size:12px;color:#555">※ 정보주체의 동의를 받거나 계약 등을 통해 미리 알린 경우, 법률에 명확히 규정이 있는 경우에는 거부권이 인정되지 않고 설명 및 검토 요구만 가능합니다.</p>`);
+  }
+
+  html+=SEC('개인정보 보호책임자 및 담당부서',
+    `<p>${org}는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 정보주체의 불만처리 및 피해구제를 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.</p>
+<table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0">
+<thead><tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">▶ 개인정보 보호책임자</th><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">▶ 개인정보보호 담당부서</th></tr></thead>
+<tbody><tr>
+<td style="border:1px solid #b8c8e0;padding:8px 10px;vertical-align:top;line-height:1.9">성명 : ${cpoName}<br>직위 : ${cpoDept}<br>이메일 : ${cpoEmail}<br>전화 : ${cpoTel}</td>
+<td style="border:1px solid #b8c8e0;padding:8px 10px;vertical-align:top;line-height:1.9">부서명 : ${cpoDept2}<br>연락처 : ${cpoDept2C}</td>
+</tr></tbody></table>
+<p>정보주체는 ${org}의 서비스를 이용하시면서 발생한 모든 개인정보보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의하실 수 있습니다. ${org}는 정보주체의 문의에 대해 지체 없이 답변 및 처리해 드릴 것입니다.</p>`);
+
+  if(repOn){
+    const rN=ppV('pp-rep-name')||'(성명/법인명 입력)';
+    const rA=ppV('pp-rep-addr')||'(주소 입력)';
+    const rT=ppV('pp-rep-tel')||'(전화번호 입력)';
+    const rE=ppV('pp-rep-email')||'(이메일 입력)';
+    html+=SEC('국내대리인 지정에 관한 사항',
+      `<p>정보주체는 「개인정보 보호법」 제31조의2에 따라 지정된 ${org}의 국내대리인에게 개인정보 관련 고충처리 등의 업무를 위하여 연락할 수 있습니다.</p>
+<ul style="margin:8px 0 8px 20px;line-height:2.1">
+  <li>성명(법인명) : ${rN}</li>
+  <li>주소(법인: 영업소 소재지) : ${rA}</li>
+  <li>전화번호 : ${rT}</li>
+  <li>전자우편 주소 : ${rE}</li>
+</ul>`);
+  }
+
+  if(remedyOn){
+    html+=SEC('정보주체의 권익침해에 대한 구제방법',
+      `<p>정보주체는 개인정보침해로 인한 구제를 받기 위하여 개인정보분쟁조정위원회, 한국인터넷진흥원 개인정보침해 신고센터 등에 분쟁해결이나 상담 등을 신청할 수 있습니다. 이 밖에 기타 개인정보침해의 신고·상담에 대하여는 아래의 기관에 문의하시기 바랍니다.</p>
+<ol style="margin:8px 0 8px 20px;line-height:2.2">
+  <li>개인정보 분쟁조정위원회 : (국번없이) 1833-6972 (www.kopico.go.kr)</li>
+  <li>개인정보침해 신고센터 : (국번없이) 118 (privacy.kisa.or.kr)</li>
+  <li>경찰청 : (국번없이) 182 (ecrm.police.go.kr)</li>
+</ol>
+<p style="font-size:12px;color:#555">※ 「개인정보 보호법」 제35조·제36조·제37조의 규정에 의한 요구에 대하여 공공기관의 장이 행한 처분 또는 부작위로 인하여 권리 또는 이익의 침해를 받은 자는 행정심판법이 정하는 바에 따라 행정심판을 청구할 수 있습니다.</p>`);
+  }
+
+  if(cctvOn){
+    const cp=ppV('pp-cctv-purpose')||'시설 안전 및 화재·범죄 예방';
+    const cc=ppV('pp-cctv-count')||'(대수 입력)';
+    const cl=ppV('pp-cctv-location')||'(위치·촬영범위 입력)';
+    const ct=ppV('pp-cctv-time')||'24시간';
+    const cd=ppV('pp-cctv-period')||'촬영일로부터 30일';
+    const cm=ppV('pp-cctv-manager')||'(관리책임자 입력)';
+    html+=SEC('고정형 영상정보처리기기 운영·관리',
+      `<p>${org}는 다음과 같이 고정형 영상정보처리기기를 운영·관리하고 있습니다. (「개인정보 보호법」 §25)</p>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0"><tbody>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left;width:35%">설치 목적</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${cp}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">설치 대수</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${cc}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">설치 위치 및 촬영 범위</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${cl}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">촬영 시간</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${ct}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">보관 기간</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${cd}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">관리책임자</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${cm}</td></tr>
+</tbody></table>
+<p style="font-size:12px;color:#555">귀하의 개인영상정보에 관하여 열람 또는 존재확인·삭제를 원하시는 경우 언제든지 고정형영상정보처리기기 운영자에게 요구하실 수 있습니다. 당사는 개인영상정보에 관하여 열람 또는 존재확인·삭제를 요구한 경우 지체 없이 필요한 조치를 하겠습니다.</p>`);
+  }
+
+  if(mcctvOn){
+    const mp=ppV('pp-mcctv-purpose')||'(운영 목적 입력)';
+    const mc=ppV('pp-mcctv-count')||'(대수 입력)';
+    const mt=ppV('pp-mcctv-time')||'(촬영 시간 입력)';
+    const md=ppV('pp-mcctv-period')||'(보관기간 입력)';
+    const mm=ppV('pp-mcctv-manager')||'(관리책임자 입력)';
+    html+=SEC('이동형 영상정보처리기기 운영·관리',
+      `<p>${org}는 다음과 같이 이동형 영상정보처리기기를 운영·관리하고 있습니다. (「개인정보 보호법」 §25의2)</p>
+<table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0"><tbody>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left;width:35%">운영 목적</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${mp}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">운영 대수</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${mc}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">촬영 시간</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${mt}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">보관 기간</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${md}</td></tr>
+<tr><th style="border:1px solid #b8c8e0;padding:7px 10px;background:#dce7f5;text-align:left">관리책임자</th><td style="border:1px solid #b8c8e0;padding:7px 10px">${mm}</td></tr>
+</tbody></table>`);
+  }
+
+  html+=SEC('개인정보 처리방침의 변경',
+    `<p><strong>①</strong> 이 개인정보 처리방침은 <strong>${dateStr}</strong>부터 적용됩니다.</p>
+${histOn?`<p><strong>②</strong> 이전의 개인정보 처리방침은 아래에서 확인하실 수 있습니다.</p>
+${TBL(['버전','적용 기간','주요 변경 내용'],histRows||null)}`:'<p><strong>②</strong> 이전의 개인정보 처리방침은 별도 게시판을 통해 확인하실 수 있습니다.</p>'}`);
+
+  html+=`<div style="margin-top:28px;padding-top:12px;border-top:2px solid #1a56a0;font-size:11.5px;color:#555;text-align:center;line-height:2">
+이 처리방침은 <strong>${dateStr}</strong>부터 시행됩니다.<br>${org} | 개인정보 보호책임자 : ${cpoName} (${cpoEmail})
+</div></div>`;
+
+  el.innerHTML=html;
+}
+
+function ppPrint(){
+  const content=document.getElementById('ppPreview')?.innerHTML||'';
+  const win=window.open('','_blank','width=820,height=950');
+  win.document.write(`<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>개인정보 처리방침</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>body{font-family:'Noto Sans KR',sans-serif;margin:40px 50px;font-size:13px;line-height:1.85;color:#1a1a2e}
+table{border-collapse:collapse;width:100%}th,td{border:1px solid #b8c8e0;padding:7px 9px}th{background:#dce7f5}
+ul,ol{margin:8px 0 8px 20px}@media print{body{margin:20mm 25mm}}</style></head>
+<body>${content}</body></html>`);
+  win.document.close();win.focus();setTimeout(()=>win.print(),500);
+}
+
+function ppCopy(){
+  const el=document.getElementById('ppPreview');
+  if(!el)return;
+  const text=el.innerText||el.textContent||'';
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).then(()=>{
+      const btn=event.currentTarget;const orig=btn.textContent;
+      btn.textContent='✅ 복사됨!';setTimeout(()=>btn.textContent=orig,1600);
+    });
+  }
+}
+(()=>{ppAddItem();ppRender();})();
+</script>

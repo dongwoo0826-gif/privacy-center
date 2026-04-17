@@ -1,0 +1,457 @@
+<div class="page" id="pg-flow">
+<div class="pg-wrap">
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:11px;color:var(--accent);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">FLOW TABLE · 흐름표 작성</div>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보 처리 흐름표</div>
+    <div style="font-size:12px;color:var(--text2);margin-top:.3rem">영향평가 핵심 산출물 — 수집·보유이용·제공파기 3종 흐름표를 작성하고 TSV로 복사하거나 출력하세요.</div>
+  </div>
+  <div class="flow-tabs">
+    <button class="flow-tab active" onclick="switchFlow(0)">① 수집 흐름표</button>
+    <button class="flow-tab" onclick="switchFlow(1)">② 보유·이용 흐름표</button>
+    <button class="flow-tab" onclick="switchFlow(2)">③ 제공·파기 흐름표</button>
+    <button class="flow-tab" onclick="switchFlow(3)">✦ AI 흐름도 <span style="font-size:10px;color:#94a3b8;font-weight:400">(TBD)</span></button>
+  </div>
+  <!-- 수집 -->
+  <div class="flow-panel active" id="fp0">
+    <div class="ft-desc">수집 흐름표는 개인정보 처리업무별로 <strong>수집 근거·목적·항목·경로·대상·주기·담당자</strong>를 기록합니다. 동의·비동의 수집을 구분하고, 자동 생성 데이터(로그·행동 데이터)도 포함합니다.</div>
+    <div class="ft-wrap"><table class="ft-table">
+      <thead><tr><th class="req">평가업무명</th><th>수집구분</th><th class="req">수집근거</th><th class="req">수집목적</th><th class="req">수집항목</th><th>수집경로</th><th>수집대상</th><th>수집주기</th><th>수집담당자</th><th></th></tr></thead>
+      <tbody id="ftb0"></tbody>
+    </table></div>
+    <div class="ft-actions">
+      <button class="btn btn-blue" onclick="addFTRow(0)">+ 행 추가</button>
+      <button class="btn btn-gray" onclick="copyFT(0)">📋 TSV 복사</button>
+      <button class="btn btn-gray" onclick="printFT(0)">🖨️ 출력</button>
+      <span class="ft-hint">* 필수 항목</span>
+    </div>
+  </div>
+  <!-- 보유이용 -->
+  <div class="flow-panel" id="fp1">
+    <div class="ft-desc">보유·이용 흐름표는 수집된 개인정보의 <strong>보유 형태·암호화 항목·이용 목적·이용 항목·개인정보취급자·이용 방법</strong>을 기록합니다. DB 저장 시 암호화 적용 항목을 반드시 명시합니다.</div>
+    <div class="ft-wrap"><table class="ft-table">
+      <thead>
+        <tr>
+          <th rowspan="2" class="req">평가업무명</th>
+          <th colspan="2" class="th-group">보유</th>
+          <th colspan="4" class="th-group">이용</th>
+          <th rowspan="2"></th>
+        </tr>
+        <tr>
+          <th>보유형태</th><th>암호화항목</th>
+          <th class="req">이용목적</th><th class="req">이용항목</th><th>개인정보취급자</th><th>이용방법</th>
+        </tr>
+      </thead>
+      <tbody id="ftb1"></tbody>
+    </table></div>
+    <div class="ft-actions">
+      <button class="btn btn-blue" onclick="addFTRow(1)">+ 행 추가</button>
+      <button class="btn btn-gray" onclick="copyFT(1)">📋 TSV 복사</button>
+      <button class="btn btn-gray" onclick="printFT(1)">🖨️ 출력</button>
+    </div>
+  </div>
+  <!-- 제공파기 -->
+  <div class="flow-panel" id="fp2">
+    <div class="ft-desc">제공·파기 흐름표는 <strong>제공 현황(목적·제공자·수신자·근거·방법·주기)</strong>과 <strong>파기 현황(보관기간·파기방법·파기처)</strong>을 기록합니다. 해당 없는 항목은 '해당없음'으로 기재하세요.</div>
+    <div class="ft-wrap"><table class="ft-table">
+      <thead>
+        <tr>
+          <th rowspan="2" class="req">평가업무명</th>
+          <th colspan="6" class="th-group">제공</th>
+          <th colspan="3" class="th-group">파기</th>
+          <th rowspan="2"></th>
+        </tr>
+        <tr>
+          <th>제공목적</th><th>제공자</th><th>수신자</th><th>제공근거</th><th>제공방법</th><th>제공주기</th>
+          <th class="req">보관기간</th><th>파기방법</th><th>파기처</th>
+        </tr>
+      </thead>
+      <tbody id="ftb2"></tbody>
+    </table></div>
+    <div class="ft-actions">
+      <button class="btn btn-blue" onclick="addFTRow(2)">+ 행 추가</button>
+      <button class="btn btn-gray" onclick="copyFT(2)">📋 TSV 복사</button>
+      <button class="btn btn-gray" onclick="printFT(2)">🖨️ 출력</button>
+    </div>
+  </div>
+
+  <!-- AI 흐름도 -->
+  <div class="flow-panel" id="fp3">
+    <div class="ft-desc">위 흐름표(수집·보유이용·제공파기)에 입력된 데이터를 불러온 뒤, 흐름표에서 파악할 수 없는 정보를 추가로 입력하세요. <strong>AI 흐름도 생성 기능은 개발 중입니다.</strong></div>
+
+    <!-- ① 흐름표 데이터 불러오기 -->
+    <div class="aff-section">
+      <div class="aff-section-title">① 흐름표 데이터 불러오기</div>
+      <div class="aff-ft-load">
+        <div class="aff-ft-hint">각 흐름표 탭에 입력된 데이터를 읽어 AI 생성의 기반 입력값으로 활용합니다.</div>
+        <button class="btn btn-blue" onclick="loadFlowData()" style="margin-bottom:.75rem">🔄 흐름표 데이터 불러오기</button>
+        <div id="aff-ft-summary">
+          <div class="aff-ft-cards">
+            <div class="aff-ft-card" id="aff-fc0"><span class="aff-ft-icon">📋</span><span class="aff-ft-name">수집 흐름표</span><span class="aff-ft-cnt">—</span></div>
+            <div class="aff-ft-card" id="aff-fc1"><span class="aff-ft-icon">📋</span><span class="aff-ft-name">보유·이용 흐름표</span><span class="aff-ft-cnt">—</span></div>
+            <div class="aff-ft-card" id="aff-fc2"><span class="aff-ft-icon">📋</span><span class="aff-ft-name">제공·파기 흐름표</span><span class="aff-ft-cnt">—</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② 추가 정보 입력 -->
+    <div class="aff-section">
+      <div class="aff-section-title">② 추가 정보 입력</div>
+
+      <!-- 시스템 기본 정보 -->
+      <div class="aff-subsection-title">시스템 기본 정보</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field">
+          <label>시스템명</label>
+          <input type="text" id="aff-sys" placeholder="예: 민원처리시스템">
+        </div>
+        <div class="aff-field">
+          <label>평가 대상 기관명</label>
+          <input type="text" id="aff-org" placeholder="예: ○○부, ○○공단">
+        </div>
+        <div class="aff-field aff-full">
+          <label>평가 목적</label>
+          <input type="text" id="aff-purpose" placeholder="예: 신규 개인정보처리시스템 구축에 따른 영향평가">
+        </div>
+      </div>
+
+      <!-- 민감정보 여부 -->
+      <div class="aff-subsection-title">민감정보 여부</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field">
+          <label>민감정보 포함 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-sensitive-y" onclick="toggleYN('sensitive','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-sensitive-n" onclick="toggleYN('sensitive','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-sensitive">
+            <div class="aff-field">
+              <label>수집 민감정보 항목</label>
+              <input type="text" id="aff-sensitive-items" placeholder="예: 건강정보, 종교, 정치적 견해 등">
+            </div>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>고유식별정보 포함 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-unique-y" onclick="toggleYN('unique','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-unique-n" onclick="toggleYN('unique','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-unique">
+            <div class="aff-field">
+              <label>수집 고유식별정보 항목</label>
+              <div class="aff-check-group" style="margin-top:4px">
+                <label class="aff-check"><input type="checkbox" name="unique-id" value="주민등록번호"> 주민등록번호</label>
+                <label class="aff-check"><input type="checkbox" name="unique-id" value="여권번호"> 여권번호</label>
+                <label class="aff-check"><input type="checkbox" name="unique-id" value="운전면허번호"> 운전면허번호</label>
+                <label class="aff-check"><input type="checkbox" name="unique-id" value="외국인등록번호"> 외국인등록번호</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>아동(만 14세 미만) 개인정보 포함</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-child-y" onclick="toggleYN('child','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-child-n" onclick="toggleYN('child','n')">N</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 정보주체 현황 -->
+      <div class="aff-subsection-title">정보주체 현황</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field aff-full">
+          <label>정보주체 유형</label>
+          <div class="aff-check-group aff-check-row" style="margin-top:4px">
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="일반국민"> 일반국민</label>
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="직원·임직원"> 직원·임직원</label>
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="고객·회원"> 고객·회원</label>
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="아동·청소년"> 아동·청소년</label>
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="외국인"> 외국인</label>
+            <label class="aff-check"><input type="checkbox" name="data-subject" value="기타"> 기타</label>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>예상 정보주체 수</label>
+          <select id="aff-subject-cnt">
+            <option value="">-- 선택 --</option>
+            <option value="1천명 미만">1천명 미만</option>
+            <option value="1만명 미만">1만명 미만</option>
+            <option value="10만명 미만">10만명 미만</option>
+            <option value="10만명 이상">10만명 이상</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 처리 환경 -->
+      <div class="aff-subsection-title">처리 환경</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field">
+          <label>클라우드 이용 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-cloud-y" onclick="toggleYN('cloud','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-cloud-n" onclick="toggleYN('cloud','n')">N</button>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>국외 이전 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-overseas-y" onclick="toggleYN('overseas','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-overseas-n" onclick="toggleYN('overseas','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-overseas">
+            <div class="aff-grid" style="gap:8px">
+              <div class="aff-field"><label>이전 국가</label><input type="text" id="aff-ov-country" placeholder="예: 미국(AWS us-east-1), 일본"></div>
+              <div class="aff-field"><label>이전 근거</label><input type="text" id="aff-ov-basis" placeholder="예: 표준계약 체결, 정보주체 동의"></div>
+            </div>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>위탁 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-consign-y" onclick="toggleYN('consign','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-consign-n" onclick="toggleYN('consign','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-consign">
+            <div class="aff-grid" style="gap:8px">
+              <div class="aff-field"><label>수탁자명</label><input type="text" id="aff-cs-vendor" placeholder="예: ○○CS센터, ○○클라우드"></div>
+              <div class="aff-field"><label>위탁 업무</label><input type="text" id="aff-cs-task" placeholder="예: 고객 상담, 시스템 운영 및 유지보수"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 시스템 연계 현황 -->
+      <div class="aff-subsection-title">시스템 연계 현황</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field">
+          <label>타 시스템 연계 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-link-y" onclick="toggleYN('link','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-link-n" onclick="toggleYN('link','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-link">
+            <div class="aff-grid" style="gap:8px">
+              <div class="aff-field"><label>연계 시스템명</label><input type="text" id="aff-link-sys" placeholder="예: 행정안전부 주민등록시스템"></div>
+              <div class="aff-field"><label>연계 항목</label><input type="text" id="aff-link-fields" placeholder="예: 주민등록번호, 주소"></div>
+            </div>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>외부 API 연동 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-extapi-y" onclick="toggleYN('extapi','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-extapi-n" onclick="toggleYN('extapi','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-extapi">
+            <div class="aff-field">
+              <label>API 제공기관명</label>
+              <input type="text" id="aff-api-provider" placeholder="예: 카카오, NICE신용평가, 기상청">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 보안 조치 현황 -->
+      <div class="aff-subsection-title">보안 조치 현황</div>
+      <div class="aff-grid" style="margin-bottom:16px">
+        <div class="aff-field aff-full">
+          <label>접근통제 방식</label>
+          <div class="aff-check-group aff-check-row" style="margin-top:4px">
+            <label class="aff-check"><input type="checkbox" name="access-ctrl" value="IP 제한"> IP 제한</label>
+            <label class="aff-check"><input type="checkbox" name="access-ctrl" value="VPN"> VPN</label>
+            <label class="aff-check"><input type="checkbox" name="access-ctrl" value="2단계 인증"> 2단계 인증</label>
+            <label class="aff-check"><input type="checkbox" name="access-ctrl" value="계정별 권한관리"> 계정별 권한관리</label>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>암호화 적용 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-encrypt-y" onclick="toggleYN('encrypt','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-encrypt-n" onclick="toggleYN('encrypt','n')">N</button>
+          </div>
+          <div class="aff-conditional" id="cond-encrypt">
+            <div class="aff-field">
+              <label>암호화 대상 항목</label>
+              <input type="text" id="aff-enc-fields" placeholder="예: 주민등록번호, 비밀번호, 계좌번호">
+            </div>
+          </div>
+        </div>
+        <div class="aff-field">
+          <label>접속기록 관리 여부</label>
+          <div class="aff-yn-row">
+            <button class="aff-yn-btn" id="yn-accesslog-y" onclick="toggleYN('accesslog','y')">Y</button>
+            <button class="aff-yn-btn" id="yn-accesslog-n" onclick="toggleYN('accesslog','n')">N</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 기타 -->
+      <div class="aff-subsection-title">기타</div>
+      <div class="aff-grid">
+        <div class="aff-field aff-full">
+          <label>특이사항</label>
+          <textarea id="aff-note" placeholder="예: AI 분석 모델 학습에 활용, 외부망 노출 구간 존재, 해외 이전 예정, IoT 기기 활용 등"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 생성 버튼 + TBD 출력 -->
+    <div class="aff-actions">
+      <button class="btn btn-blue" onclick="generateAIFlow()">✦ AI로 흐름도 생성</button>
+    </div>
+    <div id="ai-flow-output" class="aff-tbd-box">
+      <div class="aff-tbd-icon">🔧</div>
+      <div class="aff-tbd-title">AI 흐름도 생성 기능 구현 예정</div>
+      <div class="aff-tbd-body">향후 AI API 연동을 통해 입력된 흐름표 정보를 기반으로<br>자동 흐름도가 생성될 예정입니다.<br><br>현재는 입력 양식만 제공됩니다.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════ 업무 도구 ══════ -->
+<div class="page" id="pg-tools">
+<div class="pg-wrap">
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:11px;color:var(--accent);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">TOOLS · 업무 도구</div>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보보호 업무 도구</div>
+  </div>
+  <div class="tools-grid">
+    <!-- 위험도 계산기 -->
+    <div class="tool-panel">
+      <div class="tool-panel-title">⚠️ 위험도 판단 계산기</div>
+      <div class="tool-panel-desc">법적 제재 조문 해당 여부 및 정보주체 영향을 기반으로 위험도를 판단합니다.</div>
+      <div class="rq-label">Q1. 해당 사항이 법적 제재(과태료·과징금·형사처벌) 조문에 직접 해당합니까?</div>
+      <div class="radio-row">
+        <button class="r-opt" id="r1y" onclick="setR(1,'y')">해당</button>
+        <button class="r-opt" id="r1n" onclick="setR(1,'n')">미해당</button>
+        <button class="r-opt" id="r1u" onclick="setR(1,'u')">불확실</button>
+      </div>
+      <div class="rq-label">Q2. 정보주체에게 직접적이고 즉각적인 피해(유출·차별·금전 손실)가 발생할 수 있습니까?</div>
+      <div class="radio-row">
+        <button class="r-opt" id="r2y" onclick="setR(2,'y')">가능성 높음</button>
+        <button class="r-opt" id="r2n" onclick="setR(2,'n')">간접·지연적</button>
+        <button class="r-opt" id="r2u" onclick="setR(2,'u')">불확실</button>
+      </div>
+      <div class="risk-out empty" id="riskOut">항목을 모두 선택하면 결과가 표시됩니다.</div>
+    </div>
+    <!-- 처리 생명주기 -->
+    <div class="tool-panel">
+      <div class="tool-panel-title">🔄 개인정보 처리 생명주기</div>
+      <div class="tool-panel-desc">단계를 클릭하면 해당 단계의 주요 준수사항을 확인할 수 있습니다.</div>
+      <div class="lc-flow" id="lcFlow"></div>
+      <div class="lc-detail" id="lcDetail"><div style="color:var(--text3)">단계를 선택하세요</div></div>
+    </div>
+  </div>
+  <!-- 과태료 기준 -->
+  <div class="tool-panel" style="margin-bottom:1.25rem">
+    <div class="tool-panel-title">💰 과태료·과징금·형사처벌 기준표</div>
+    <div class="tool-panel-desc" style="margin-bottom:.75rem">개인정보보호법 위반 유형별 제재 기준 (2024년 개정 기준)</div>
+    <div style="overflow-x:auto"><table class="ref-table">
+      <thead><tr><th>위반 유형</th><th>제재 수준</th><th>관련 조문</th></tr></thead>
+      <tbody id="penaltyTbody"></tbody>
+    </table></div>
+  </div>
+  <div class="tools-grid">
+    <!-- 보유기간 -->
+    <div class="tool-panel">
+      <div class="tool-panel-title">📅 법정 보유기간 참조표</div>
+      <div class="tool-panel-desc" style="margin-bottom:.75rem">주요 법령별 의무 보존 기간</div>
+      <table class="ref-table">
+        <thead><tr><th>대상 정보</th><th>보존기간</th><th>근거 법령</th></tr></thead>
+        <tbody id="retentionTbody"></tbody>
+      </table>
+    </div>
+    <!-- 암호화 -->
+    <div class="tool-panel">
+      <div class="tool-panel-title">🔐 암호화 기준 참조표</div>
+      <div class="tool-panel-desc" style="margin-bottom:.75rem">개인정보 유형별 저장·전송 암호화 기준</div>
+      <table class="ref-table">
+        <thead><tr><th>정보 유형</th><th>저장 암호화</th><th>전송</th><th>권장 알고리즘</th></tr></thead>
+        <tbody id="encryptTbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════ 약관 가이드 ══════ -->
+<script>
+// ══ FLOW TABLE JS ══
+const FT_COLS=[
+  ['평가업무명','수집구분','수집근거','수집목적','수집항목','수집경로','수집대상','수집주기','수집담당자'],
+  ['평가업무명','보유형태','암호화항목','이용목적','이용항목','개인정보취급자','이용방법'],
+  ['평가업무명','제공목적','제공자','수신자','제공근거','제공방법','제공주기','보관기간','파기방법','파기처'],
+];
+const FT_PLACEHOLDER=[
+  ['예: 회원가입 관리','동의/비동의','제15조①1 등','본인확인·관리','이메일, 전화','온라인','회원','상시','운영팀'],
+  ['예: 회원가입 관리','DB(MySQL)/파일','비밀번호(일방향)','본인확인','이메일, 비밀번호','운영팀 5명','DB 조회'],
+  ['예: 배송 처리','물품 배송','운영팀','○○배송사','개보법 제17조①1','API 연동','주문시','탈퇴시까지','자동 배치 삭제','운영팀'],
+];
+function addFTRow(ti){
+  const tbody=document.getElementById('ftb'+ti);
+  if(!tbody)return;
+  const row=tbody.insertRow();
+  FT_COLS[ti].forEach((col,ci)=>{
+    const td=row.insertCell();
+    const ph=FT_PLACEHOLDER[ti][ci]||'';
+    td.innerHTML=`<textarea class="ft-cell" rows="1" placeholder="${ph}" oninput="autoResize(this)"></textarea>`;
+  });
+  const last=row.insertCell();
+  last.innerHTML=`<button class="ft-del" onclick="this.closest('tr').remove()">×</button>`;
+}
+function autoResize(el){el.style.height='auto';el.style.height=el.scrollHeight+'px'}
+function copyFT(ti){
+  const rows=document.querySelectorAll('#ftb'+ti+' tr');
+  const headers=FT_COLS[ti].join('\t');
+  const body=[...rows].map(r=>[...r.querySelectorAll('textarea')].map(t=>t.value).join('\t')).join('\n');
+  navigator.clipboard.writeText(headers+'\n'+body).then(()=>alert('클립보드에 복사되었습니다.'));
+}
+function printFT(ti){
+  const headers=FT_COLS[ti];
+  const rows=document.querySelectorAll('#ftb'+ti+' tr');
+  const body=[...rows].map(r=>[...r.querySelectorAll('textarea')].map(t=>t.value));
+  const names=['수집 흐름표','보유·이용 흐름표','제공·파기 흐름표'];
+  const w=window.open('','','width=1100,height=700');
+  w.document.write(`<html><head><title>${names[ti]}</title><style>body{font-family:sans-serif;font-size:12px;padding:20px}h2{margin-bottom:16px}table{width:100%;border-collapse:collapse}th{background:#eee;border:1px solid #ccc;padding:7px;text-align:left;font-size:11px}td{border:1px solid #ddd;padding:6px;vertical-align:top}</style></head><body><h2>${names[ti]}</h2><table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${body.map(r=>`<tr>${r.map(c=>`<td>${c||''}</td>`).join('')}</tr>`).join('')}</tbody></table></body></html>`);
+  w.document.close();w.print();
+}
+function loadFlowData(){
+  [0,1,2].forEach(i=>{
+    const rows=[...document.querySelectorAll('#ftb'+i+' tr')];
+    const filled=rows.filter(r=>[...r.querySelectorAll('textarea')].some(t=>t.value.trim()));
+    const card=document.getElementById('aff-fc'+i);
+    if(!card)return;
+    const cnt=filled.length;
+    card.querySelector('.aff-ft-cnt').textContent=cnt>0?cnt+'건 입력됨':'미입력';
+    card.className='aff-ft-card'+(cnt>0?' has-data':'');
+  });
+}
+function generateAIFlow(){
+  // 기능 구현 예정 — TBD 안내 표시 유지
+  const out=document.getElementById('ai-flow-output');
+  if(out){
+    out.className='aff-tbd-box';
+    out.innerHTML=`<div class="aff-tbd-icon">🔧</div>
+      <div class="aff-tbd-title">AI 흐름도 생성 기능 구현 예정</div>
+      <div class="aff-tbd-body">향후 AI API 연동을 통해 입력된 흐름표 정보를 기반으로<br>자동 흐름도가 생성될 예정입니다.<br><br>현재는 입력 양식만 제공됩니다.</div>`;
+  }
+}
+function toggleYN(key,val){
+  const btnY=document.getElementById('yn-'+key+'-y');
+  const btnN=document.getElementById('yn-'+key+'-n');
+  const cond=document.getElementById('cond-'+key);
+  if(!btnY||!btnN)return;
+  btnY.className='aff-yn-btn'+(val==='y'?' active-y':'');
+  btnN.className='aff-yn-btn'+(val==='n'?' active-n':'');
+  if(cond) cond.className='aff-conditional'+(val==='y'?' show':'');
+}
+function switchFlow(i){
+  document.querySelectorAll('.flow-tab').forEach((t,ti)=>t.classList.toggle('active',ti===i));
+  document.querySelectorAll('.flow-panel').forEach((p,pi)=>p.classList.toggle('active',pi===i));
+}
+/* ═══ 처리방침 Template ═══ */
+const ppItems=[];
+[0,1,2].forEach(ti=>addFTRow(ti));
+</script>

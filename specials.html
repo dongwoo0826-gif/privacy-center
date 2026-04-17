@@ -1,0 +1,105 @@
+<div class="page" id="pg-specials">
+<div class="pg-wrap">
+  <div style="margin-bottom:1.5rem">
+    <div style="font-size:11px;color:var(--accent);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">checklist · 별도 체크리스트</div>
+    <div style="font-size:1.4rem;font-weight:700;color:var(--text)">특정 IT 기술별 점검 체크리스트</div>
+    <div style="font-size:13px;color:var(--text2);margin-top:.25rem">개인정보보호위원회·KISA 가이드라인 및 관계 법령 기반<br>IT 유형별·데이터 유형별 특화 체크리스트입니다. 카드를 클릭해 점검을 시작하세요.</div>
+  </div>
+  <div class="spec-grid">
+
+    <!-- ① AI 활용 시스템 — 사용 가능 -->
+    <div class="spec-card active-card" onclick="go('checklist')">
+      <div class="spec-head">
+        <div class="spec-title">AI 활용 시스템</div>
+        <span class="badge badge-green">사용 가능</span>
+      </div>
+      <div class="spec-desc">외부 AI 모델(API 연동·다운로드)을 서비스에 활용하는 시스템 대상 19개 점검 항목. 수집·이용·운영관리·접근통제·암호화·로그관리 전 영역.</div>
+      <div style="margin-top:.6rem;display:flex;gap:5px;flex-wrap:wrap">
+        <span class="badge badge-red">높음 12</span>
+        <span class="badge badge-amber">중간 7</span>
+        <span class="badge badge-blue">인공지능기본법 반영</span>
+      </div>
+      <div style="margin-top:.6rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--accent);font-family:var(--mono)">→ 체크리스트 보기</span>
+        <a href="./AI 활용 체크리스트.xlsx" download onclick="event.stopPropagation()" style="font-size:11px;padding:3px 9px;background:var(--bg2);color:var(--text2);border:1px solid var(--border2);border-radius:4px;text-decoration:none;font-family:var(--mono);letter-spacing:.02em">↓ 체크리스트 다운로드</a>
+      </div>
+    </div>
+
+    <!-- ② 위치정보 서비스 — 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">위치정보 서비스</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">위치정보의 보호 및 이용 등에 관한 법률 기반 위치정보 수집·이용·제공·파기 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 위치정보법 제15·16·18·24조 기반</div>
+    </div>
+
+    <!-- ③ 연계정보(CI) 처리 — 사용 가능 -->
+    <div class="spec-card active-card" onclick="go('ci-checklist')">
+      <div class="spec-head">
+        <div class="spec-title">연계정보(CI) 처리</div>
+        <span class="badge badge-green">사용 가능</span>
+      </div>
+      <div class="spec-desc">정보통신망법 기반 연계정보(CI) 수집·이용·제공·파기·안전조치 15개 점검 항목.</div>
+      <div style="margin-top:.6rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--accent);font-family:var(--mono)">→ 체크리스트 보기</span>
+        <a href="./CI 활용 체크리스트.xlsx" download onclick="event.stopPropagation()" style="font-size:11px;padding:3px 9px;background:var(--bg2);color:var(--text2);border:1px solid var(--border2);border-radius:4px;text-decoration:none;font-family:var(--mono);letter-spacing:.02em">↓ 체크리스트 다운로드</a>
+      </div>
+    </div>
+
+    <!-- ④ 생체인식정보 처리 — 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">생체인식정보 처리</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">지문·얼굴·홍채 등 생체인식정보(민감정보) 처리 시 보호조치 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 개인정보보호법 제23조 기반</div>
+    </div>
+
+    <!-- ⑤ 마이데이터(전송요구권) — 신규 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">마이데이터(전송요구권)</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">개인정보 전송요구권(마이데이터) 서비스 운영 시 전송 대상·절차·보안조치 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 개인정보보호법 제35조의2 기반</div>
+    </div>
+
+    <!-- ⑥ 가명정보 처리 — 신규 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">가명정보 처리</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">가명처리 절차, 추가정보 분리 보관, 결합·분석 시 안전성 확보 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 개인정보보호법 제28조의2~7 기반</div>
+    </div>
+
+    <!-- ⑦ CCTV·영상정보 — 신규 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">CCTV·영상정보</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">고정형·이동형 영상정보처리기기 설치·운영 시 안내판·접근통제·보관기간 등 보호조치 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 개인정보보호법 제25조·제25조의2 기반</div>
+    </div>
+
+    <!-- ⑧ 개인정보 국외이전 — 신규 준비 중 -->
+    <div class="spec-card">
+      <div class="spec-head">
+        <div class="spec-title">개인정보 국외이전</div>
+        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+      </div>
+      <div class="spec-desc">개인정보의 제3국 이전·수탁·제공 시 보호조치 및 정보주체 동의·고지 점검 항목.</div>
+      <div class="spec-tbd-note">추후 추가 예정 — 개인정보보호법 제28조의8~12 기반</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════ AI CHECKLIST ══════ -->
