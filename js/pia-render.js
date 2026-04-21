@@ -482,6 +482,35 @@ function selectPIAByCode(code) {
        </div>`
     : '';
 
+  /* ── 7) AI 보완 내용 (없으면 숨김) ── */
+  const aiHtml = (typeof allAiComments !== 'undefined' && allAiComments[it.code])
+    ? (() => {
+        const c = allAiComments[it.code];
+        const fieldHtml = [
+          c.general
+            ? `<div class="gc-ai-general">${c.general}</div>`
+            : '',
+          c.aws
+            ? `<div class="gc-ai-field"><span class="gc-ai-badge gc-ai-aws">AWS</span><span class="gc-ai-text">${c.aws}</span></div>`
+            : '',
+          c.gcp
+            ? `<div class="gc-ai-field"><span class="gc-ai-badge gc-ai-gcp">GCP</span><span class="gc-ai-text">${c.gcp}</span></div>`
+            : '',
+          c.azure
+            ? `<div class="gc-ai-field"><span class="gc-ai-badge gc-ai-azure">Azure</span><span class="gc-ai-text">${c.azure}</span></div>`
+            : '',
+          c.cloud_common
+            ? `<div class="gc-ai-field"><span class="gc-ai-badge gc-ai-cloud">Cloud 공통</span><span class="gc-ai-text">${c.cloud_common}</span></div>`
+            : '',
+        ].join('');
+        return `<div class="gc-ai-section">
+          <div class="gc-ai-hdr">💡 AI 보완 내용 · 참고용</div>
+          <div class="gc-ai-notice">본 내용은 AI 생성 참고 코멘트로, 실제 적용 시 환경별 검토가 필요합니다.</div>
+          ${fieldHtml}
+        </div>`;
+      })()
+    : '';
+
   /* ── 조합 출력 ── */
   el.innerHTML = `
     <div class="gc-cat">${secLabel} · ${it.code}</div>
@@ -492,6 +521,7 @@ function selectPIAByCode(code) {
     ${geHtml}
     ${termsHtml}
     ${advHtml}
+    ${aiHtml}
     <div class="gc-nav">
       ${prev
         ? `<button class="gc-nav-btn" onclick="selectPIAByCode('${prev.code}')">← ${prev.code}</button>`
