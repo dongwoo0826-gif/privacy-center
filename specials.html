@@ -25,14 +25,23 @@
       </div>
     </div>
 
-    <!-- ② 위치정보 서비스 — 준비 중 -->
-    <div class="spec-card">
+    <!-- ② 위치정보 서비스 — 사용 가능 -->
+    <div class="spec-card active-card" onclick="go('li-checklist')">
       <div class="spec-head">
         <div class="spec-title">위치정보 서비스</div>
-        <span class="badge" style="background:var(--surface2);color:var(--text3);border:1px solid var(--border)">준비 중</span>
+        <span class="badge badge-green">사용 가능</span>
       </div>
-      <div class="spec-desc">위치정보의 보호 및 이용 등에 관한 법률 기반 위치정보 수집·이용·제공·파기 점검 항목.</div>
-      <div class="spec-tbd-note">추후 추가 예정 — 위치정보법 제15·16·18·24조 기반</div>
+      <div class="spec-desc">위치정보의 보호 및 이용 등에 관한 법률 기반 사업자 자격·수집·이용·제공·보호조치·이용자 권리·긴급구조 전 영역 점검 항목.</div>
+      <div style="margin-top:.6rem;display:flex;gap:5px;flex-wrap:wrap">
+        <span class="badge badge-purple">사업자 의무 11</span>
+        <span class="badge badge-amber">보호조치 15</span>
+        <span class="badge badge-teal">수집·이용·제공 12</span>
+        <span class="badge badge-red">권리·특수 10</span>
+      </div>
+      <div style="margin-top:.6rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span style="font-size:12px;color:var(--accent);font-family:var(--mono)">→ 체크리스트 보기</span>
+        <a href="./위치정보 점검 체크리스트.xlsx" download onclick="event.stopPropagation()" style="font-size:11px;padding:3px 9px;background:var(--bg2);color:var(--text2);border:1px solid var(--border2);border-radius:4px;text-decoration:none;font-family:var(--mono);letter-spacing:.02em">↓ 체크리스트 다운로드</a>
+      </div>
     </div>
 
     <!-- ③ 연계정보(CI) 처리 — 사용 가능 -->
