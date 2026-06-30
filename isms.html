@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISMS-P 인증기준 · Privacy Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/ismsData.js"></script>
+<style>
+/* ══ ISMS-P 전용 스타일 v5 — style.css / pia-guide.html 수치 직접 정렬 ══ */
+body { overflow:hidden; }
+#pg-isms { display:flex; flex-direction:column; height:100vh; overflow:hidden; padding-top:52px; }
+#pg-isms .guide-layout { grid-template-columns:240px 1fr; }
+
+/* ── 콘텐츠 패널 — .g-content 기준 padding:2rem 2.5rem ── */
+#ismsPane { padding:2rem 2.5rem; overflow-y:auto; }
+#ismsPane::-webkit-scrollbar { width:5px; }
+#ismsPane::-webkit-scrollbar-thumb { background:var(--border2); border-radius:2px; }
+
+/* ─────────────────────────────────────────────────────
+   섹션 공통 — .gc-section 기준: margin-bottom:1.25rem
+───────────────────────────────────────────────────── */
+.is-sec { margin-bottom:1.25rem; padding-bottom:1rem; border-bottom:1px solid var(--border); }
+.is-sec:last-child { border-bottom:none; padding-bottom:0; margin-bottom:0; }
+
+/* 섹션 타이틀 — .gc-section-title 기준
+   font-size:11px / margin-bottom:.6rem / padding-bottom:5px */
+.is-sec-title {
+  display:flex; align-items:center; gap:.45rem;
+  font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text3); font-family:var(--mono);
+  margin:0 0 .6rem; padding-bottom:5px; border-bottom:1px solid var(--border);
+}
+.is-sec-title::before {
+  content:''; display:inline-block; flex-shrink:0;
+  width:3px; height:10px; background:var(--accent); border-radius:2px;
+}
+.is-ico { display:none; }
+
+/* ─────────────────────────────────────────────────────
+   ① 인증기준 박스 — .gc-law-box 기준: padding:8px 12px
+───────────────────────────────────────────────────── */
+.is-criteria-box {
+  background:var(--surface); border:1px solid var(--border2);
+  border-left:3px solid var(--accent);
+  border-radius:0 var(--r) var(--r) 0;
+  padding:9px 13px;
+}
+.is-chip {
+  display:inline-block; font-size:9px; font-weight:700;
+  letter-spacing:.09em; text-transform:uppercase; font-family:var(--mono);
+  color:var(--accent); background:var(--accent-d);
+  border:1px solid rgba(37,99,235,.2); border-radius:3px;
+  padding:1px 7px; margin-bottom:.45rem;
+}
+.is-criteria-text { font-size:12.5px; line-height:1.8; color:var(--text); margin:0; }
+
+/* ─────────────────────────────────────────────────────
+   ② 주요 확인사항 — .gc-check 기준
+   padding:7px 11px / font-size:12px / gap:8px
+───────────────────────────────────────────────────── */
+.is-check-list { display:flex; flex-direction:column; gap:5px; }
+.is-check-card {
+  display:flex; align-items:flex-start; gap:8px;
+  border:1px solid var(--border); border-radius:var(--r);
+  padding:7px 11px; background:var(--surface);
+  transition:border-color .12s;
+}
+.is-check-card:hover { border-color:var(--border2); background:var(--bg2); }
+/* gc-check-num: 18×18 정사각형 */
+.is-check-num {
+  flex-shrink:0; width:18px; height:18px;
+  background:var(--accent); color:#fff;
+  border-radius:3px; font-size:9.5px; font-weight:700; font-family:var(--mono);
+  display:flex; align-items:center; justify-content:center; margin-top:.18rem;
+}
+.is-check-text { font-size:12px; color:var(--text2); line-height:1.65; }
+
+/* ─────────────────────────────────────────────────────
+   ③ 관련 법령 — .gc-law-box 기준: padding:8px 12px
+───────────────────────────────────────────────────── */
+.is-law-box {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--r); padding:8px 12px;
+}
+.is-law-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px; }
+.is-law-item { display:flex; align-items:flex-start; gap:6px; font-size:12px; line-height:1.65; color:var(--text2); }
+.is-law-dot { flex-shrink:0; color:var(--accent); font-size:14px; line-height:1.1; }
+
+/* ─────────────────────────────────────────────────────
+   ④ 세부 설명 — font-size:12px, line-height:1.75
+───────────────────────────────────────────────────── */
+.is-detail-body { font-size:12px; line-height:1.8; color:var(--text2); }
+.is-main-para {
+  font-size:12px; font-weight:600; color:var(--text);
+  line-height:1.75; margin:.5rem 0 .2rem;
+}
+.is-main-para:first-child { margin-top:0; }
+.is-sub-point {
+  display:flex; align-items:flex-start; gap:.35rem;
+  font-size:12px; color:var(--text2); line-height:1.75;
+  padding-left:.65rem; margin:.08rem 0;
+}
+.is-arrow { color:var(--accent); font-weight:700; flex-shrink:0; }
+.is-numlist { list-style:none; margin:.3rem 0 .3rem .65rem; padding:0; display:flex; flex-direction:column; gap:2px; }
+.is-numlist li { display:flex; align-items:baseline; gap:5px; font-size:12px; color:var(--text2); line-height:1.75; }
+.is-num { flex-shrink:0; font-family:var(--mono); font-size:11px; font-weight:700; color:var(--accent); min-width:16px; }
+.is-sub-text { font-size:12px; color:var(--text2); line-height:1.75; padding-left:1.25rem; margin:.04rem 0; }
+.is-gap { display:block; height:.3rem; }
+.is-bulletlist { list-style:none; margin:.25rem 0; padding:0; display:flex; flex-direction:column; gap:2px; }
+.is-bulletlist .is-bullet { display:flex; align-items:flex-start; gap:6px; font-size:12px; color:var(--text2); line-height:1.75; }
+.is-bulletlist .is-bullet::before { content:"●"; color:var(--accent); flex-shrink:0; font-size:6px; margin-top:6px; }
+/* 표 — pia-guide .ft-table / style.css 기준 */
+.is-table-wrap { display:block; width:100%; overflow-x:auto; margin:.5rem 0 1rem; border-radius:var(--r); border:1px solid var(--border2); box-shadow:0 1px 3px rgba(0,0,0,.04); }
+.is-table-caption { caption-side:top; text-align:left; font-size:11px; font-weight:700; color:var(--accent2); font-family:var(--mono); padding:6px 4px 5px; letter-spacing:.03em; }
+.is-detail-body table { width:100%; border-collapse:collapse; font-size:11.5px; min-width:360px; }
+.is-detail-body table th {
+  background:var(--accent-d); color:var(--accent2);
+  padding:7px 10px; text-align:center; vertical-align:middle;
+  border:1px solid rgba(37,99,235,.15); font-weight:700; font-size:11px;
+}
+.is-detail-body table td {
+  padding:6px 10px; border:1px solid var(--border);
+  color:var(--text2); line-height:1.6; vertical-align:middle; font-size:11.5px;
+}
+.is-detail-body table tr:nth-child(odd) td  { background:#f8fafc; }
+.is-detail-body table tr:nth-child(even) td { background:#fff; }
+.is-detail-body table tr:hover td { background:var(--accent-d); }
+
+/* ─────────────────────────────────────────────────────
+   ⑤ 증거자료 — .gc-ev 기준
+   font-size:11px / padding:3px 9px
+───────────────────────────────────────────────────── */
+.is-ev-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.is-ev-tag {
+  font-size:11px; font-family:var(--mono);
+  color:var(--text2); background:var(--surface);
+  border:1px solid var(--border); border-radius:var(--r);
+  padding:3px 9px; line-height:1.5;
+  transition:border-color .12s, background .12s, color .12s;
+}
+.is-ev-tag:hover { border-color:var(--accent); background:var(--accent-d); color:var(--accent2); }
+
+/* ─────────────────────────────────────────────────────
+   ⑥ 결함사례 — 주황 테마 유지, 본문 텍스트 진한 색
+───────────────────────────────────────────────────── */
+.is-defect-list { display:flex; flex-direction:column; gap:.5rem; }
+.is-defect-card {
+  display:flex; align-items:stretch;
+  border:1px solid rgba(217,119,6,.25); border-radius:var(--r);
+  background:var(--amber-d); overflow:hidden;
+}
+.is-defect-num {
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  width:32px; align-self:stretch;
+  background:rgba(217,119,6,.15); border-right:2px solid rgba(217,119,6,.4);
+  font-size:9px; font-weight:700; font-family:var(--mono);
+  color:var(--amber); letter-spacing:.06em;
+  writing-mode:vertical-rl; text-orientation:mixed; padding:8px 0;
+}
+/* 본문 텍스트: var(--text) = #1a1a2e — 최대 대비 */
+.is-defect-body { padding:.65rem .9rem; font-size:12px; line-height:1.75; color:var(--text); flex:1; }
+
+/* ─────────────────────────────────────────────────────
+   ⑦ AI 보완 설명 — 연한 회색 배경(var(--surface))으로 분리
+───────────────────────────────────────────────────── */
+.ai-sec-outer {
+  background:var(--surface); border:1px solid var(--border2);
+  border-radius:var(--r2); padding:.85rem 1rem;
+  margin-bottom:1.25rem;
+}
+/* AI 섹션 타이틀 */
+.ai-sec-title {
+  display:flex; align-items:center; gap:.4rem;
+  font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent2); font-family:var(--mono);
+  margin:0 0 .65rem; padding-bottom:5px;
+  border-bottom:1px solid var(--border2);
+}
+.ai-supp-badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:8.5px; font-weight:700; letter-spacing:.06em;
+  color:#fff; background:var(--accent);
+  border-radius:3px; padding:1px 6px; line-height:1.5; flex-shrink:0;
+}
+.ai-supp-wrap { display:flex; flex-direction:column; gap:.65rem; }
+/* AI 서브 레이블 */
+.ai-s-label {
+  font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent2); font-family:var(--mono);
+  margin-bottom:.35rem; padding-bottom:3px;
+  border-bottom:1px solid var(--border2);
+}
+/* 핵심 요약 */
+.ai-s-summary {
+  background:var(--bg2); border:1px solid var(--border2);
+  border-left:3px solid var(--accent); border-radius:0 var(--r) var(--r) 0;
+  padding:.7rem .9rem; font-size:12px; line-height:1.8; color:var(--text2);
+}
+/* 실무 적용 포인트 */
+.ai-tip-list { display:flex; flex-direction:column; gap:.3rem; }
+.ai-tip-item {
+  display:flex; align-items:flex-start; gap:.55rem;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--r); padding:6px 10px;
+  font-size:11.5px; line-height:1.7; color:var(--text2);
+}
+.ai-tip-num {
+  flex-shrink:0; display:inline-flex; align-items:center; justify-content:center;
+  min-width:17px; height:17px; background:var(--accent); color:#fff;
+  font-size:9px; font-weight:700; font-family:var(--mono); border-radius:3px; margin-top:.15rem;
+}
+.ai-tip-text { font-size:11.5px; line-height:1.7; color:var(--text2); }
+/* 결함 패턴 */
+.ai-mistake-list { display:flex; flex-direction:column; gap:.3rem; }
+.ai-mistake-item {
+  display:flex; align-items:flex-start; gap:.55rem; padding:6px 10px;
+  background:var(--bg2); border:1px solid rgba(217,119,6,.18);
+  border-left:3px solid var(--amber); border-radius:0 var(--r) var(--r) 0;
+  font-size:11.5px; line-height:1.7; color:var(--text2);
+}
+.ai-mistake-dot { flex-shrink:0; width:4px; height:4px; background:var(--amber); border-radius:50%; margin-top:.55em; }
+/* 클라우드 탭 — 축소 */
+.ai-cloud-wrap { background:var(--bg2); border:1px solid var(--border2); border-radius:var(--r); overflow:hidden; }
+.ai-cloud-tabs { display:flex; border-bottom:1px solid var(--border2); background:var(--surface); }
+.ai-cloud-tab {
+  flex:1; padding:6px 0; font-size:10.5px; font-weight:700; font-family:var(--mono);
+  letter-spacing:.06em; color:var(--text3); background:transparent; border:none; cursor:pointer;
+  border-bottom:2px solid transparent; transition:color .15s, border-color .15s, background .15s;
+}
+.ai-cloud-tab:hover { color:var(--text2); background:var(--accent-d); }
+.ai-cloud-tab.active { color:var(--accent); border-bottom-color:var(--accent); background:var(--accent-d); }
+.ai-cloud-body { padding:.5rem .7rem; display:flex; flex-direction:column; gap:.3rem; }
+.ai-cloud-panel { display:flex; flex-direction:column; gap:.3rem; }
+.ai-hidden { display:none !important; }
+.ai-cloud-item {
+  display:flex; flex-direction:column; gap:1px; padding:.4rem .65rem;
+  background:var(--surface); border:1px solid var(--border); border-radius:5px;
+}
+.ai-cloud-svc { font-size:10.5px; font-weight:600; font-family:var(--mono); color:var(--accent); }
+.ai-cloud-desc { font-size:11.5px; line-height:1.65; color:var(--text2); }
+/* 자가점검 체크리스트 */
+.ai-chk-list { display:flex; flex-direction:column; gap:.3rem; }
+.ai-chk-item {
+  display:flex; align-items:flex-start; gap:.6rem; padding:6px 10px;
+  background:var(--bg2); border:1px solid var(--border); border-radius:var(--r);
+  cursor:pointer; transition:background .12s, border-color .12s;
+  font-size:11.5px; line-height:1.7; color:var(--text2); user-select:none;
+}
+.ai-chk-item:hover { background:var(--accent-d); border-color:rgba(37,99,235,.18); }
+.ai-chk-item.checked { background:var(--accent-d); border-color:rgba(37,99,235,.28); color:var(--text); }
+.ai-chk-input { display:none; }
+.ai-chk-box {
+  flex-shrink:0; width:14px; height:14px;
+  border:1.5px solid var(--border2); border-radius:3px;
+  background:#fff; margin-top:.25rem; transition:all .12s; position:relative;
+}
+.ai-chk-item.checked .ai-chk-box { background:var(--accent); border-color:var(--accent); }
+.ai-chk-item.checked .ai-chk-box::after {
+  content:''; position:absolute; left:3px; top:0px;
+  width:4px; height:7px; border:2px solid #fff;
+  border-top:none; border-left:none; transform:rotate(45deg);
+}
+/* ── 세부 설명 계층 구조 ─────────────────────────────────
+   is-d0: 본문 단락 (기호 없음)
+   is-d1: 1단계 ▶ / • / ■  — 들여쓰기 없음, accent 기호
+   is-d2: 2단계 ※ / - / ○  — 들여쓰기 1단계
+   is-d3: 3단계 숫자. / 가나다.  — 들여쓰기 2단계
+──────────────────────────────────────────────────────── */
+.is-d0 {
+  font-size:12px; line-height:1.8; color:var(--text2);
+  margin:.15rem 0;
+}
+.is-d1 {
+  display:flex; align-items:flex-start; gap:.35rem;
+  font-size:12px; line-height:1.75; color:var(--text2);
+  margin:.3rem 0 .1rem;
+}
+.is-d1-ico {
+  flex-shrink:0; color:var(--accent); font-weight:700;
+  font-size:11px; margin-top:.12em; min-width:.9em;
+}
+.is-d2 {
+  display:flex; align-items:flex-start; gap:.35rem;
+  font-size:11.5px; line-height:1.75; color:var(--text2);
+  padding-left:1.1rem; margin:.1rem 0;
+}
+.is-d2-ico {
+  flex-shrink:0; color:var(--text3); font-size:11px;
+  margin-top:.1em; min-width:.9em;
+}
+.is-d3 {
+  display:flex; align-items:flex-start; gap:.35rem;
+  font-size:11px; line-height:1.75; color:var(--text3);
+  padding-left:2.2rem; margin:.05rem 0;
+}
+.is-d3-ico {
+  flex-shrink:0; color:var(--text3); font-size:10.5px;
+  margin-top:.1em; min-width:.9em;
+}
+.is-d3-num {
+  flex-shrink:0; font-family:var(--mono); font-size:10.5px;
+  font-weight:600; color:var(--text3); min-width:1.6em;
+}
+.is-d1-cont {
+  font-size:12px; line-height:1.75; color:var(--text2);
+  padding-left:1.3em; margin:.05rem 0;
+}
+.is-d2-cont {
+  font-size:11.5px; line-height:1.75; color:var(--text2);
+  padding-left:calc(1.1rem + 1.3em); margin:.05rem 0;
+}
+.is-d3-cont {
+  font-size:11px; line-height:1.75; color:var(--text3);
+  padding-left:calc(2.2rem + 1.8em); margin:.05rem 0;
+}
+.is-d2-num {
+  flex-shrink:0; font-family:var(--mono); font-size:11px;
+  font-weight:600; color:var(--accent); min-width:1.6em;
+}
+
+/* ── 빈 패널 ── */
+.isms-empty { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.75rem; padding:4rem 2rem; color:var(--text3); text-align:center; }
+.isms-empty-icon { font-size:2.5rem; line-height:1; }
+.isms-empty-title { font-size:14px; font-weight:600; color:var(--text2); }
+.isms-empty-sub { font-size:12px; color:var(--text3); }
+/* ── Welcome 오버뷰 ── */
+.iw-header { margin-bottom:1.25rem; }
+.iw-badge {
+  display:inline-block; font-family:var(--mono); font-size:10px; font-weight:700;
+  letter-spacing:.08em; color:var(--accent2); background:var(--accent-d);
+  border:1px solid rgba(37,99,235,.25); border-radius:4px;
+  padding:2px 8px; margin-bottom:.55rem;
+}
+.iw-title { font-size:1.35rem; font-weight:700; color:var(--text); line-height:1.3; margin-bottom:.3rem; }
+.iw-sub   { font-size:12px; color:var(--text3); }
+/* 영역 카드 */
+.iw-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin-bottom:1.25rem; }
+.iw-card {
+  padding:1.1rem 1rem 1rem; border-radius:var(--r2); border:1px solid transparent;
+  cursor:pointer; transition:transform .15s, box-shadow .15s;
+}
+.iw-card:hover { transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,.08); }
+.iw-card-blue   { background:var(--accent-d);  border-color:rgba(37,99,235,.2); }
+.iw-card-purple { background:var(--purple-d);  border-color:rgba(124,58,237,.2); }
+.iw-card-cyan   { background:var(--cyan-d);    border-color:rgba(8,145,178,.2); }
+.iw-card-num  { font-family:var(--mono); font-size:1.8rem; font-weight:700; line-height:1; margin-bottom:.3rem; }
+.iw-card-blue   .iw-card-num { color:var(--accent); }
+.iw-card-purple .iw-card-num { color:var(--purple); }
+.iw-card-cyan   .iw-card-num { color:var(--cyan); }
+.iw-card-name  { font-size:12px; font-weight:600; color:var(--text); margin-bottom:.2rem; }
+.iw-card-range { font-size:10.5px; color:var(--text3); font-family:var(--mono); margin-bottom:.55rem; }
+.iw-card-go    { font-size:11px; font-weight:600; color:var(--text3); }
+.iw-card:hover .iw-card-go { color:var(--accent); }
+/* ── SVG 다이어그램 ── */
+.iw-diagram-wrap { margin-bottom:1.25rem; }
+.iw-diagram { width:100%; max-width:680px; display:block; margin:0 auto; }
+.iw-diagram text { font-family:var(--sans), sans-serif; }
+/* circle hover */
+.iw-svg-circle { transition:opacity .15s; }
+.iw-svg-circle:hover > circle:first-child { fill:#1d4ed8; }
+/* node label hover */
+.iw-svg-node:hover > rect { fill:#dbeafe; stroke:#3b82f6; }
+.iw-svg-node:hover > text { fill:#1d4ed8; }
+/* area box hover */
+.iw-svg-area:hover > rect { fill:#f0fdf4; }
+/* 섹션 공통 */
+.iw-section { margin-bottom:1.1rem; }
+.iw-section-title { font-size:12px; font-weight:700; color:var(--text2); margin-bottom:.6rem; }
+/* TOP 5 뱃지 */
+.iw-top5 { display:flex; flex-wrap:wrap; gap:.4rem; }
+.iw-top5-tag {
+  font-family:var(--mono); font-size:11px; font-weight:600;
+  padding:4px 10px; border-radius:20px; cursor:pointer;
+  background:var(--surface); border:1px solid var(--border);
+  color:var(--text2); transition:background .12s, color .12s, border-color .12s;
+}
+.iw-top5-tag:hover { background:var(--accent-d); border-color:rgba(37,99,235,.35); color:var(--accent2); }
+/* 준비 단계 */
+.iw-steps {
+  display:flex; align-items:flex-start; gap:.5rem;
+  background:var(--surface); border:1px solid var(--border);
+  border-radius:var(--r2); padding:.9rem 1rem;
+}
+.iw-step       { display:flex; align-items:flex-start; gap:.6rem; flex:1; }
+.iw-step-num   {
+  flex-shrink:0; width:22px; height:22px; border-radius:50%;
+  background:var(--accent); color:#fff;
+  font-size:11px; font-weight:700; font-family:var(--mono);
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+.iw-step-label { font-size:12px; font-weight:600; color:var(--text); margin-bottom:2px; }
+.iw-step-desc  { font-size:11px; color:var(--text3); line-height:1.55; }
+.iw-step-arrow { flex-shrink:0; color:var(--text3); font-size:13px; padding-top:4px; align-self:center; }
+/* ── 사이드바 ── */
+#pg-isms .g-item.leaf { padding-left:2.25rem; }
+#pg-isms .g-item.active { background:var(--accent-d); border-left-color:var(--accent); }
+#pg-isms .g-item.active .g-item-code { color:var(--accent); }
+#pg-isms .g-item.active .g-item-name { color:var(--text); font-weight:500; }
+#pg-isms .gc-cat { color:var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="location.href='index.html'">Privacy Center</div>
+  <div class="nav-links">
+    <div class="nav-link" onclick="location.href='index.html'">홈</div>
+    <div class="nav-link" onclick="location.href='index.html#guide'">영향평가 가이드</div>
+    <div class="nav-link" onclick="location.href='index.html#flow'">흐름표·흐름도</div>
+    <div class="nav-link" onclick="location.href='index.html#safety'">보호조치 가이드</div>
+    <div class="nav-link active">ISMS-P 인증기준</div>
+    <div class="nav-link" onclick="location.href='index.html#template'">동의서·처리방침 가이드</div>
+    <div class="nav-link" onclick="location.href='index.html#tools'">업무 도구</div>
+    <div class="nav-link" onclick="location.href='index.html#specials'">특화 체크리스트</div>
+    <div class="nav-link" onclick="location.href='index.html#about'">소개</div>
+  </div>
+</nav>
+
+<!-- ══════ ISMS-P 인증기준 ══════ -->
+<div id="pg-isms">
+
+  <!-- 상단 overview 바 -->
+  <div class="guide-overview">
+    <div>
+      <div class="guide-overview-title">ISMS-P 인증기준 가이드</div>
+      <div class="guide-overview-sub">인증기준 안내서 2023.11 · 3개 영역 101개 인증기준</div>
+    </div>
+    <div class="guide-overview-tags">
+      <span class="badge badge-blue">관리체계 수립 및 운영</span>
+      <span class="badge badge-purple">보호대책 요구사항</span>
+      <span class="badge badge-teal">개인정보 처리 단계별</span>
+      <span class="badge badge-green">총 101개 항목</span>
+    </div>
+  </div>
+
+  <!-- 2-panel 레이아웃 -->
+  <div class="guide-layout">
+
+    <!-- ── 좌측 사이드바 240px ── -->
+    <div class="g-sidebar" id="ismsSidebar">
+
+      <!-- 검색창 -->
+      <div class="g-search-wrap">
+        <input class="g-search" id="ismsSearch" placeholder="인증기준 검색..." oninput="ismsFilter()">
+      </div>
+
+      <!-- TOC -->
+      <div id="ismsToc">
+
+        <!-- ════ 영역 1: 관리체계 수립 및 운영 ════ -->
+        <div class="g-cat-hdr" onclick="ismsToggleCat(this,'cat1')">
+          <span class="g-cat-label">1. 관리체계 수립 및 운영</span>
+          <span class="g-cat-arrow">▶</span>
+        </div>
+        <div class="g-items-wrap" id="cat1">
+
+          <!-- 1.1 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub1-1')">
+            <span>1.1 관리체계 기반 마련</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub1-1">
+            <div class="g-item leaf" data-id="1.1.1" onclick="ismsSelect(this,'1.1.1')"><span class="g-item-code">1.1.1</span><span class="g-item-name">경영진의 참여</span></div>
+            <div class="g-item leaf" data-id="1.1.2" onclick="ismsSelect(this,'1.1.2')"><span class="g-item-code">1.1.2</span><span class="g-item-name">최고책임자의 지정</span></div>
+            <div class="g-item leaf" data-id="1.1.3" onclick="ismsSelect(this,'1.1.3')"><span class="g-item-code">1.1.3</span><span class="g-item-name">조직 구성</span></div>
+            <div class="g-item leaf" data-id="1.1.4" onclick="ismsSelect(this,'1.1.4')"><span class="g-item-code">1.1.4</span><span class="g-item-name">범위 설정</span></div>
+            <div class="g-item leaf" data-id="1.1.5" onclick="ismsSelect(this,'1.1.5')"><span class="g-item-code">1.1.5</span><span class="g-item-name">정책 수립</span></div>
+            <div class="g-item leaf" data-id="1.1.6" onclick="ismsSelect(this,'1.1.6')"><span class="g-item-code">1.1.6</span><span class="g-item-name">자원 할당</span></div>
+          </div>
+
+          <!-- 1.2 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub1-2')">
+            <span>1.2 위험 관리</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub1-2">
+            <div class="g-item leaf" data-id="1.2.1" onclick="ismsSelect(this,'1.2.1')"><span class="g-item-code">1.2.1</span><span class="g-item-name">정보자산 식별</span></div>
+            <div class="g-item leaf" data-id="1.2.2" onclick="ismsSelect(this,'1.2.2')"><span class="g-item-code">1.2.2</span><span class="g-item-name">현황 및 흐름분석</span></div>
+            <div class="g-item leaf" data-id="1.2.3" onclick="ismsSelect(this,'1.2.3')"><span class="g-item-code">1.2.3</span><span class="g-item-name">위험 평가</span></div>
+            <div class="g-item leaf" data-id="1.2.4" onclick="ismsSelect(this,'1.2.4')"><span class="g-item-code">1.2.4</span><span class="g-item-name">보호대책 선정</span></div>
+          </div>
+
+          <!-- 1.3 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub1-3')">
+            <span>1.3 관리체계 운영</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub1-3">
+            <div class="g-item leaf" data-id="1.3.1" onclick="ismsSelect(this,'1.3.1')"><span class="g-item-code">1.3.1</span><span class="g-item-name">보호대책 구현</span></div>
+            <div class="g-item leaf" data-id="1.3.2" onclick="ismsSelect(this,'1.3.2')"><span class="g-item-code">1.3.2</span><span class="g-item-name">보호대책 공유</span></div>
+            <div class="g-item leaf" data-id="1.3.3" onclick="ismsSelect(this,'1.3.3')"><span class="g-item-code">1.3.3</span><span class="g-item-name">운영현황 관리</span></div>
+          </div>
+
+          <!-- 1.4 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub1-4')">
+            <span>1.4 관리체계 점검 및 개선</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub1-4">
+            <div class="g-item leaf" data-id="1.4.1" onclick="ismsSelect(this,'1.4.1')"><span class="g-item-code">1.4.1</span><span class="g-item-name">법적 요구사항 준수 검토</span></div>
+            <div class="g-item leaf" data-id="1.4.2" onclick="ismsSelect(this,'1.4.2')"><span class="g-item-code">1.4.2</span><span class="g-item-name">관리체계 점검</span></div>
+            <div class="g-item leaf" data-id="1.4.3" onclick="ismsSelect(this,'1.4.3')"><span class="g-item-code">1.4.3</span><span class="g-item-name">관리체계 개선</span></div>
+          </div>
+
+        </div><!-- /cat1 -->
+
+        <!-- ════ 영역 2: 보호대책 요구사항 ════ -->
+        <div class="g-cat-hdr" onclick="ismsToggleCat(this,'cat2')">
+          <span class="g-cat-label">2. 보호대책 요구사항</span>
+          <span class="g-cat-arrow">▶</span>
+        </div>
+        <div class="g-items-wrap" id="cat2">
+
+          <!-- 2.1 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-1')">
+            <span>2.1 정책, 조직, 자산 관리</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-1">
+            <div class="g-item leaf" data-id="2.1.1" onclick="ismsSelect(this,'2.1.1')"><span class="g-item-code">2.1.1</span><span class="g-item-name">정책의 유지관리</span></div>
+            <div class="g-item leaf" data-id="2.1.2" onclick="ismsSelect(this,'2.1.2')"><span class="g-item-code">2.1.2</span><span class="g-item-name">조직의 유지관리</span></div>
+            <div class="g-item leaf" data-id="2.1.3" onclick="ismsSelect(this,'2.1.3')"><span class="g-item-code">2.1.3</span><span class="g-item-name">정보자산 관리</span></div>
+          </div>
+
+          <!-- 2.2 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-2')">
+            <span>2.2 인적 보안</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-2">
+            <div class="g-item leaf" data-id="2.2.1" onclick="ismsSelect(this,'2.2.1')"><span class="g-item-code">2.2.1</span><span class="g-item-name">주요 직무자 지정 및 관리</span></div>
+            <div class="g-item leaf" data-id="2.2.2" onclick="ismsSelect(this,'2.2.2')"><span class="g-item-code">2.2.2</span><span class="g-item-name">직무 분리</span></div>
+            <div class="g-item leaf" data-id="2.2.3" onclick="ismsSelect(this,'2.2.3')"><span class="g-item-code">2.2.3</span><span class="g-item-name">보안 서약</span></div>
+            <div class="g-item leaf" data-id="2.2.4" onclick="ismsSelect(this,'2.2.4')"><span class="g-item-code">2.2.4</span><span class="g-item-name">인식제고 및 교육훈련</span></div>
+            <div class="g-item leaf" data-id="2.2.5" onclick="ismsSelect(this,'2.2.5')"><span class="g-item-code">2.2.5</span><span class="g-item-name">퇴직 및 직무변경 관리</span></div>
+            <div class="g-item leaf" data-id="2.2.6" onclick="ismsSelect(this,'2.2.6')"><span class="g-item-code">2.2.6</span><span class="g-item-name">보안 위반 시 조치</span></div>
+          </div>
+
+          <!-- 2.3 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-3')">
+            <span>2.3 외부자 보안</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-3">
+            <div class="g-item leaf" data-id="2.3.1" onclick="ismsSelect(this,'2.3.1')"><span class="g-item-code">2.3.1</span><span class="g-item-name">외부자 현황 관리</span></div>
+            <div class="g-item leaf" data-id="2.3.2" onclick="ismsSelect(this,'2.3.2')"><span class="g-item-code">2.3.2</span><span class="g-item-name">외부자 계약 시 보안</span></div>
+            <div class="g-item leaf" data-id="2.3.3" onclick="ismsSelect(this,'2.3.3')"><span class="g-item-code">2.3.3</span><span class="g-item-name">외부자 보안 이행 관리</span></div>
+            <div class="g-item leaf" data-id="2.3.4" onclick="ismsSelect(this,'2.3.4')"><span class="g-item-code">2.3.4</span><span class="g-item-name">외부자 계약 변경 및 만료 시 보안</span></div>
+          </div>
+
+          <!-- 2.4 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-4')">
+            <span>2.4 물리 보안</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-4">
+            <div class="g-item leaf" data-id="2.4.1" onclick="ismsSelect(this,'2.4.1')"><span class="g-item-code">2.4.1</span><span class="g-item-name">보호구역 지정</span></div>
+            <div class="g-item leaf" data-id="2.4.2" onclick="ismsSelect(this,'2.4.2')"><span class="g-item-code">2.4.2</span><span class="g-item-name">출입통제</span></div>
+            <div class="g-item leaf" data-id="2.4.3" onclick="ismsSelect(this,'2.4.3')"><span class="g-item-code">2.4.3</span><span class="g-item-name">정보시스템 보호</span></div>
+            <div class="g-item leaf" data-id="2.4.4" onclick="ismsSelect(this,'2.4.4')"><span class="g-item-code">2.4.4</span><span class="g-item-name">보호설비 운영</span></div>
+            <div class="g-item leaf" data-id="2.4.5" onclick="ismsSelect(this,'2.4.5')"><span class="g-item-code">2.4.5</span><span class="g-item-name">보호구역 내 작업</span></div>
+            <div class="g-item leaf" data-id="2.4.6" onclick="ismsSelect(this,'2.4.6')"><span class="g-item-code">2.4.6</span><span class="g-item-name">반출입 기기 통제</span></div>
+            <div class="g-item leaf" data-id="2.4.7" onclick="ismsSelect(this,'2.4.7')"><span class="g-item-code">2.4.7</span><span class="g-item-name">업무환경 보안</span></div>
+          </div>
+
+          <!-- 2.5 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-5')">
+            <span>2.5 인증 및 권한관리</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-5">
+            <div class="g-item leaf" data-id="2.5.1" onclick="ismsSelect(this,'2.5.1')"><span class="g-item-code">2.5.1</span><span class="g-item-name">사용자 계정 관리</span></div>
+            <div class="g-item leaf" data-id="2.5.2" onclick="ismsSelect(this,'2.5.2')"><span class="g-item-code">2.5.2</span><span class="g-item-name">사용자 식별</span></div>
+            <div class="g-item leaf" data-id="2.5.3" onclick="ismsSelect(this,'2.5.3')"><span class="g-item-code">2.5.3</span><span class="g-item-name">사용자 인증</span></div>
+            <div class="g-item leaf" data-id="2.5.4" onclick="ismsSelect(this,'2.5.4')"><span class="g-item-code">2.5.4</span><span class="g-item-name">비밀번호 관리</span></div>
+            <div class="g-item leaf" data-id="2.5.5" onclick="ismsSelect(this,'2.5.5')"><span class="g-item-code">2.5.5</span><span class="g-item-name">특수 계정 및 권한 관리</span></div>
+            <div class="g-item leaf" data-id="2.5.6" onclick="ismsSelect(this,'2.5.6')"><span class="g-item-code">2.5.6</span><span class="g-item-name">접근권한 검토</span></div>
+          </div>
+
+          <!-- 2.6 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-6')">
+            <span>2.6 접근통제</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-6">
+            <div class="g-item leaf" data-id="2.6.1" onclick="ismsSelect(this,'2.6.1')"><span class="g-item-code">2.6.1</span><span class="g-item-name">네트워크 접근</span></div>
+            <div class="g-item leaf" data-id="2.6.2" onclick="ismsSelect(this,'2.6.2')"><span class="g-item-code">2.6.2</span><span class="g-item-name">정보시스템 접근</span></div>
+            <div class="g-item leaf" data-id="2.6.3" onclick="ismsSelect(this,'2.6.3')"><span class="g-item-code">2.6.3</span><span class="g-item-name">응용프로그램 접근</span></div>
+            <div class="g-item leaf" data-id="2.6.4" onclick="ismsSelect(this,'2.6.4')"><span class="g-item-code">2.6.4</span><span class="g-item-name">데이터베이스 접근</span></div>
+            <div class="g-item leaf" data-id="2.6.5" onclick="ismsSelect(this,'2.6.5')"><span class="g-item-code">2.6.5</span><span class="g-item-name">무선 네트워크 접근</span></div>
+            <div class="g-item leaf" data-id="2.6.6" onclick="ismsSelect(this,'2.6.6')"><span class="g-item-code">2.6.6</span><span class="g-item-name">원격접근 통제</span></div>
+            <div class="g-item leaf" data-id="2.6.7" onclick="ismsSelect(this,'2.6.7')"><span class="g-item-code">2.6.7</span><span class="g-item-name">인터넷 접속 통제</span></div>
+          </div>
+
+          <!-- 2.7 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-7')">
+            <span>2.7 암호화 적용</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-7">
+            <div class="g-item leaf" data-id="2.7.1" onclick="ismsSelect(this,'2.7.1')"><span class="g-item-code">2.7.1</span><span class="g-item-name">암호정책 적용</span></div>
+            <div class="g-item leaf" data-id="2.7.2" onclick="ismsSelect(this,'2.7.2')"><span class="g-item-code">2.7.2</span><span class="g-item-name">암호키 관리</span></div>
+          </div>
+
+          <!-- 2.8 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-8')">
+            <span>2.8 정보시스템 도입 및 개발 보안</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-8">
+            <div class="g-item leaf" data-id="2.8.1" onclick="ismsSelect(this,'2.8.1')"><span class="g-item-code">2.8.1</span><span class="g-item-name">보안 요구사항 정의</span></div>
+            <div class="g-item leaf" data-id="2.8.2" onclick="ismsSelect(this,'2.8.2')"><span class="g-item-code">2.8.2</span><span class="g-item-name">보안 요구사항 검토 및 시험</span></div>
+            <div class="g-item leaf" data-id="2.8.3" onclick="ismsSelect(this,'2.8.3')"><span class="g-item-code">2.8.3</span><span class="g-item-name">시험과 운영 환경 분리</span></div>
+            <div class="g-item leaf" data-id="2.8.4" onclick="ismsSelect(this,'2.8.4')"><span class="g-item-code">2.8.4</span><span class="g-item-name">시험 데이터 보안</span></div>
+            <div class="g-item leaf" data-id="2.8.5" onclick="ismsSelect(this,'2.8.5')"><span class="g-item-code">2.8.5</span><span class="g-item-name">소스 프로그램 관리</span></div>
+            <div class="g-item leaf" data-id="2.8.6" onclick="ismsSelect(this,'2.8.6')"><span class="g-item-code">2.8.6</span><span class="g-item-name">운영환경 이관</span></div>
+          </div>
+
+          <!-- 2.9 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-9')">
+            <span>2.9 시스템 및 서비스 운영관리</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-9">
+            <div class="g-item leaf" data-id="2.9.1" onclick="ismsSelect(this,'2.9.1')"><span class="g-item-code">2.9.1</span><span class="g-item-name">변경관리</span></div>
+            <div class="g-item leaf" data-id="2.9.2" onclick="ismsSelect(this,'2.9.2')"><span class="g-item-code">2.9.2</span><span class="g-item-name">성능 및 장애관리</span></div>
+            <div class="g-item leaf" data-id="2.9.3" onclick="ismsSelect(this,'2.9.3')"><span class="g-item-code">2.9.3</span><span class="g-item-name">백업 및 복구관리</span></div>
+            <div class="g-item leaf" data-id="2.9.4" onclick="ismsSelect(this,'2.9.4')"><span class="g-item-code">2.9.4</span><span class="g-item-name">로그 및 접속기록 관리</span></div>
+            <div class="g-item leaf" data-id="2.9.5" onclick="ismsSelect(this,'2.9.5')"><span class="g-item-code">2.9.5</span><span class="g-item-name">로그 및 접속기록 점검</span></div>
+            <div class="g-item leaf" data-id="2.9.6" onclick="ismsSelect(this,'2.9.6')"><span class="g-item-code">2.9.6</span><span class="g-item-name">시간 동기화</span></div>
+            <div class="g-item leaf" data-id="2.9.7" onclick="ismsSelect(this,'2.9.7')"><span class="g-item-code">2.9.7</span><span class="g-item-name">정보자산의 재사용 및 폐기</span></div>
+          </div>
+
+          <!-- 2.10 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-10')">
+            <span>2.10 시스템 및 서비스 보안관리</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-10">
+            <div class="g-item leaf" data-id="2.10.1" onclick="ismsSelect(this,'2.10.1')"><span class="g-item-code">2.10.1</span><span class="g-item-name">보안시스템 운영</span></div>
+            <div class="g-item leaf" data-id="2.10.2" onclick="ismsSelect(this,'2.10.2')"><span class="g-item-code">2.10.2</span><span class="g-item-name">클라우드 보안</span></div>
+            <div class="g-item leaf" data-id="2.10.3" onclick="ismsSelect(this,'2.10.3')"><span class="g-item-code">2.10.3</span><span class="g-item-name">공개서버 보안</span></div>
+            <div class="g-item leaf" data-id="2.10.4" onclick="ismsSelect(this,'2.10.4')"><span class="g-item-code">2.10.4</span><span class="g-item-name">전자거래 및 핀테크 보안</span></div>
+            <div class="g-item leaf" data-id="2.10.5" onclick="ismsSelect(this,'2.10.5')"><span class="g-item-code">2.10.5</span><span class="g-item-name">정보전송 보안</span></div>
+            <div class="g-item leaf" data-id="2.10.6" onclick="ismsSelect(this,'2.10.6')"><span class="g-item-code">2.10.6</span><span class="g-item-name">업무용 단말기기 보안</span></div>
+            <div class="g-item leaf" data-id="2.10.7" onclick="ismsSelect(this,'2.10.7')"><span class="g-item-code">2.10.7</span><span class="g-item-name">보조저장매체 관리</span></div>
+            <div class="g-item leaf" data-id="2.10.8" onclick="ismsSelect(this,'2.10.8')"><span class="g-item-code">2.10.8</span><span class="g-item-name">패치관리</span></div>
+            <div class="g-item leaf" data-id="2.10.9" onclick="ismsSelect(this,'2.10.9')"><span class="g-item-code">2.10.9</span><span class="g-item-name">악성코드 통제</span></div>
+          </div>
+
+          <!-- 2.11 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-11')">
+            <span>2.11 사고 예방 및 대응</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-11">
+            <div class="g-item leaf" data-id="2.11.1" onclick="ismsSelect(this,'2.11.1')"><span class="g-item-code">2.11.1</span><span class="g-item-name">사고 예방 및 대응체계 구축</span></div>
+            <div class="g-item leaf" data-id="2.11.2" onclick="ismsSelect(this,'2.11.2')"><span class="g-item-code">2.11.2</span><span class="g-item-name">취약점 점검 및 조치</span></div>
+            <div class="g-item leaf" data-id="2.11.3" onclick="ismsSelect(this,'2.11.3')"><span class="g-item-code">2.11.3</span><span class="g-item-name">이상행위 분석 및 모니터링</span></div>
+            <div class="g-item leaf" data-id="2.11.4" onclick="ismsSelect(this,'2.11.4')"><span class="g-item-code">2.11.4</span><span class="g-item-name">사고 대응 훈련 및 개선</span></div>
+            <div class="g-item leaf" data-id="2.11.5" onclick="ismsSelect(this,'2.11.5')"><span class="g-item-code">2.11.5</span><span class="g-item-name">사고 대응 및 복구</span></div>
+          </div>
+
+          <!-- 2.12 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub2-12')">
+            <span>2.12 재해 복구</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub2-12">
+            <div class="g-item leaf" data-id="2.12.1" onclick="ismsSelect(this,'2.12.1')"><span class="g-item-code">2.12.1</span><span class="g-item-name">재해·재난 대비 안전조치</span></div>
+            <div class="g-item leaf" data-id="2.12.2" onclick="ismsSelect(this,'2.12.2')"><span class="g-item-code">2.12.2</span><span class="g-item-name">재해 복구 시험 및 개선</span></div>
+          </div>
+
+        </div><!-- /cat2 -->
+
+        <!-- ════ 영역 3: 개인정보 처리단계별 요구사항 ════ -->
+        <div class="g-cat-hdr" onclick="ismsToggleCat(this,'cat3')">
+          <span class="g-cat-label">3. 개인정보 처리 단계별 요구사항</span>
+          <span class="g-cat-arrow">▶</span>
+        </div>
+        <div class="g-items-wrap" id="cat3">
+
+          <!-- 3.1 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub3-1')">
+            <span>3.1 개인정보 수집 시 보호조치</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub3-1">
+            <div class="g-item leaf" data-id="3.1.1" onclick="ismsSelect(this,'3.1.1')"><span class="g-item-code">3.1.1</span><span class="g-item-name">개인정보 수집·이용</span></div>
+            <div class="g-item leaf" data-id="3.1.2" onclick="ismsSelect(this,'3.1.2')"><span class="g-item-code">3.1.2</span><span class="g-item-name">개인정보 수집 제한</span></div>
+            <div class="g-item leaf" data-id="3.1.3" onclick="ismsSelect(this,'3.1.3')"><span class="g-item-code">3.1.3</span><span class="g-item-name">주민등록번호 처리 제한</span></div>
+            <div class="g-item leaf" data-id="3.1.4" onclick="ismsSelect(this,'3.1.4')"><span class="g-item-code">3.1.4</span><span class="g-item-name">민감정보 및 고유식별정보의 처리 제한</span></div>
+            <div class="g-item leaf" data-id="3.1.5" onclick="ismsSelect(this,'3.1.5')"><span class="g-item-code">3.1.5</span><span class="g-item-name">개인정보 간접수집</span></div>
+            <div class="g-item leaf" data-id="3.1.6" onclick="ismsSelect(this,'3.1.6')"><span class="g-item-code">3.1.6</span><span class="g-item-name">영상정보처리기기 설치·운영</span></div>
+            <div class="g-item leaf" data-id="3.1.7" onclick="ismsSelect(this,'3.1.7')"><span class="g-item-code">3.1.7</span><span class="g-item-name">마케팅 목적의 개인정보 수집·이용</span></div>
+          </div>
+
+          <!-- 3.2 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub3-2')">
+            <span>3.2 개인정보 보유 및 이용 시 보호조치</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub3-2">
+            <div class="g-item leaf" data-id="3.2.1" onclick="ismsSelect(this,'3.2.1')"><span class="g-item-code">3.2.1</span><span class="g-item-name">개인정보 현황관리</span></div>
+            <div class="g-item leaf" data-id="3.2.2" onclick="ismsSelect(this,'3.2.2')"><span class="g-item-code">3.2.2</span><span class="g-item-name">개인정보 품질보장</span></div>
+            <div class="g-item leaf" data-id="3.2.3" onclick="ismsSelect(this,'3.2.3')"><span class="g-item-code">3.2.3</span><span class="g-item-name">이용자 단말기 접근 보호</span></div>
+            <div class="g-item leaf" data-id="3.2.4" onclick="ismsSelect(this,'3.2.4')"><span class="g-item-code">3.2.4</span><span class="g-item-name">개인정보 목적 외 이용 및 제공</span></div>
+            <div class="g-item leaf" data-id="3.2.5" onclick="ismsSelect(this,'3.2.5')"><span class="g-item-code">3.2.5</span><span class="g-item-name">가명정보 처리</span></div>
+          </div>
+
+          <!-- 3.3 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub3-3')">
+            <span>3.3 개인정보 제공 시 보호조치</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub3-3">
+            <div class="g-item leaf" data-id="3.3.1" onclick="ismsSelect(this,'3.3.1')"><span class="g-item-code">3.3.1</span><span class="g-item-name">개인정보 제3자 제공</span></div>
+            <div class="g-item leaf" data-id="3.3.2" onclick="ismsSelect(this,'3.3.2')"><span class="g-item-code">3.3.2</span><span class="g-item-name">개인정보 처리 업무 위탁</span></div>
+            <div class="g-item leaf" data-id="3.3.3" onclick="ismsSelect(this,'3.3.3')"><span class="g-item-code">3.3.3</span><span class="g-item-name">영업의 양도 등에 따른 개인정보 이전</span></div>
+            <div class="g-item leaf" data-id="3.3.4" onclick="ismsSelect(this,'3.3.4')"><span class="g-item-code">3.3.4</span><span class="g-item-name">개인정보 국외이전</span></div>
+          </div>
+
+          <!-- 3.4 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub3-4')">
+            <span>3.4 개인정보 파기 시 보호조치</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub3-4">
+            <div class="g-item leaf" data-id="3.4.1" onclick="ismsSelect(this,'3.4.1')"><span class="g-item-code">3.4.1</span><span class="g-item-name">개인정보 파기</span></div>
+            <div class="g-item leaf" data-id="3.4.2" onclick="ismsSelect(this,'3.4.2')"><span class="g-item-code">3.4.2</span><span class="g-item-name">처리목적 달성 후 보유 시 조치</span></div>
+          </div>
+
+          <!-- 3.5 -->
+          <div class="g-subcat-hdr" onclick="ismsToggleSub(this,'sub3-5')">
+            <span>3.5 정보주체 권리보호</span>
+            <span class="g-cat-arrow">▶</span>
+          </div>
+          <div class="g-items-wrap" id="sub3-5">
+            <div class="g-item leaf" data-id="3.5.1" onclick="ismsSelect(this,'3.5.1')"><span class="g-item-code">3.5.1</span><span class="g-item-name">개인정보 처리방침 공개</span></div>
+            <div class="g-item leaf" data-id="3.5.2" onclick="ismsSelect(this,'3.5.2')"><span class="g-item-code">3.5.2</span><span class="g-item-name">정보주체 권리보장</span></div>
+            <div class="g-item leaf" data-id="3.5.3" onclick="ismsSelect(this,'3.5.3')"><span class="g-item-code">3.5.3</span><span class="g-item-name">정보주체에 대한 통지</span></div>
+          </div>
+
+        </div><!-- /cat3 -->
+
+      </div><!-- /ismsToc -->
+    </div><!-- /g-sidebar -->
+
+    <!-- ── 우측 콘텐츠 영역 ── -->
+    <div class="g-content" id="ismsPane">
+
+      <!-- 초기 화면 (항목 미선택 시) -->
+      <div id="ismsWelcome">
+
+        <!-- 헤더 -->
+        <div class="iw-header">
+          <span class="iw-badge">ISMS-P CERTIFICATION</span>
+          <div class="iw-title">ISMS-P 인증기준 가이드</div>
+          <div class="iw-sub">인증기준 안내서 2023.11 기반 · 3개 영역 · 101개 인증기준</div>
+        </div>
+
+        <!-- ISMS-P 구조 다이어그램 -->
+        <div class="iw-diagram-wrap">
+        <svg class="iw-diagram" viewBox="0 0 680 408" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="iw-arr-blue" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+              <polygon points="0,0.5 6,3.5 0,6.5" fill="#3b82f6" opacity="0.8"/>
+            </marker>
+            <marker id="iw-arr-gray" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
+              <polygon points="0,0.5 6,3.5 0,6.5" fill="#94a3b8"/>
+            </marker>
+          </defs>
+
+          <!-- ── 하단 박스: 2. 보호대책 ── -->
+          <g class="iw-svg-area iw-svg-area-2" onclick="ismsActivateById('2.1.1')" style="cursor:pointer">
+            <rect x="8" y="264" width="328" height="140" rx="9" fill="white" stroke="#16a34a" stroke-width="2"/>
+            <text x="22" y="283" font-size="12" font-weight="700" fill="#15803d">2. 보호대책 요구사항 (64개)</text>
+            <line x1="22" y1="289" x2="324" y2="289" stroke="#bbf7d0" stroke-width="1"/>
+            <text x="22" y="304" font-size="10.5" fill="#475569">2.1 정책, 조직, 자산관리</text>
+            <text x="180" y="304" font-size="10.5" fill="#475569">2.7 암호화 적용</text>
+            <text x="22" y="318" font-size="10.5" fill="#475569">2.2 인적보안</text>
+            <text x="180" y="318" font-size="10.5" fill="#475569">2.8 정보시스템 도입 및 개발보안</text>
+            <text x="22" y="332" font-size="10.5" fill="#475569">2.3 외부자 보안</text>
+            <text x="180" y="332" font-size="10.5" fill="#475569">2.9 시스템 및 서비스 운영관리</text>
+            <text x="22" y="346" font-size="10.5" fill="#475569">2.4 물리 보안</text>
+            <text x="180" y="346" font-size="10.5" fill="#475569">2.10 시스템 및 서비스 보안관리</text>
+            <text x="22" y="360" font-size="10.5" fill="#475569">2.5 인증 및 권한관리</text>
+            <text x="180" y="360" font-size="10.5" fill="#475569">2.11 사고 예방 및 대응</text>
+            <text x="22" y="374" font-size="10.5" fill="#475569">2.6 접근통제</text>
+            <text x="180" y="374" font-size="10.5" fill="#475569">2.12 재해복구</text>
+          </g>
+
+          <!-- ── 하단 박스: 3. 개인정보 ── -->
+          <g class="iw-svg-area iw-svg-area-3" onclick="ismsActivateById('3.1.1')" style="cursor:pointer">
+            <rect x="344" y="264" width="328" height="140" rx="9" fill="white" stroke="#16a34a" stroke-width="2"/>
+            <text x="358" y="283" font-size="12" font-weight="700" fill="#15803d">3. 개인정보 처리단계별 (21개)</text>
+            <line x1="358" y1="289" x2="660" y2="289" stroke="#bbf7d0" stroke-width="1"/>
+            <text x="358" y="308" font-size="10.5" fill="#475569">3.1 개인정보 수집 시 보호조치</text>
+            <text x="358" y="326" font-size="10.5" fill="#475569">3.2 개인정보 보유 및 이용 시 보호조치</text>
+            <text x="358" y="344" font-size="10.5" fill="#475569">3.3 개인정보 제공 시 보호조치</text>
+            <text x="358" y="362" font-size="10.5" fill="#475569">3.4 개인정보 파기 시 보호조치</text>
+            <text x="358" y="380" font-size="10.5" fill="#475569">3.5 정보주체 권리보호</text>
+          </g>
+
+          <!-- ── 원→박스 연결 화살표 ── -->
+          <line x1="296" y1="217" x2="178" y2="261" stroke="#94a3b8" stroke-width="1.5"
+                stroke-dasharray="5,3" marker-end="url(#iw-arr-gray)"/>
+          <line x1="384" y1="217" x2="502" y2="261" stroke="#94a3b8" stroke-width="1.5"
+                stroke-dasharray="5,3" marker-end="url(#iw-arr-gray)"/>
+
+          <!-- ── 순환 흐름 호 (r=110, clockwise) ── -->
+          <!-- Arc 1: 1.1→1.2 (-75°→-35°) -->
+          <path d="M 368,39 A 110,110 0 0,1 430,81"
+                fill="none" stroke="#3b82f6" stroke-width="2.5" opacity="0.55"
+                marker-end="url(#iw-arr-blue)"/>
+          <!-- Arc 2: 1.2→1.3 (-15°→15°) -->
+          <path d="M 446,117 A 110,110 0 0,1 446,173"
+                fill="none" stroke="#3b82f6" stroke-width="2.5" opacity="0.55"
+                marker-end="url(#iw-arr-blue)"/>
+          <!-- Arc 3: 1.3→1.4 (35°→165°) -->
+          <path d="M 430,209 A 110,110 0 0,1 234,173"
+                fill="none" stroke="#3b82f6" stroke-width="2.5" opacity="0.55"
+                marker-end="url(#iw-arr-blue)"/>
+          <!-- Arc 4: 1.4→1.1 (195°→285°) -->
+          <path d="M 234,117 A 110,110 0 0,1 368,39"
+                fill="none" stroke="#3b82f6" stroke-width="2.5" opacity="0.55"
+                marker-end="url(#iw-arr-blue)"/>
+
+          <!-- ── 노드→원 연결선 ── -->
+          <line x1="340" y1="36" x2="340" y2="75" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="460" y1="92" x2="408" y2="118" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="458" y1="174" x2="412" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+          <line x1="228" y1="113" x2="271" y2="140" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+
+          <!-- ── 중앙 원 ── -->
+          <g class="iw-svg-circle" onclick="ismsActivateById('1.1.1')" style="cursor:pointer">
+            <circle cx="340" cy="145" r="74" fill="#2563eb"/>
+            <circle cx="340" cy="145" r="63" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <text x="340" y="130" text-anchor="middle" font-size="12" font-weight="700" fill="white">1. 관리체계</text>
+            <text x="340" y="148" text-anchor="middle" font-size="12" font-weight="700" fill="white">수립 및 운영</text>
+            <text x="340" y="168" text-anchor="middle" font-size="11.5" fill="rgba(255,255,255,0.88)">(16개)</text>
+          </g>
+
+          <!-- ── 노드 라벨 박스 ── -->
+          <!-- 1.1 상단 -->
+          <g class="iw-svg-node" onclick="ismsActivateById('1.1.1')" style="cursor:pointer">
+            <rect x="248" y="8" width="184" height="28" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="340" y="26.5" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">1.1 관리체계 기반 마련</text>
+          </g>
+          <!-- 1.2 우상 -->
+          <g class="iw-svg-node" onclick="ismsActivateById('1.2.1')" style="cursor:pointer">
+            <rect x="462" y="78" width="116" height="28" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="520" y="96.5" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">1.2 위험관리</text>
+          </g>
+          <!-- 1.3 우하 -->
+          <g class="iw-svg-node" onclick="ismsActivateById('1.3.1')" style="cursor:pointer">
+            <rect x="460" y="160" width="150" height="28" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="535" y="178.5" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">1.3 관리체계 운영</text>
+          </g>
+          <!-- 1.4 좌 -->
+          <g class="iw-svg-node" onclick="ismsActivateById('1.4.1')" style="cursor:pointer">
+            <rect x="58" y="98" width="170" height="28" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+            <text x="143" y="116.5" text-anchor="middle" font-size="11" font-weight="600" fill="#1e293b">1.4 관리체계 점검 및 개선</text>
+          </g>
+        </svg>
+        </div>
+
+        <!-- 자주 결함 나오는 항목 TOP 5 -->
+        <div class="iw-section">
+          <div class="iw-section-title">⚠️ 심사 결함 빈출 항목 TOP 5</div>
+          <div class="iw-top5">
+            <span class="iw-top5-tag" onclick="ismsActivateById('2.6.1')">2.6.1 네트워크 접근</span>
+            <span class="iw-top5-tag" onclick="ismsActivateById('2.5.1')">2.5.1 사용자 계정 관리</span>
+            <span class="iw-top5-tag" onclick="ismsActivateById('2.9.1')">2.9.1 변경관리</span>
+            <span class="iw-top5-tag" onclick="ismsActivateById('2.10.1')">2.10.1 보안시스템 운영</span>
+            <span class="iw-top5-tag" onclick="ismsActivateById('1.2.1')">1.2.1 정보보호 최고책임자</span>
+          </div>
+        </div>
+
+        <!-- 심사 준비 단계 -->
+        <div class="iw-section">
+          <div class="iw-section-title">📋 인증 심사 준비 단계</div>
+          <div class="iw-steps">
+            <div class="iw-step">
+              <div class="iw-step-num">1</div>
+              <div>
+                <div class="iw-step-label">범위 확정 · 현황 파악</div>
+                <div class="iw-step-desc">정보서비스 범위 정의, 자산 현황, 취급자 목록 구성</div>
+              </div>
+            </div>
+            <div class="iw-step-arrow">→</div>
+            <div class="iw-step">
+              <div class="iw-step-num">2</div>
+              <div>
+                <div class="iw-step-label">갭 분석 · 개선 조치</div>
+                <div class="iw-step-desc">101개 기준 대비 현황 점검, 결함 항목 개선 이행</div>
+              </div>
+            </div>
+            <div class="iw-step-arrow">→</div>
+            <div class="iw-step">
+              <div class="iw-step-num">3</div>
+              <div>
+                <div class="iw-step-label">증적 준비 · 심사 대응</div>
+                <div class="iw-step-desc">항목별 증빙 자료 정리, 담당자 질의 대비 준비</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 활용 안내 -->
+        <div class="gc-alert info" style="margin-top:1rem">
+          💡 <strong>사용법</strong> — 좌측 사이드바에서 항목 클릭 · 검색창에 번호(예: 2.6.1) 또는 키워드 입력 · 위 영역 카드 클릭으로 바로이동
+        </div>
+
+      </div>
+
+      <!-- 항목 선택 시 렌더링 영역 (초기엔 숨김) -->
+      <div id="ismsDetail" style="display:none">
+
+        <!-- 항목 헤더 -->
+        <div style="margin-bottom:.75rem">
+          <span class="badge badge-blue" id="ismsDetailBadge" style="font-family:var(--mono);font-size:12px">1.1.1</span>
+          <span class="gc-cat" id="ismsDetailCat" style="display:inline;margin-left:.5rem;font-size:11px"></span>
+        </div>
+        <div class="gc-title" id="ismsDetailTitle">인증기준명</div>
+        <div class="divider"></div>
+
+        <!-- 단일 스크롤 콘텐츠 -->
+        <div id="ismsContent">
+          <div class="isms-empty"><div class="isms-empty-icon">📋</div><div class="isms-empty-sub">좌측 목록에서 항목을 선택하세요.</div></div>
+        </div>
+
+        <!-- 이전/다음 네비게이션 -->
+        <div class="gc-nav">
+          <button class="gc-nav-btn" id="ismsPrevBtn" onclick="ismsNavPrev()">← 이전 항목</button>
+          <button class="gc-nav-btn" id="ismsNextBtn" onclick="ismsNavNext()">다음 항목 →</button>
+        </div>
+
+      </div><!-- /ismsDetail -->
+    </div><!-- /g-content -->
+
+  </div><!-- /guide-layout -->
+</div><!-- /pg-isms -->
+
+<script>
+/* ══════════════════════════════════════════════════════
+   ISMS-P 인증기준 가이드 — Phase 1 레이아웃 쉘
+   데이터·렌더 로직은 Phase 2에서 채워집니다.
+══════════════════════════════════════════════════════ */
+
+/* ── 항목 ID 플랫 목록 (순서 = 사이드바 표시 순서) ── */
+const ismsAllIds = [
+  '1.1.1','1.1.2','1.1.3','1.1.4','1.1.5','1.1.6',
+  '1.2.1','1.2.2','1.2.3','1.2.4',
+  '1.3.1','1.3.2','1.3.3',
+  '1.4.1','1.4.2','1.4.3',
+  '2.1.1','2.1.2','2.1.3',
+  '2.2.1','2.2.2','2.2.3','2.2.4','2.2.5','2.2.6',
+  '2.3.1','2.3.2','2.3.3','2.3.4',
+  '2.4.1','2.4.2','2.4.3','2.4.4','2.4.5','2.4.6','2.4.7',
+  '2.5.1','2.5.2','2.5.3','2.5.4','2.5.5','2.5.6',
+  '2.6.1','2.6.2','2.6.3','2.6.4','2.6.5','2.6.6','2.6.7',
+  '2.7.1','2.7.2',
+  '2.8.1','2.8.2','2.8.3','2.8.4','2.8.5','2.8.6',
+  '2.9.1','2.9.2','2.9.3','2.9.4','2.9.5','2.9.6','2.9.7',
+  '2.10.1','2.10.2','2.10.3','2.10.4','2.10.5','2.10.6','2.10.7','2.10.8','2.10.9',
+  '2.11.1','2.11.2','2.11.3','2.11.4','2.11.5',
+  '2.12.1','2.12.2',
+  '3.1.1','3.1.2','3.1.3','3.1.4','3.1.5','3.1.6','3.1.7',
+  '3.2.1','3.2.2','3.2.3','3.2.4','3.2.5',
+  '3.3.1','3.3.2','3.3.3','3.3.4',
+  '3.4.1','3.4.2',
+  '3.5.1','3.5.2','3.5.3'
+];
+
+let ismsCurrentId = null;
+
+/* ─────────────────────────────────────────────────────
+   renderContent(itemId)  — 단일 스크롤 페이지 렌더
+───────────────────────────────────────────────────── */
+function renderContent(itemId) {
+  const d = (typeof ismsData !== 'undefined') ? ismsData[itemId] : null;
+  const el = document.getElementById('ismsContent');
+  if (!d) { el.innerHTML = emptyPanel('📋', '데이터가 없습니다.'); return; }
+
+  let html = '';
+
+  /* ① 인증기준 */
+  if (d.criteria) {
+    html += `<section class="is-sec">
+      <div class="is-criteria-box">
+        <div class="is-chip">인증기준</div>
+        <p class="is-criteria-text">${escHtml(d.criteria)}</p>
+      </div>
+    </section>`;
+  }
+
+  /* ② 주요 확인사항 */
+  if (d.checkpoints && d.checkpoints.length) {
+    const cards = d.checkpoints.map((c, i) =>
+      `<div class="is-check-card">
+        <span class="is-check-num">${i + 1}</span>
+        <span class="is-check-text">${escHtml(c.text)}</span>
+      </div>`
+    ).join('');
+    html += `<section class="is-sec">
+      <h3 class="is-sec-title">주요 확인사항</h3>
+      <div class="is-check-list">${cards}</div>
+    </section>`;
+  }
+
+  /* ③ 관련 법령 (데이터 있을 때만) */
+  if (d.relatedLaws && d.relatedLaws.length) {
+    /* 변경: ⚖(U+2696 Noto KR 미지원) → • (U+2022 범용 불릿) */
+    const items = d.relatedLaws.map(l =>
+      `<li class="is-law-item"><span class="is-law-dot">•</span>${escHtml(l)}</li>`
+    ).join('');
+    html += `<section class="is-sec">
+      <h3 class="is-sec-title">관련 법령</h3>
+      <div class="is-law-box"><ul class="is-law-list">${items}</ul></div>
+    </section>`;
+  }
+
+  /* ④ 세부 설명 + 관련 표 — sections 배열 우선, 없으면 레거시 */
+  if (d.sections && d.sections.length) {
+    /* sections 기반: text/table 인터리브 */
+    var secHtml = d.sections.map(function(s) {
+      if (s.type === 'text') {
+        return renderDetailsLines(sanitize(s.content));
+      }
+      if (s.type === 'table') {
+        var tbl = (typeof s.idx === 'number' && d.tables && d.tables[s.idx])
+          ? d.tables[s.idx] : s.data;
+        return tbl ? renderTables([tbl]) : '';
+      }
+      return '';
+    }).join('');
+    html += `<section class="is-sec">
+      <h3 class="is-sec-title">세부 설명</h3>
+      <div class="is-detail-body">${secHtml}</div>
+    </section>`;
+  } else {
+    /* 레거시: details 텍스트 + tables 별도 섹션 */
+    if (d.details && d.details.trim()) {
+      html += `<section class="is-sec">
+        <h3 class="is-sec-title">세부 설명</h3>
+        <div class="is-detail-body">${renderDetailsLines(sanitize(d.details))}</div>
+      </section>`;
+    }
+    if (d.tables && d.tables.length) {
+      html += `<section class="is-sec">
+        <h3 class="is-sec-title">관련 표</h3>
+        <div class="is-detail-body">${renderTables(d.tables)}</div>
+      </section>`;
+    }
+  }
+
+  /* ⑤ 증거자료 — [v4] flex-wrap 태그 뱃지 */
+  if (d.evidence && d.evidence.length) {
+    const tags = d.evidence.map(e =>
+      `<span class="is-ev-tag">${escHtml(e)}</span>`
+    ).join('');
+    html += `<section class="is-sec">
+      <h3 class="is-sec-title">증거자료 예시</h3>
+      <div class="is-ev-tags">${tags}</div>
+    </section>`;
+  }
+
+  /* ⑥ 결함사례 */
+  if (d.defectCases && d.defectCases.length) {
+    const cases = d.defectCases.map((df, i) => {
+      const nm = df.match(/^사례\s*(\d+)\s*:?\s*/);
+      const num = nm ? nm[1] : String(i + 1);
+      const body = df.replace(/^사례\s*\d+\s*:?\s*/, '');
+      return `<div class="is-defect-card">
+        <div class="is-defect-num">사례${num}</div>
+        <div class="is-defect-body">${escHtml(body)}</div>
+      </div>`;
+    }).join('');
+    html += `<section class="is-sec">
+      <h3 class="is-sec-title">결함사례</h3>
+      <div class="is-defect-list">${cases}</div>
+    </section>`;
+  }
+
+  /* ⑦ AI 보완 설명 */
+  html += renderAiSupplement(d.aiSupplement);
+
+  el.innerHTML = html;
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+/* ── renderDetailsLines: 접두기호 기반 3단계 계층 렌더 ──────
+   1단계(is-d1): ▶  •  ·  ■  ∙  (들여쓰기 없음, accent 기호)
+   2단계(is-d2): ※  -  ○          (들여쓰기 1단계)
+   3단계(is-d3): 숫자.  가나다.    (들여쓰기 2단계)
+   연속(is-dN-cont): 마커 없는 이어지는 줄 → 이전 깊이 상속
+   기타(is-d0) : 최상위 본문 단락 (이전 마커 없을 때)
+─────────────────────────────────────────────────────────── */
+function renderDetailsLines(raw) {
+  var lines = raw.split('\n');
+  var out = '';
+  var prevDepth = 0;
+  for (var i = 0; i < lines.length; i++) {
+    var t = lines[i].trim();
+    if (!t) { out += '<div class="is-gap"></div>'; prevDepth = 0; continue; }
+
+    var ch = t.charAt(0);
+
+    /* 1단계: ▶ • · ■ ∙(U+2219) */
+    if (ch === '▶') {
+      out += '<div class="is-d1"><span class="is-d1-ico">▶</span><span>' + escHtml(t.slice(1).trim()) + '</span></div>';
+      prevDepth = 1;
+    } else if (ch === '•' || ch === '·' || ch === '∙') {
+      out += '<div class="is-d1"><span class="is-d1-ico">•</span><span>' + escHtml(t.slice(1).trim()) + '</span></div>';
+      prevDepth = 1;
+    } else if (ch === '■') {
+      out += '<div class="is-d1"><span class="is-d1-ico">■</span><span>' + escHtml(t.slice(1).trim()) + '</span></div>';
+      prevDepth = 1;
+
+    /* 2단계: ※ - ○ */
+    } else if (ch === '※') {
+      out += '<div class="is-d2"><span class="is-d2-ico">※</span><span>' + escHtml(t.slice(1).trim()) + '</span></div>';
+      prevDepth = 2;
+    } else if (t.slice(0, 2) === '- ') {
+      out += '<div class="is-d2"><span class="is-d2-ico">–</span><span>' + escHtml(t.slice(2).trim()) + '</span></div>';
+      prevDepth = 2;
+    } else if (ch === '○') {
+      out += '<div class="is-d2"><span class="is-d2-ico">○</span><span>' + escHtml(t.slice(1).trim()) + '</span></div>';
+      prevDepth = 2;
+
+    /* 3단계: 숫자. (1. 2. 3. …) */
+    } else if (/^\d+\.\s/.test(t)) {
+      var nm = t.match(/^(\d+\.)\s*/);
+      out += '<div class="is-d3"><span class="is-d3-num">' + nm[1] + '</span><span>' + escHtml(t.slice(nm[0].length)) + '</span></div>';
+      prevDepth = 3;
+
+    /* 3단계: 가. 나. 다. … (한글 목록) */
+    } else if (/^[가나다라마바사아자차카타파하]\./.test(t)) {
+      out += '<div class="is-d3"><span class="is-d3-num">' + t.slice(0, 2) + '</span><span>' + escHtml(t.slice(2).trim()) + '</span></div>';
+      prevDepth = 3;
+
+    /* 이어지는 줄: 이전 마커 깊이 상속 */
+    } else {
+      if (prevDepth === 1)      out += '<p class="is-d1-cont">' + escHtml(t) + '</p>';
+      else if (prevDepth === 2) out += '<p class="is-d2-cont">' + escHtml(t) + '</p>';
+      else if (prevDepth === 3) out += '<p class="is-d3-cont">' + escHtml(t) + '</p>';
+      else                      out += '<p class="is-d0">' + escHtml(t) + '</p>';
+    }
+  }
+  return out;
+}
+
+/* ── sanitize: 렌더링 전 텍스트 정제 ──────────────────────
+   ① U+E000–U+F8FF  Private Use Area (Font Awesome 아이콘
+      코드포인트) → 제거  ← 엑박(missing-glyph □) 주원인
+   ② ｢｣ (U+FF62/63) 반각 괄호 → 「」 전각 변환 / 빈 쌍 삭제
+─────────────────────────────────────────────────────────── */
+function sanitize(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/[\uE000-\uF8FF]/g, '')
+    .replace(/｢([\s\S]*?)｣/g, function(_, p) {
+      var c = p.replace(/\s+/g, ' ').trim();
+      return c ? '「' + c + '」' : '';
+    });
+}
+
+/* ── renderTables: tables[] 배열을 <table> HTML로 변환 ───
+   schema: { caption:string, headers:string[], rows:string[][] }
+   셀 내 \n은 <br>로 변환 (IaaS/PaaS/SaaS 다줄 셀 대응)
+─────────────────────────────────────────────────────── */
+function renderTables(tables) {
+  if (!tables || !tables.length) return '';
+  return tables.map(function(t) {
+    var caption = t.caption
+      ? '<caption class="is-table-caption">' + escHtml(t.caption) + '</caption>'
+      : '';
+    var thead = '';
+    if (t.headers && t.headers.length) {
+      thead = '<thead><tr>' +
+        t.headers.map(function(h) { return '<th>' + escHtml(h) + '</th>'; }).join('') +
+        '</tr></thead>';
+    }
+    var tbody = '';
+    if (t.rows && t.rows.length) {
+      tbody = '<tbody>' +
+        t.rows.map(function(row) {
+          return '<tr>' +
+            row.map(function(cell) {
+              return '<td>' + escHtml(String(cell)).replace(/\n/g, '<br>') + '</td>';
+            }).join('') +
+            '</tr>';
+        }).join('') +
+        '</tbody>';
+    }
+    return '<div class="is-table-wrap"><table>' + caption + thead + tbody + '</table></div>';
+  }).join('');
+}
+
+/* ── renderAiSupplement ─────────────────────────────── */
+var _aiUid = 0;
+
+function renderAiSupplement(ai) {
+  if (!ai) return '';
+  var uid = 'ai' + (++_aiUid);
+  var uid2 = 'ck' + _aiUid;
+  var s = '';
+
+  s += '<section class="ai-sec-outer">';
+  s += '<div class="ai-sec-title"><span class="ai-supp-badge">AI</span>보완 설명</div>';
+  s += '<div class="ai-supp-wrap">';
+
+  /* 핵심 요약 */
+  if (ai.summary) {
+    s += '<div class="ai-s-block">';
+    s += '<div class="ai-s-label">핵심 요약</div>';
+    s += '<div class="ai-s-summary">' + escHtml(ai.summary) + '</div>';
+    s += '</div>';
+  }
+
+  /* 실무 적용 포인트 */
+  if (ai.practicalTips && ai.practicalTips.length) {
+    s += '<div class="ai-s-block">';
+    s += '<div class="ai-s-label">실무 적용 포인트</div>';
+    s += '<div class="ai-tip-list">';
+    ai.practicalTips.forEach(function(t, i) {
+      s += '<div class="ai-tip-item">';
+      s += '<span class="ai-tip-num">' + (i + 1) + '</span>';
+      s += '<span class="ai-tip-text">' + escHtml(t) + '</span>';
+      s += '</div>';
+    });
+    s += '</div></div>';
+  }
+
+  /* 자주 나오는 결함 패턴 */
+  if (ai.commonMistakes && ai.commonMistakes.length) {
+    s += '<div class="ai-s-block">';
+    s += '<div class="ai-s-label">자주 나오는 결함 패턴</div>';
+    s += '<div class="ai-mistake-list">';
+    ai.commonMistakes.forEach(function(m) {
+      s += '<div class="ai-mistake-item">';
+      s += '<span class="ai-mistake-dot"></span>';
+      s += '<span class="ai-mistake-text">' + escHtml(m) + '</span>';
+      s += '</div>';
+    });
+    s += '</div></div>';
+  }
+
+  /* 클라우드 보안 조치 (cloudGuide != null) */
+  if (ai.cloudGuide) {
+    s += '<div class="ai-s-block">';
+    s += '<div class="ai-s-label">클라우드 보안 조치</div>';
+    s += '<div class="ai-cloud-wrap">';
+    s += '<div class="ai-cloud-tabs">';
+    ['aws','gcp','azure'].forEach(function(t, i) {
+      s += '<button class="ai-cloud-tab' + (i === 0 ? ' active' : '') + '"';
+      s += ' onclick="aiCloudTab(\'' + uid + '\',\'' + t + '\',this)">';
+      s += t.toUpperCase() + '</button>';
+    });
+    s += '</div>';
+    s += '<div class="ai-cloud-body">';
+    ['aws','gcp','azure'].forEach(function(t, i) {
+      s += '<div class="ai-cloud-panel' + (i > 0 ? ' ai-hidden' : '') + '" id="' + uid + '-' + t + '">';
+      (ai.cloudGuide[t] || []).forEach(function(item) {
+        var ci = item.indexOf(':');
+        if (ci > 0) {
+          s += '<div class="ai-cloud-item">';
+          s += '<span class="ai-cloud-svc">' + escHtml(item.slice(0, ci).trim()) + '</span>';
+          s += '<span class="ai-cloud-desc">' + escHtml(item.slice(ci + 1).trim()) + '</span>';
+          s += '</div>';
+        } else {
+          s += '<div class="ai-cloud-item"><span class="ai-cloud-desc">' + escHtml(item) + '</span></div>';
+        }
+      });
+      s += '</div>';
+    });
+    s += '</div></div></div>';
+  }
+
+  /* 자가점검 체크리스트 */
+  if (ai.checkQuestions && ai.checkQuestions.length) {
+    s += '<div class="ai-s-block">';
+    s += '<div class="ai-s-label">자가점검 체크리스트</div>';
+    s += '<div class="ai-chk-list">';
+    ai.checkQuestions.forEach(function(q, i) {
+      var qid = uid2 + 'q' + i;
+      s += '<label class="ai-chk-item" for="' + qid + '">';
+      s += '<input type="checkbox" id="' + qid + '" class="ai-chk-input" onchange="aiCheckToggle(this)">';
+      s += '<span class="ai-chk-box"></span>';
+      s += '<span class="ai-chk-text">' + escHtml(q) + '</span>';
+      s += '</label>';
+    });
+    s += '</div></div>';
+  }
+
+  s += '</div></section>';
+  return s;
+}
+
+function aiCloudTab(uid, tab, btn) {
+  ['aws','gcp','azure'].forEach(function(t) {
+    var p = document.getElementById(uid + '-' + t);
+    if (p) p.classList.toggle('ai-hidden', t !== tab);
+  });
+  btn.closest('.ai-cloud-tabs').querySelectorAll('.ai-cloud-tab')
+    .forEach(function(b) { b.classList.toggle('active', b === btn); });
+}
+
+function aiCheckToggle(input) {
+  var item = input.closest('.ai-chk-item');
+  if (item) item.classList.toggle('checked', input.checked);
+}
+
+function emptyPanel(icon, msg) {
+  return `<div class="isms-empty"><div class="isms-empty-icon">${icon}</div><div class="isms-empty-sub">${msg}</div></div>`;
+}
+
+/* ── 항목 선택 ── */
+function ismsSelect(el, itemId) {
+  document.querySelectorAll('#ismsToc .g-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+  ismsCurrentId = itemId;
+
+  document.getElementById('ismsDetailBadge').textContent = itemId;
+  document.getElementById('ismsDetailTitle').textContent =
+    el.querySelector('.g-item-name')?.textContent || itemId;
+  document.getElementById('ismsDetailCat').textContent = getCatLabel(itemId);
+
+  document.getElementById('ismsWelcome').style.display = 'none';
+  document.getElementById('ismsDetail').style.display  = 'block';
+
+  renderContent(itemId);
+  document.getElementById('ismsPane').scrollTop = 0;
+}
+
+/* ── 영역 레이블 반환 ── */
+function getCatLabel(id) {
+  if (id.startsWith('1.')) return '관리체계 수립 및 운영';
+  if (id.startsWith('2.')) return '보호대책 요구사항';
+  if (id.startsWith('3.')) return '개인정보 처리단계별 요구사항';
+  return '';
+}
+
+/* ── 아코디언: 대분류 토글 ── */
+function ismsToggleCat(hdr, catId) {
+  const wrap  = document.getElementById(catId);
+  const arrow = hdr.querySelector('.g-cat-arrow');
+  const isOpen = wrap.classList.toggle('open');
+  if (arrow) arrow.style.transform = isOpen ? 'rotate(90deg)' : '';
+}
+
+/* ── 아코디언: 중분류 토글 ── */
+function ismsToggleSub(hdr, subId) {
+  const wrap  = document.getElementById(subId);
+  const arrow = hdr.querySelector('.g-cat-arrow');
+  const isOpen = wrap.classList.toggle('open');
+  hdr.classList.toggle('open', isOpen);
+  if (arrow) arrow.style.transform = isOpen ? 'rotate(90deg)' : '';
+}
+
+
+/* ── 검색 필터 ── */
+function ismsFilter() {
+  const q = document.getElementById('ismsSearch').value.trim().toLowerCase();
+  document.querySelectorAll('#ismsToc .g-item').forEach(item => {
+    const code = item.querySelector('.g-item-code')?.textContent.toLowerCase() || '';
+    const name = item.querySelector('.g-item-name')?.textContent.toLowerCase() || '';
+    item.style.display = (!q || code.includes(q) || name.includes(q)) ? '' : 'none';
+  });
+  if (q) {
+    /* 검색 중에는 모든 카테고리·서브 펼치기 */
+    document.querySelectorAll('.g-items-wrap').forEach(w => w.classList.add('open'));
+    document.querySelectorAll('.g-cat-arrow').forEach(a => a.style.transform = 'rotate(90deg)');
+  }
+}
+
+/* ── 이전/다음 네비게이션 ── */
+function ismsNavPrev() {
+  if (!ismsCurrentId) return;
+  const idx = ismsAllIds.indexOf(ismsCurrentId);
+  if (idx > 0) ismsActivateById(ismsAllIds[idx - 1]);
+}
+
+function ismsNavNext() {
+  if (!ismsCurrentId) return;
+  const idx = ismsAllIds.indexOf(ismsCurrentId);
+  if (idx < ismsAllIds.length - 1) ismsActivateById(ismsAllIds[idx + 1]);
+}
+
+function ismsActivateById(itemId) {
+  const el = document.querySelector('#ismsToc .g-item[data-id="' + itemId + '"]');
+  if (el) ismsSelect(el, itemId);
+}
+</script>
+</body>
+</html>
