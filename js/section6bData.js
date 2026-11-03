@@ -560,13 +560,4 @@ const section6bData = [
 
 const section6Data = [...section6aData, ...section6bData];
 
-const allPIAData = [
-  ...section1Data,
-  ...section2Data,
-  ...section3Data,
-  ...section4aData,
-  ...section4bData,
-  ...section5Data,
-  ...section6aData,
-  ...section6bData
-];
+// 전체 통합 배열(allPIAData)은 js/allPIAData.js에서 선언합니다.
