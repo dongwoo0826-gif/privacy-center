@@ -689,3 +689,30 @@ footer a:hover{color:var(--accent)}
 .aic-res-desc{color:var(--text2)}
 @media(max-width:900px){.aic-inputs{grid-template-columns:1fr}}
 #aic-output .aff-tbd-body{max-width:480px}
+
+/* ── 미완성 기능 숨김 (js/site-config.js 의 showWip 로 복구) ── */
+body:not(.show-wip) .wip{display:none!important}
+
+/* ── 법령 기준일 배지 ── */
+.law-date-row{margin-top:.4rem}
+.law-date{display:inline-block;font-size:10.5px;font-family:var(--mono);color:var(--text2);background:var(--surface);border:1px solid var(--border2);border-radius:4px;padding:1px 8px;letter-spacing:.02em}
+.law-date:empty{display:none}
+
+/* ── 푸터 면책 문구 ── */
+.footer-disclaimer{font-family:var(--sans);font-size:11.5px;line-height:1.7;max-width:760px;margin:0 auto .4rem}
+
+/* ── 소개: 로드맵 · 변경 이력 ── */
+.rm-list{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.rm-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:.65rem .9rem}
+.rm-head{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.rm-name{font-size:13px;font-weight:600;color:var(--text)}
+.rm-where{font-size:10.5px;color:var(--text3);font-family:var(--mono)}
+.rm-desc{font-size:12px;color:var(--text2);line-height:1.7;margin-top:2px}
+.cl-log-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r2);background:var(--bg2)}
+.cl-log{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+.cl-log th{background:var(--surface);color:var(--text2);font-weight:600;text-align:left;padding:8px 12px;border-bottom:1px solid var(--border2);white-space:nowrap}
+.cl-log td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.65}
+.cl-log tr:last-child td{border-bottom:none}
+.cl-log td:first-child{font-family:var(--mono);white-space:nowrap;color:var(--text)}
+.cl-log td:nth-child(2){white-space:nowrap}
+@media(max-width:640px){.rm-list{grid-template-columns:1fr}}

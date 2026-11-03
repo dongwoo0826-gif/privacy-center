@@ -91,5 +91,25 @@
     </div>
   </div>`;
 
-  root.innerHTML = header + stats + grid + areas + `<div class="about-sec about-grid">${principles}${site}</div>`;
+  const roadmap = d.roadmap && d.roadmap.length ? `
+  <div class="about-sec">
+    <div class="sec-label">ROADMAP · 개발 예정</div>
+    <div class="rm-list">${d.roadmap.map(r => `
+      <div class="rm-item">
+        <div class="rm-head"><span class="rm-name">${esc(r.name)}</span><span class="rm-where">${esc(r.where)}</span></div>
+        <div class="rm-desc">${esc(r.desc)}</div>
+      </div>`).join('')}
+    </div>
+  </div>` : '';
+
+  const changelog = d.changelog && d.changelog.length ? `
+  <div class="about-sec">
+    <div class="sec-label">CHANGELOG · 변경 이력</div>
+    <div class="cl-log-wrap"><table class="cl-log">
+      <thead><tr><th>일자</th><th>구분</th><th>내용</th></tr></thead>
+      <tbody>${d.changelog.map(c => `<tr><td>${esc(c.date)}</td><td>${esc(c.type)}</td><td>${esc(c.desc)}</td></tr>`).join('')}</tbody>
+    </table></div>
+  </div>` : '';
+
+  root.innerHTML = header + stats + grid + areas + `<div class="about-sec about-grid">${principles}${site}</div>` + roadmap + changelog;
 })();

@@ -9,7 +9,7 @@
     <button class="flow-tab active" onclick="switchFlow(0)">① 수집 흐름표</button>
     <button class="flow-tab" onclick="switchFlow(1)">② 보유·이용 흐름표</button>
     <button class="flow-tab" onclick="switchFlow(2)">③ 제공·파기 흐름표</button>
-    <button class="flow-tab" onclick="switchFlow(3)">✦ AI 흐름도 <span style="font-size:10px;color:#94a3b8;font-weight:400">(TBD)</span></button>
+    <button class="flow-tab wip" onclick="switchFlow(3)">✦ AI 흐름도 <span style="font-size:10px;color:#94a3b8;font-weight:400">(TBD)</span></button>
   </div>
   <!-- 수집 -->
   <div class="flow-panel active" id="fp0">
@@ -75,7 +75,7 @@
   </div>
 
   <!-- AI 흐름도 -->
-  <div class="flow-panel" id="fp3">
+  <div class="flow-panel wip" id="fp3">
     <div class="ft-desc">위 흐름표(수집·보유이용·제공파기)에 입력된 데이터를 불러온 뒤, 흐름표에서 파악할 수 없는 정보를 추가로 입력하세요. <strong>AI 흐름도 생성 기능은 개발 중입니다.</strong></div>
 
     <!-- ① 흐름표 데이터 불러오기 -->
@@ -316,6 +316,7 @@
   <div style="margin-bottom:1.5rem">
     <div style="font-size:11px;color:var(--accent);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">TOOLS · 업무 도구</div>
     <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보보호 업무 도구</div>
+    <div class="law-date-row"><span class="law-date" data-law-date></span></div>
   </div>
   <div class="tools-grid">
     <!-- 위험도 계산기 -->

@@ -3,6 +3,7 @@
   <div style="margin-bottom:1.5rem">
     <div style="font-size:11px;color:var(--cyan);font-family:var(--mono);letter-spacing:.1em;margin-bottom:3px">TEMPLATE · 약관·동의서 가이드</div>
     <div style="font-size:1.4rem;font-weight:700;color:var(--text)">개인정보 수집·이용 동의서 및 개인정보 처리방침 가이드</div>
+    <div class="law-date-row"><span class="law-date" data-law-date></span></div>
   </div>
   <div class="tmpl-tabs">
     <button class="tmpl-tab active" onclick="switchTmpl(0)">동의서 체크리스트</button>
@@ -10,7 +11,7 @@
     <button class="tmpl-tab" onclick="switchTmpl(2)">처리방침 체크리스트</button>
     <button class="tmpl-tab" onclick="switchTmpl(3)">처리방침 Template</button>
     <button class="tmpl-tab" onclick="switchTmpl(4)">잘못된 사례</button>
-    <button class="tmpl-tab" onclick="switchTmpl(5)">✦ AI 정합성 비교 <span style="font-size:10px;color:#94a3b8;font-weight:400">(TBD)</span></button>
+    <button class="tmpl-tab wip" onclick="switchTmpl(5)">✦ AI 정합성 비교 <span style="font-size:10px;color:#94a3b8;font-weight:400">(TBD)</span></button>
   </div>
 
   <!-- ① 동의서 체크리스트 -->
@@ -54,7 +55,7 @@
             <button class="cl-toggle-btn open" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
           </div>
           <div class="cl-item-detail open">
-            <p>동의 외에도 계약의 이행·체결(§15①4호, 2023년 개정으로 계약 이행에 필요한 정보는 동의 불필요), 법적 의무 이행(§15①2호), 정당한 이익(§15①6호) 등 6가지 적법근거를 먼저 검토합니다.</p>
+            <p>동의 외에도 계약의 이행·체결(§15①4호, 2023년 개정으로 계약 이행에 필요한 정보는 동의 불필요), 법적 의무 이행(§15①2호), 정당한 이익(§15①6호) 등 7가지 적법근거를 먼저 검토합니다.</p>
             <p>불필요하게 동의를 수집하면 정보주체가 거부할 경우 서비스 제공에 어려움이 생기므로, 동의가 꼭 필요한 처리에만 동의를 활용하는 것이 바람직합니다.</p>
           </div>
         </div>
@@ -70,7 +71,7 @@
           </div>
           <div class="cl-item-detail">
             <p>각각의 동의 사항을 구분하여 정보주체가 명확히 인지하고 각각 동의할 수 있어야 합니다. 예: 필수 서비스 항목과 선택 항목(마케팅·분석)을 별도 체크박스로 구분.</p>
-            <p>법 §28조의8①(1)에 따라 이동통신 단말장치 정보 처리도 별도 동의 대상이 될 수 있습니다.</p>
+            <p>스마트폰 앱의 단말기 접근권한은 정보통신망법 §22조의2에 따른 별도 고지·동의 대상입니다.</p>
           </div>
         </div>
 
@@ -650,7 +651,7 @@
     <div class="cl-progress-card">
       <div class="cl-progress-top">
         <div class="cl-progress-title">📋 처리방침 체크리스트 진행률</div>
-        <div class="cl-progress-stat">전체 <strong id="pc-done">0</strong>/32 &nbsp;·&nbsp; 필수·해당시필수 <strong id="pc-mand-done">0</strong>/26</div>
+        <div class="cl-progress-stat">전체 <strong id="pc-done">0</strong>/32 &nbsp;·&nbsp; 필수·해당시필수 <strong id="pc-mand-done">0</strong>/23</div>
       </div>
       <div class="cl-bar-row">
         <div class="cl-bar-label">전체</div>
@@ -707,7 +708,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①2호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">영§31①1호</span></div>
               <div class="cl-item-title">처리하는 개인정보의 항목 — 법적 근거·항목 전수 기재</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -722,7 +723,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①3호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①2호</span></div>
               <div class="cl-item-title">개인정보의 처리 및 보유 기간 — 구체적 기간 명시</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -737,7 +738,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①4호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①3의2호</span></div>
               <div class="cl-item-title">개인정보의 파기 절차 및 방법</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -752,7 +753,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①5호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">영§31①3호</span></div>
               <div class="cl-item-title">개인정보의 안전성 확보조치 — 관리적·기술적·물리적 조치</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -767,7 +768,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①6호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①5호</span></div>
               <div class="cl-item-title">정보주체와 법정대리인의 권리·의무 및 행사방법</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -782,7 +783,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①7호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①6호</span></div>
               <div class="cl-item-title">개인정보 보호책임자 성명·직책·연락처</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -797,7 +798,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①8호</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30②, 영§31②</span></div>
               <div class="cl-item-title">개인정보 처리방침의 변경에 관한 사항</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -869,7 +870,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">처리 업무 위탁 시</span><span class="cl-b law">§26</span></div>
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">처리 업무 위탁 시</span><span class="cl-b law">§30①4호, §26</span></div>
               <div class="cl-item-title">개인정보 처리업무의 위탁 — 수탁자·위탁 업무 전수 공개</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -884,7 +885,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">국외 이전 시</span><span class="cl-b law">§28의8</span></div>
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">국외 이전 시</span><span class="cl-b law">영§31①2호, §28의8</span></div>
               <div class="cl-item-title">개인정보의 국외 수집 및 이전 — 이전 국가·근거·거부 방법</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -911,7 +912,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">민감정보 공개 가능 서비스</span><span class="cl-b law">§23</span></div>
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">민감정보 공개 가능 서비스</span><span class="cl-b law">§30①3의3호, §23③</span></div>
               <div class="cl-item-title">민감정보의 공개 가능성 및 비공개를 선택하는 방법</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -926,7 +927,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">가명처리 이용 시</span><span class="cl-b law">§28의2</span></div>
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">가명처리 이용 시</span><span class="cl-b law">§30①4의2호, §28의2</span></div>
               <div class="cl-item-title">가명정보 처리에 관한 사항</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -941,7 +942,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">쿠키·SDK 등 운영 시</span><span class="cl-b law">§15①</span></div>
+              <div class="cl-badges-row"><span class="cl-b cond">해당 시 필수</span><span class="cl-b cond-txt">쿠키·SDK 등 운영 시</span><span class="cl-b law">§30①7호</span></div>
               <div class="cl-item-title">개인정보 자동 수집 장치의 설치·운영 및 거부에 관한 사항</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -963,7 +964,7 @@
           </div>
           <div class="cl-item-detail">
             <p>완전히 자동화된 시스템으로 개인정보를 처리하여 이루어지는 결정(인공지능 기술 적용 포함)이 있는 경우 ① 결정이 이루어진다는 사실 및 목적·대상 범위, ② 주요 개인정보의 유형과 결정의 관계, ③ 결정 과정의 고려사항 및 처리 절차, ④ 민감정보·14세 미만 아동 처리 여부, ⑤ 거부·설명 요구 방법 및 절차를 기재합니다.</p>
-            <p>§37조의2(2024.9.15 시행)에 따라 정보주체는 자동화된 결정에 대해 거부·설명 요구를 할 수 있으며, 이를 안내해야 합니다. 인공지능 기술의 복잡성을 고려하여 정보주체가 쉽게 이해할 수 있도록 표준화된 용어, 동영상·그림·도표 등 시각적 방법을 활용하는 것을 권장합니다.</p>
+            <p>§37조의2(2024.3.15 시행)에 따라 정보주체는 자동화된 결정에 대해 거부·설명 요구를 할 수 있으며, 이를 안내해야 합니다. 인공지능 기술의 복잡성을 고려하여 정보주체가 쉽게 이해할 수 있도록 표준화된 용어, 동영상·그림·도표 등 시각적 방법을 활용하는 것을 권장합니다.</p>
           </div>
         </div>
 
@@ -1085,7 +1086,7 @@
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30①10</span></div>
+              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30②, 영§31②</span></div>
               <div class="cl-item-title">처리방침 변경에 관한 사항 기재 여부</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
@@ -1096,47 +1097,47 @@
           </div>
         </div>
 
-        <div class="cl-item" data-mand="1">
+        <div class="cl-item" data-mand="0">
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">시행령§32②</span></div>
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">개인정보 처리방침 작성지침(권고)</span></div>
               <div class="cl-item-title">변경 시 최소 7일 전 공지 여부</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
           </div>
           <div class="cl-item-detail">
-            <p>처리방침을 변경하는 경우 시행일 7일 전부터 누리집(인터넷 홈페이지) 등에 공지해야 합니다(시행령 §32조②). 공지 기간이 짧을 경우 정보주체에게 충분한 확인 기회가 부여되지 않으므로 준수 여부를 반드시 점검합니다.</p>
+            <p>처리방침을 변경하는 경우 시행일 7일 전부터 누리집(인터넷 홈페이지) 등에 공지해야 합니다(개인정보 처리방침 작성지침). 공지 기간이 짧을 경우 정보주체에게 충분한 확인 기회가 부여되지 않으므로 준수 여부를 반드시 점검합니다.</p>
             <p>팝업, 배너, 이메일 발송 등 다양한 방식을 통해 정보주체가 변경 내용을 인지할 수 있도록 하는 것이 권장됩니다.</p>
           </div>
         </div>
 
-        <div class="cl-item" data-mand="1">
+        <div class="cl-item" data-mand="0">
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">시행령§32②</span></div>
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">개인정보 처리방침 작성지침(권고)</span></div>
               <div class="cl-item-title">중요 변경 시 30일 전 공지 여부</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
           </div>
           <div class="cl-item-detail">
-            <p>개인정보의 수집·이용 목적, 수집하는 개인정보 항목, 개인정보의 제3자 제공 등 정보주체에게 중요한 내용이 변경되는 경우에는 시행일 30일 전부터 공지해야 합니다(시행령 §32조②).</p>
+            <p>개인정보의 수집·이용 목적, 수집하는 개인정보 항목, 개인정보의 제3자 제공 등 정보주체에게 중요한 내용이 변경되는 경우에는 시행일 30일 전부터 공지해야 합니다(개인정보 처리방침 작성지침).</p>
             <p>중요 변경 사항에 해당하는지 여부를 사전에 검토하는 내부 기준을 마련하고, 중요 변경 시에는 이메일·문자 메시지 등 개인별 통지 방법도 활용하는 것을 권장합니다.</p>
           </div>
         </div>
 
-        <div class="cl-item" data-mand="1">
+        <div class="cl-item" data-mand="0">
           <div class="cl-item-row">
             <label class="cl-chk-wrap"><input type="checkbox" class="cl-chk" onchange="pcUpdate()"></label>
             <div class="cl-item-body" onclick="clToggleDetail(this.closest('.cl-item'))">
-              <div class="cl-badges-row"><span class="cl-b req">필수</span><span class="cl-b law">§30②</span></div>
+              <div class="cl-badges-row"><span class="cl-b rec">권고</span><span class="cl-b law">§30②</span></div>
               <div class="cl-item-title">이전 버전 처리방침 열람 가능 여부</div>
             </div>
             <button class="cl-toggle-btn" onclick="clToggleDetail(this.closest('.cl-item'))">›</button>
           </div>
           <div class="cl-item-detail">
-            <p>개인정보 보호법 §30②에 따라 변경된 처리방침과 함께 이전 처리방침을 열람할 수 있도록 보관·제공하여야 합니다. 최소 3년치 이전 버전 보관을 권장하며, '이전 처리방침 보기' 링크나 버전 이력 탭 등 접근 기능을 제공해야 합니다.</p>
+            <p>정보주체의 확인 편의를 위해 이전 처리방침을 열람할 수 있도록 제공하는 것을 권장합니다. 최소 3년치 이전 버전 보관을 권장하며, '이전 처리방침 보기' 링크나 버전 이력 탭 등 접근 기능을 제공해야 합니다.</p>
             <p>이전 처리방침이 적용되었던 기간(시행일~변경일)을 함께 표시하면 정보주체의 알권리 보장에 더욱 도움이 됩니다.</p>
           </div>
         </div>
@@ -1245,14 +1246,14 @@
 
           <!-- ② 처리 목적 · ③ 수집항목 · ⑤ 보유기간 -->
           <div class="form-block">
-            <div class="f-label">처리 목적 · 수집항목 · 보유기간 <span class="f-req">*</span> <span class="tc-badge-law">§30①2호·3호</span></div>
+            <div class="f-label">처리 목적 · 수집항목 · 보유기간 <span class="f-req">*</span> <span class="tc-badge-law">§30①1·2호, 영§31①1호</span></div>
             <div id="pp-item-list"></div>
             <button class="btn btn-ghost" style="font-size:11px;padding:3px 10px;margin-top:4px" onclick="ppAddItem()">+ 처리 유형 추가</button>
           </div>
 
           <!-- ⑥ 파기 절차 및 방법 -->
           <div class="form-block">
-            <div class="f-label">파기 절차 및 방법 <span class="f-req">*</span> <span class="tc-badge-law">§30①4호</span></div>
+            <div class="f-label">파기 절차 및 방법 <span class="f-req">*</span> <span class="tc-badge-law">§30①3의2호</span></div>
             <div class="pp-destr-opts">
               <label><input type="radio" name="pp-destr-media" value="electronic" onchange="ppRender()" checked> 전자 매체만</label>
               <label><input type="radio" name="pp-destr-media" value="paper" onchange="ppRender()"> 종이만</label>
@@ -1263,7 +1264,7 @@
 
           <!-- ⑪ 안전성 확보조치 -->
           <div class="form-block">
-            <div class="f-label">안전성 확보조치 <span class="f-req">*</span> <span class="tc-badge-law">§30①5호</span></div>
+            <div class="f-label">안전성 확보조치 <span class="f-req">*</span> <span class="tc-badge-law">영§31①3호</span></div>
             <div class="pp-safe-grid">
               <label><input type="checkbox" id="pp-safe1" onchange="ppRender()" checked> 내부관리계획 수립·시행</label>
               <label><input type="checkbox" id="pp-safe2" onchange="ppRender()" checked> 개인정보취급자 교육</label>
@@ -1278,14 +1279,14 @@
 
           <!-- ⑯ 정보주체 권리·행사방법 -->
           <div class="form-block">
-            <div class="f-label">정보주체 권리·행사방법 접수처 <span class="f-req">*</span> <span class="tc-badge-law">§30①6호</span></div>
+            <div class="f-label">정보주체 권리·행사방법 접수처 <span class="f-req">*</span> <span class="tc-badge-law">§30①5호</span></div>
             <input class="f-inp" id="pp-rights-dept" placeholder="부서명 (예: 개인정보보호팀)" oninput="ppRender()" style="margin-bottom:4px">
             <input class="f-inp" id="pp-rights-contact" placeholder="연락처 (전화·이메일)" oninput="ppRender()">
           </div>
 
           <!-- ⑱ 개인정보 보호책임자 -->
           <div class="form-block">
-            <div class="f-label">개인정보 보호책임자 <span class="f-req">*</span> <span class="tc-badge-law">§30①7호</span></div>
+            <div class="f-label">개인정보 보호책임자 <span class="f-req">*</span> <span class="tc-badge-law">§30①6호</span></div>
             <input class="f-inp" id="pp-cpo-name" placeholder="성명" oninput="ppRender()" style="margin-bottom:4px">
             <input class="f-inp" id="pp-cpo-dept" placeholder="직위·부서 (예: 개인정보보호팀장)" oninput="ppRender()" style="margin-bottom:4px">
             <input class="f-inp" id="pp-cpo-email" placeholder="이메일" oninput="ppRender()" style="margin-bottom:4px">
@@ -1392,7 +1393,7 @@
           <!-- ⑨ 처리위탁 -->
           <div class="form-block">
             <div class="pp-cond-header">
-              <div class="pp-cond-label">처리 위탁 <span class="tc-badge-law">§26</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-cond-label">처리 위탁 <span class="tc-badge-law">§30①4호, §26</span> <span class="tc-badge-imp">해당시</span></div>
               <div class="pp-yn-group" id="pp-delegate-yn">
                 <button class="pp-yn active-n" onclick="ppYN('delegate','N',this)">N</button>
                 <button class="pp-yn pp-yn-y" onclick="ppYN('delegate','Y',this)">Y</button>
@@ -1407,7 +1408,7 @@
           <!-- ⑩ 국외이전 -->
           <div class="form-block">
             <div class="pp-cond-header">
-              <div class="pp-cond-label">국외 이전 <span class="tc-badge-law">§28의8</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-cond-label">국외 이전 <span class="tc-badge-law">영§31①2호, §28의8</span> <span class="tc-badge-imp">해당시</span></div>
               <div class="pp-yn-group" id="pp-overseas-yn">
                 <button class="pp-yn active-n" onclick="ppYN('overseas','N',this)">N</button>
                 <button class="pp-yn pp-yn-y" onclick="ppYN('overseas','Y',this)">Y</button>
@@ -1422,7 +1423,7 @@
           <!-- ⑬ 가명정보 처리 -->
           <div class="form-block">
             <div class="pp-cond-header">
-              <div class="pp-cond-label">가명정보 처리 <span class="tc-badge-law">§28의2</span> <span class="tc-badge-imp">해당시</span></div>
+              <div class="pp-cond-label">가명정보 처리 <span class="tc-badge-law">§30①4의2호, §28의2</span> <span class="tc-badge-imp">해당시</span></div>
               <div class="pp-yn-group" id="pp-pseudo-yn">
                 <button class="pp-yn active-n" onclick="ppYN('pseudo','N',this)">N</button>
                 <button class="pp-yn pp-yn-y" onclick="ppYN('pseudo','Y',this)">Y</button>
@@ -1455,7 +1456,7 @@
           <!-- ⑰ 자동화된 결정 -->
           <div class="form-block">
             <div class="pp-cond-header">
-              <div class="pp-cond-label">자동화된 결정 <span class="tc-badge-law">§37의2</span> <span class="tc-badge-imp">해당시</span> <span class="tc-badge-imp" style="background:#fef3c7;color:#92400e;border-color:#fde68a">2025 신설</span></div>
+              <div class="pp-cond-label">자동화된 결정 <span class="tc-badge-law">§37의2</span> <span class="tc-badge-imp">해당시</span> <span class="tc-badge-imp" style="background:#fef3c7;color:#92400e;border-color:#fde68a">2024.3 시행</span></div>
               <div class="pp-yn-group" id="pp-auto-yn">
                 <button class="pp-yn active-n" onclick="ppYN('auto','N',this)">N</button>
                 <button class="pp-yn pp-yn-y" onclick="ppYN('auto','Y',this)">Y</button>
@@ -1554,7 +1555,7 @@
 
         <!-- ▶ 처리방침 변경 (필수) -->
         <div class="pp-sec-group">
-          <div class="pp-sec-group-title">📝 처리방침 변경 <span class="tc-badge-law">§30①8호</span></div>
+          <div class="pp-sec-group-title">📝 처리방침 변경 <span class="tc-badge-law">§30②, 영§31②</span></div>
           <div class="form-block">
             <div class="pp-cond-header">
               <div class="pp-cond-label">이전 버전 변경이력 기재 <span class="tc-badge-law">§30②</span></div>
@@ -1571,7 +1572,7 @@
         </div>
 
         <!-- AI TBD -->
-        <div class="form-block" style="border:2px dashed var(--border);border-radius:10px;padding:14px;background:var(--surface2);margin-top:4px">
+        <div class="form-block wip" style="border:2px dashed var(--border);border-radius:10px;padding:14px;background:var(--surface2);margin-top:4px">
           <div style="font-size:12px;color:var(--text2);margin-bottom:8px">🤖 AI 자동 초안 생성 <span style="font-size:11px;color:var(--text3)">(준비 중)</span></div>
           <button class="btn btn-teal" style="width:100%;opacity:0.5;cursor:not-allowed" disabled>AI로 처리방침 초안 생성하기</button>
           <div id="privacy-policy-output" style="margin-top:8px;font-size:12px;color:var(--text3)"></div>
@@ -1601,7 +1602,7 @@
   </div>
 
   <!-- ⑥ AI 동의서·처리방침 정합성 비교 (TBD) — 로직: js/ai-compare.js -->
-  <div class="tmpl-panel" id="tab-ai-compare">
+  <div class="tmpl-panel wip" id="tab-ai-compare">
     <div class="aic-desc">
       <strong>동의서</strong>와 <strong>처리방침</strong>을 함께 입력하면 AI가 항목별로 대조해, 동의서에 고지한 내용이 처리방침에 <strong>누락</strong>되었거나 <strong>서로 다르게</strong> 기재된 부분을 찾아냅니다.
       <span class="aic-tbd">AI 분석 기능 구현 예정 (TBD)</span>
