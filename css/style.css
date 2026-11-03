@@ -240,8 +240,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;background:rgba(
 .ref-table thead th{background:var(--surface2);color:var(--text2);font-weight:500;padding:7px 9px;text-align:left;border-bottom:1px solid var(--border2)}
 .ref-table td{padding:7px 9px;border-bottom:1px solid var(--border);vertical-align:top}
 /* TEMPLATE */
-.tmpl-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.25rem}
-.tmpl-tab{padding:9px 16px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans)}
+.tmpl-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.25rem;overflow-x:auto;scrollbar-width:none}
+.tmpl-tabs::-webkit-scrollbar{display:none}
+.tmpl-tab{padding:9px 16px;white-space:nowrap;flex-shrink:0;font-size:13px;font-weight:500;cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;background:none;border-top:none;border-left:none;border-right:none;font-family:var(--sans)}
 .tmpl-tab.active{color:var(--cyan);border-bottom-color:var(--cyan)}
 .tmpl-panel{display:none}
 .tmpl-panel.active{display:block}
@@ -653,3 +654,38 @@ footer a:hover{color:var(--accent)}
 .site-tool:hover{background:var(--accent);color:#fff}
 @media(max-width:900px){.area-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.area-grid{grid-template-columns:1fr}}
+
+/* ── AI 동의서·처리방침 정합성 비교 (TBD) ── */
+.aic-desc{background:var(--cyan-d);border:1px solid rgba(8,145,178,.25);border-left:3px solid var(--cyan);border-radius:6px;padding:11px 16px;font-size:12px;color:var(--text2);line-height:1.85;margin-bottom:1.25rem}
+.aic-desc strong{color:var(--cyan)}
+.aic-tbd{display:inline-block;margin-left:6px;font-size:10.5px;color:var(--text3);font-family:var(--mono)}
+.aic-step{font-size:10px;color:var(--cyan);font-family:var(--mono);letter-spacing:.08em;margin:1.5rem 0 .6rem}
+.aic-inputs{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.aic-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:.9rem 1rem;display:flex;flex-direction:column;gap:.6rem;min-width:0}
+.aic-card-head{display:flex;justify-content:space-between;align-items:center;gap:.5rem;flex-wrap:wrap}
+.aic-card-title{font-size:13px;font-weight:600;color:var(--text)}
+.aic-load{font-size:11px;padding:3px 10px}
+.aic-drop{display:flex;flex-direction:column;align-items:center;gap:2px;border:1.5px dashed var(--border2);border-radius:var(--r);padding:.9rem;cursor:pointer;font-size:12px;color:var(--text2);text-align:center;transition:all .15s}
+.aic-drop:hover{border-color:var(--cyan);background:var(--cyan-d)}
+.aic-drop input{display:none}
+.aic-drop em{font-style:normal;font-size:10.5px;color:var(--text3)}
+.aic-fname{font-size:11px;color:var(--text3);font-family:var(--mono);word-break:break-all}
+.aic-text{width:100%;min-height:150px;resize:vertical;border:1px solid var(--border2);border-radius:var(--r);padding:8px 10px;font-family:var(--sans);font-size:12px;line-height:1.7;color:var(--text);background:var(--bg)}
+.aic-text:focus{outline:none;border-color:var(--cyan)}
+.aic-notice{font-size:11.5px;color:var(--text3);margin-top:.6rem}
+.aic-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r2);background:var(--bg2)}
+.aic-table{width:100%;border-collapse:collapse;font-size:12px;min-width:720px}
+.aic-table th{background:var(--surface);color:var(--text2);font-weight:600;text-align:left;padding:8px 10px;border-bottom:1px solid var(--border2);white-space:nowrap}
+.aic-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top;line-height:1.65}
+.aic-table tr:last-child td{border-bottom:none}
+.aic-item{font-weight:600;color:var(--text)!important;white-space:nowrap}
+.aic-law{font-family:var(--mono);font-size:10px;color:var(--cyan);font-weight:400}
+.aic-check{color:var(--text)!important}
+.aic-sample{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:.4rem 1rem;opacity:.85}
+.aic-res{display:flex;align-items:baseline;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--border);font-size:12px;flex-wrap:wrap}
+.aic-res:last-child{border-bottom:none}
+.aic-res .badge{flex-shrink:0;min-width:58px;text-align:center}
+.aic-res-item{font-weight:600;color:var(--text);flex-shrink:0}
+.aic-res-desc{color:var(--text2)}
+@media(max-width:900px){.aic-inputs{grid-template-columns:1fr}}
+#aic-output .aff-tbd-body{max-width:480px}
