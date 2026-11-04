@@ -4,7 +4,7 @@ const SITE_CONFIG = {
   // 각 가이드·체크리스트 상단 "법령 기준일" 배지에 표시되는 날짜
   lawBaseDate: '2026.11.03',
   // true 로 바꾸면 class="wip" 로 숨겨 둔 미완성 기능(AI 흐름도, AI 정합성 비교 등)이 다시 표시된다
-  showWip: false
+  showWip: true
 };
 
 (function () {
